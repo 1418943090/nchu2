@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="/js/CodeSeven-toastr-50092cc/build/toastr.css" rel="stylesheet" >
+     <script src="/js/CodeSeven-toastr-50092cc/build/toastr.min.js"></script>
+     <link rel="stylesheet" type="text/css" href="/js/main.css">
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+        .container{
+            padding-top: 5%;
+            padding-left: 5%;
+            padding-right: 2%;
+        }
+        .paper-author{
+            font-size:1.5em;
+        }
+        .paper-name{
+            color:#FF6347;
+        }
+        .page-header{
+            color: #d58512;
+        }
+        .btn-lookPaper{
+            background-color:#FF8C00;
+        }
+        .paper-title{
+            margin: 0;
+            font-size: 4em;
+            text-decoration: none;
+            -webkit-transition: all 0.2s ease;
+            -o-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+            word-break:break-all
+        }
+        .navbar-header{
+            padding-top: 1em;
+        }
+        .search{
+            position: absolute;
+            right:1%;
+            top: 7%;
+        }
+        .search-condition{
+            position: absolute;
+            right:3%;
+            top: 13%;
+        }
+    </style>
+    <script>
+        function oncheck(){
+            if($("#all").is(":checked")==false){
+                $("#all").prop("checked",true);
+            }
+            $("#author").attr("checked",false);
+            $("#title").attr("checked",false);
+        }
+        function search(){
+            var str = document.getElementById("input_search").value;
+           if(str==""){
+                 swal({
+                      title: "你还没有输入要搜索的内容哦",
+                      text: "",
+                      icon: "warning",
+                       button: "确定",
+                     });
+           }
+           else {
+               if (document.getElementById("all").checked == true) {
+                   data = "all";
+               }
+               else {
+                   data = $('input:radio[name="search-condition"]:checked').val();
+               }
+               location.href = '/papers/search/' + data + "/" + str;
+           }
+        }
+        $(function () {
+            $("#all").attr("checked",true);
+            $("input[name='search-condition']").click(function(){
+                    $("#all").attr("checked",false);
+            });
+        });
+         toastr.options = {
+                       // closeButton: true,                                            // 是否显示关闭按钮，（提示框右上角关闭按钮）
+                        // debug: false,                                                    // 是否使用deBug模式
+                        // progressBar: true,                                            // 是否显示进度条，（设置关闭的超时时间进度条）
+                        positionClass: 'toast-top-center',              // 设置提示款显示的位置
+                        // onclick: null,                                                     // 点击消息框自定义事件 
+                        // showDuration: "300",                                      // 显示动画的时间
+                        // hideDuration: "1000",                                     //  消失的动画时间
+                        // timeOut: "2000",                                             //  自动关闭超时时间 
+                        // extendedTimeOut: "1000",                             //  加长展示时间
+                        // showEasing: "swing",                                     //  显示时的动画缓冲方式
+                        // hideEasing: "linear",                                       //   消失时的动画缓冲方式
+                        // showMethod: "fadeIn",                                   //   显示时的动画方式
+                        // hideMethod: "fadeOut"                                   //   消失时的动画方式
+                    };
+    </script>
+</head>
+<body>
+<nav class="navbar  navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <h5 class="title" th:text="${TitleEdit.getTitle1()}"></h5>
+                </li>
+            </ul>
+
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a  th:href="@{/index}"  th:method="POST" th:type="post"><h5 class="title"><strong>Home</strong></h5></a>
+                </li>
+                <li>
+                    <a  th:href="@{/login}"  th:method="POST" th:type="post"><h5 class="title"><strong>News</strong></h5></a>
+                </li>
+                <li>
+                    <a  th:href="@{/papers}"  th:method="POST" th:type="post"><h5 class="title"><strong>Papers</strong></h5></a>
+                </li>
+                <li>
+                    <a  th:href="@{/people}"  th:method="POST" th:type="post"><h5 class="title"><strong>People</strong></h5></a>
+                </li>
+                <li>
+                    <a  th:href="@{/products}"  th:method="POST" th:type="post"><h5 class="title"><strong>Products</strong></h5></a>
+                </li>
+                <li>
+                    <a th:href="@{/projects}"  th:method="POST" th:type="post"><h5 class="title"><strong>Projects</strong></h5></a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div class="row bg">
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-10">
+            <div th:each="paper : ${model.list}" >
+             <div class="well " >
+                <div class="paper-header text-center" >
+                    <h class="paper-title" th:text="${paper.title}"></h><br>
+                    <span class="paper-author">作者:<span class="paper-name" th:text="${paper.name}"></span>•<span th:text="${paper.date}"></span></span>
+
+                </div>
+                <div class="paper-content">
+                    <h3 th:text="${paper.summary}"></h3>
+                </div>
+                <div class="paper-footer">
+                    <h5 class="page-header"></h5>
+                    <ul class="nav nav-list">
+                        <li class="divider"></li>
+                    </ul>
+                    <button class="btn btn-lookPaper"><span><a th:href="${paper.path}"  target="_blank"  style="color: white">阅读全文</a></span></button>
+                </div>
+             </div>
+            </div>
+            </div>
+            <div class="search" style="position:fixed;">
+                <form class="navbar-form navbar-left" onsubmit="return false">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" id="input_search">
+                    </div>
+                    <button  class="btn btn-default" onclick="search();">
+                        <span class="glyphicon glyphicon-search"></span>搜索</button>
+                </form>
+            </div>
+        </div>
+        <div class="search-condition " style="position:fixed;font-size: 16px; font-family: Tahoma;">
+            <label style="color: white">
+                <input type="checkbox" id="all" style="vertical-align:middle; margin-top:0;" onclick="oncheck();">全部字段&nbsp&nbsp
+            </label>
+            <label style="color: white">
+                <input type="radio" name="search-condition" id="author" value="author" style="vertical-align:middle; margin-top:0;"> 作者&nbsp&nbsp
+            </label>
+            <label style="color: white">
+                <input type="radio" name="search-condition" id="title" value="title" style="vertical-align:middle; margin-top:0;"> 标题&nbsp&nbsp
+            </label>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
