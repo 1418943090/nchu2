@@ -54,7 +54,7 @@ $(function(){
          }
          else if(num>1){
              swal({
-                 title: "一次只能编译一骗论文!",
+                 title: "一次只能编辑一篇论文!",
                  text: "",
                  icon: "warning",
                  button: "确定",

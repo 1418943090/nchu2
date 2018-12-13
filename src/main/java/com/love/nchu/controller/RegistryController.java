@@ -47,6 +47,8 @@ public class RegistryController {
     @Value("${spring.img.path}")
     String img_path;
 
+    @Value("${spring.value.adminEmailUrl}")
+            String adminEmailUrl;
     String code;
     Date date;
 
@@ -67,6 +69,8 @@ public class RegistryController {
 
     @GetMapping("/registry/step3")
     public ModelAndView step3() {
+        //提醒管理员有新的注册请求
+        mailServer.sendSimpleMail(adminEmailUrl,"注册请求","你有新的注册请求,赶紧去管理中心看看吧");
 
         return new ModelAndView("step3");
     }

@@ -53,6 +53,14 @@
                 </tr>
                 </thead>
                 <tbody>
+
+                <div th:if="${hasPaper} eq false">
+                  <tr>
+                   <td colspan="5">
+                     <h1 class="text-center" style="color: #d2322d">你还没有添加任何论文哦,立即添加一篇吧</h1>
+                   </td>
+                  </tr>
+                </div>
                   <tr th:each="paper : ${model.list}">
                       <th><input type="checkbox" class="cb" th:attr="id=${paper.id},title=${paper.title}" ></th>
                       <th id="user" th:attr="username=${paper.username}" th:text="${paper.id}"></th>
@@ -60,7 +68,7 @@
                       <th><a th:href="${paper.path}" target="_blank">查看原文</a></th>
                       <th th:text="${paper.date}"></th>
                   </tr>
-                </tbody>
+             </tbody>
             </table>
             </div>
             </div>

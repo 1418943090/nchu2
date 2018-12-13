@@ -1,5 +1,6 @@
 
 
+
 function rem(flag){
     var obj = document.getElementsByClassName(flag);
     var username;
@@ -97,11 +98,10 @@ $('.card').on('click','input:checkbox',function () {
 function add(type){
 
     var note;
-    swal("请输入节日备注:", {
+    swal("请输入备注:", {
         content: "input",
     })
         .then((value) => {
-
             if(value==null  || value.replace(/\s+/g,"")==""){
                 swal("格式错误", "请输入有效的备注!");
             }
@@ -111,20 +111,36 @@ function add(type){
                 content: "input",
             })
                 .then((value) => {
-
-
                     if(value==null ||  value.match(/^(\d{4})(-)(\d{2})(-)(\d{2})$/) == null || isNaN(Date.parse(value))){
                         swal("格式错误", "请输入正确格式的日期!");
                     }
                     else{
-                        add_submit(note,value,type);
+                        dateCheck(note,value,type);
+                       //add_submit(note,value,type);
                     }
-
                 });
             }
         });
 }
 
+function dateCheck(note,value,type){
+    var now = (new Date()).getTime();
+    var date = (new Date(value)).getTime();
+    if(now>date){
+        swal({
+            title: "Are you sure?",
+            text: value+"是过去的时间哦,如果你执意添加该登记日期,那么该天的签到记录会失效哦",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                   add_submit(note,value,type);
+                }
+            });
+    }
+}
 function add_submit(note,date,type){
     $.ajax({
         url: "/festival/add/"+note+"/"+date+"/"+type,
@@ -133,7 +149,6 @@ function add_submit(note,date,type){
             $("#rightContainer").html(data);
         },
         error: function() {
-            //toastr.error("一不小心就出错了^_^,请刷新试试嘻嘻,还不行的话,及时联系管理员哦");
             swal({
                 title: "Error!",
                 text: '服务器处理错误',

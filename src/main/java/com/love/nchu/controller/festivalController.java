@@ -23,9 +23,18 @@ public class festivalController {
              flag = false;
              model.addAttribute("result",result);
         }
-
+        boolean isEmptyA = false;
+        boolean isEmptyB = false;
         List<Festival> list1 = festivalServer.getAllByType("1");
         List<Festival> list2 = festivalServer.getAllByType("2");
+
+        if(list1.size()==0)
+            isEmptyA= true;
+        if(list2.size()==0)
+            isEmptyB = true;
+
+        model.addAttribute("isEmptyA",isEmptyA);
+        model.addAttribute("isEmptyB",isEmptyB);
         model.addAttribute("list1",list1);
         model.addAttribute("list2",list2);
         return new ModelAndView("festival","model",model);

@@ -38,8 +38,8 @@ public class testController {
   @GetMapping("/mail")
   public void mailTest(){
 
-      mailServer.sendSimpleMail("1525931170@qq.com","测试","狗子");
-
+     // mailServer.sendSimpleMail("1525931170@qq.com","测试","狗子");
+      mailServer.sendSimpleMail("1418943090@qq.com","注册请求","你有新的注册请求,赶紧去管理中心看看吧");
 
 
   }

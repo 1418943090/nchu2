@@ -36,29 +36,41 @@ public class PaperController {
     }
     @GetMapping("/papers")
     public ModelAndView papers(Model model){
+       boolean isEmptyA = false;
        List<Paper> list = paperServer.getAllPapers();
        model.addAttribute("list",list);
        System.out.println(list);
+       if(list.size()==0)
+            isEmptyA = true;
+       model.addAttribute("isEmptyA",isEmptyA);
+        model.addAttribute("isEmptyB",false);
        model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
        return new ModelAndView("papers","model",model);
     }
     @GetMapping("/papers/search/{condition}/{value}")
     public ModelAndView search(@PathVariable String condition,@PathVariable  String value,Model model){
        System.out.println(condition+" "+value);
+       List list = null;
        if(condition.equals("all")){
-           List<Paper> list =  paperServer.getPaperByNameLikeOrTitleLike(value);
+            list =  paperServer.getPaperByNameLikeOrTitleLike(value);
            System.out.println(list);
            model.addAttribute("list",list);
        }
        else if(condition.equals("author")){
-           List<Paper> list = paperServer.getPaperByNameLike(value);
+           list = paperServer.getPaperByNameLike(value);
            System.out.println(list);
            model.addAttribute("list",list);
        }else if(condition.equals("title")){
-           List<Paper> list = paperServer.getPaperByTitleLike(value);
+           list = paperServer.getPaperByTitleLike(value);
            System.out.println(list);
            model.addAttribute("list",list);
        }
+       boolean isEmptyB = false;
+       if(list.size()==0)
+           isEmptyB = true;
+
+       model.addAttribute("isEmptyB",isEmptyB);
+       model.addAttribute("isEmptyA",false);
        model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
        return new ModelAndView("papers","model",model);
     }

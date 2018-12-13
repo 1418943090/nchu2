@@ -94,6 +94,14 @@
                 </tr>
                 </thead>
                 <tbody>
+
+                <div th:if="${isFestival} eq true">
+                <tr >
+                  <td colspan="7">
+                  <h1 class="text-center" style="color: #c7254e">今天是节假日,没有查询到签到记录</h1>
+                  </td>
+                  </tr>
+                </div>
                 <tr th:each="sign_in_status : ${model.list}">
                     <td class="text-center "  th:text="${sign_in_status.username}"></td>
                     <td th:attr="class=${sign_in_status.getMon_in_class()}" ><p class="text-center"  th:text="${sign_in_status.getMon_in()}"></p></td>

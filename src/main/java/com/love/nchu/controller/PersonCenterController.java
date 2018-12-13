@@ -40,9 +40,13 @@ public class PersonCenterController {
     {
         nowuser = username;
         List<Paper> list = paperServer.findPaperByUsername(username);
-        System.out.println(list);
+        boolean hasPaper = true;
+        if(list.size()==0) {
+            hasPaper = false;
+        }
+        System.out.println(hasPaper);
+        model.addAttribute("hasPaper",hasPaper);
         model.addAttribute("list",list);
-        System.out.println("aaa");
         return new ModelAndView("userPapers","model",model);
     }
     @PostMapping("/upload/paper")

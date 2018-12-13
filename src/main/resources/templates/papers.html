@@ -143,12 +143,17 @@
     <div class="container">
         <div class="row" >
             <div class="col-md-10">
+            <div th:if="${isEmptyA} eq true">
+                 <h1 class="text-center" style="color: white">论文库空空如也,赶紧去个人中心添加一篇吧</h1>
+            </div>
+           <div th:if="${isEmptyB} eq true">
+                 <h1 class="text-center" style="color: white">一篇论文也没有搜索到哦,试试其他关键字吧</h1>
+            </div>
             <div th:each="paper : ${model.list}" >
              <div class="well " >
                 <div class="paper-header text-center" >
                     <h class="paper-title" th:text="${paper.title}"></h><br>
                     <span class="paper-author">作者:<span class="paper-name" th:text="${paper.name}"></span>•<span th:text="${paper.date}"></span></span>
-
                 </div>
                 <div class="paper-content">
                     <h3 th:text="${paper.summary}"></h3>

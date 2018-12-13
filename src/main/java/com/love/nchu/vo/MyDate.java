@@ -12,8 +12,20 @@ public  class MyDate {
 
 
 
+   public static int getTodayWeek(){
+       Calendar cal = Calendar.getInstance();
+       cal.setTime(new Date());
+      return cal.get(Calendar.DAY_OF_WEEK);
+   }
 
+   public static int getWeek(String s) throws Exception{
 
+       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+       Date d = format.parse(s);
+       Calendar cal = Calendar.getInstance();
+       cal.setTime(d);
+       return cal.get(Calendar.DAY_OF_WEEK) ;
+   }
 
    public static String getDate(){
         Date date = new Date();

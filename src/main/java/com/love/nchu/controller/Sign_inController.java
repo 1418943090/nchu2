@@ -7,6 +7,7 @@ import com.love.nchu.service.FestivalServer;
 import com.love.nchu.service.Sign_in_StatusServer;
 import com.love.nchu.service.Sign_in_TimeServer;
 import com.love.nchu.service.UserServer;
+import com.love.nchu.tool.FestivalTool;
 import com.love.nchu.tool.SignInTool;
 import com.love.nchu.vo.MyDate;
 import com.love.nchu.vo.Net;
@@ -47,7 +48,6 @@ public class Sign_inController {
         Sign_in_Status sign_in_status ;
         List<String> list = MyDate.getWeekDays(date,"yyyy-MM-dd",true);
         List<weekShow> list2 = new ArrayList<>();
-        List<Sign_in_Status> list3 = new ArrayList<>();
         List<String> user = userServer.getAllOrdinaryUsernmae();
         for(int i=0;i<user.size();i++){
             weekShow w = new weekShow(user.get(i),0,0,0,0,0,0,0);
@@ -98,11 +98,19 @@ public class Sign_inController {
 
 
     @GetMapping("/sign_in/show/all/{date}")
-    public ModelAndView show(@PathVariable String date, Model model){
+    public ModelAndView show(@PathVariable String date, Model model)throws Exception{
 
         String d = date;
         if(date.equals("today")) {
             d = MyDate.getDate();
+        }
+
+        if(FestivalTool.isFestival(d,festivalServer)){
+
+            model.addAttribute("sign_in_time",SignInTool.getTime(sign_in_timeServer));
+            model.addAttribute("date",d);
+            model.addAttribute("isFestival",true);
+            return new ModelAndView("signinshow","model",model);
         }
 
         List<Sign_in_Status> list = new ArrayList<>();
@@ -119,6 +127,7 @@ public class Sign_inController {
         model.addAttribute("sign_in_time",SignInTool.getTime(sign_in_timeServer));
         model.addAttribute("list",list);
         model.addAttribute("date",d);
+        model.addAttribute("isFestival",false);
         System.out.println(d);
         return new ModelAndView("signinshow","model",model);
     }

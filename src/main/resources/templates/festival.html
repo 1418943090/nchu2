@@ -67,6 +67,15 @@
                         </tr>
                         </thead>
                         <tbody>
+
+                        <div th:if="${isEmptyA} eq true">
+                          <tr>
+                             <td colspan="3">
+                               <h1 class="text-center" style="color: #c7254e">你还没有添加任何假日记录哦</h1>
+                             </td>
+                          </tr>
+                         </div>
+
                           <tr class ="text-center" th:each="festival : ${model.list1}">
                            <td><input type="checkbox" class="1" th:attr="id=${festival.getId()}"></td>
                            <td class="text-center"><p th:text="${festival.getNote()}"></p></td>
@@ -106,6 +115,14 @@
                  </tr>
                  </thead>
                  <tbody>
+
+                        <div th:if="${isEmptyB} eq true">
+                          <tr>
+                             <td colspan="3">
+                               <h1 class="text-center" style="color: #c7254e">你还没有添加任何假日记录哦</h1>
+                             </td>
+                          </tr>
+                         </div>
                       <tr class ="text-center" th:each="festival : ${model.list2}">
                           <td><input type="checkbox" class="2"  th:attr="id=${festival.getId()}"></td>
                           <td class="text-center"><p th:text="${festival.getNote()}"></p></td>
