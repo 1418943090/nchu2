@@ -45,7 +45,7 @@ public class loginController {
     public ModelAndView loginsuccess(HttpServletRequest request, HttpServletResponse response){
         return new ModelAndView("redirect:/index");
     }
-    @GetMapping("/log_out")
+    @GetMapping("/login_out")
     public ModelAndView logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("user","");
         cookie.setPath("/");

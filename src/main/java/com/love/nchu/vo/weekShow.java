@@ -15,6 +15,14 @@ public class weekShow implements Serializable {
     int saturday;
     int sunday;
     int count;
+    int a=0;
+    String mondayShow;
+    String tuesdayShow;
+    String wednesdayShow;
+    String thursdayShow;
+    String fridayShow;
+    String saturdayShow;
+    String sundayShow;
     protected weekShow(){
 
     }
@@ -30,8 +38,16 @@ public class weekShow implements Serializable {
         this.sunday = sunday;
     }
 
+    public int getA() {
+        return a;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
     public int count(){
-        return this.monday+this.tuesday+this.thursday+this.friday+this.saturday+this.sunday;
+        return getA()+this.monday+this.tuesday+this.thursday+this.friday+this.saturday+this.sunday;
     }
 
     public String getUsername() {
@@ -42,56 +58,73 @@ public class weekShow implements Serializable {
         this.username = username;
     }
 
-    public int getMonday() {
-        return monday;
+    public String getMonday()
+    {
+         if(monday==-1)
+             return "节假日";
+        return String.valueOf(monday);
     }
 
     public void setMonday(int monday) {
         this.monday = monday;
     }
 
-    public int getTuesday() {
-        return tuesday;
+    public String getTuesday() {
+        if(tuesday==-1)
+            return "节假日";
+        return String.valueOf(tuesday);
     }
 
     public void setTuesday(int tuesday) {
         this.tuesday = tuesday;
     }
 
-    public int getWednesday() {
-        return wednesday;
+    public String getWednesday()
+    {
+        if(wednesday==-1)
+            return "节假日";
+        return String.valueOf(wednesday);
     }
 
     public void setWednesday(int wednesday) {
         this.wednesday = wednesday;
     }
 
-    public int getThursday() {
-        return thursday;
-    }
 
+    public String getThursday()
+    {
+        if(thursday==-1)
+            return "节假日";
+        return String.valueOf(thursday);
+    }
     public void setThursday(int thursday) {
         this.thursday = thursday;
     }
 
-    public int getFriday() {
-        return friday;
+    public String getFriday() {
+        if(friday==-1)
+            return "节假日";
+        return String.valueOf(friday);
     }
 
     public void setFriday(int friday) {
         this.friday = friday;
     }
 
-    public int getSaturday() {
-        return saturday;
+    public String getSaturday() {
+        if(saturday==-1)
+            return "节假日";
+        return String.valueOf(saturday);
     }
 
     public void setSaturday(int saturday) {
         this.saturday = saturday;
     }
 
-    public int getSunday() {
-        return sunday;
+    public String getSunday() {
+        if(sunday==-1)
+            return "节假日";
+        return String.valueOf(sunday);
     }
 
     public void setSunday(int sunday) {
@@ -100,11 +133,69 @@ public class weekShow implements Serializable {
 
 
     public int getCount() {
-        return monday+tuesday+wednesday+thursday+friday+saturday+sunday;
+        return a+monday+tuesday+wednesday+thursday+friday+saturday+sunday;
     }
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+
+
+    public String getMondayShow() {
+        return mondayShow;
+    }
+
+    public void setMondayShow(String mondayShow) {
+        this.mondayShow = mondayShow;
+    }
+
+    public String getTuesdayShow() {
+        return tuesdayShow;
+    }
+
+    public void setTuesdayShow(String tuesdayShow) {
+        this.tuesdayShow = tuesdayShow;
+    }
+
+    public String getWednesdayShow() {
+        return wednesdayShow;
+    }
+
+    public void setWednesdayShow(String wednesdayShow) {
+        this.wednesdayShow = wednesdayShow;
+    }
+
+    public String getThursdayShow() {
+        return thursdayShow;
+    }
+
+    public void setThursdayShow(String thursdayShow) {
+        this.thursdayShow = thursdayShow;
+    }
+
+    public String getFridayShow() {
+        return fridayShow;
+    }
+
+    public void setFridayShow(String fridayShow) {
+        this.fridayShow = fridayShow;
+    }
+
+    public String getSaturdayShow() {
+        return saturdayShow;
+    }
+
+    public void setSaturdayShow(String saturdayShow) {
+        this.saturdayShow = saturdayShow;
+    }
+
+    public String getSundayShow() {
+        return sundayShow;
+    }
+
+    public void setSundayShow(String sundayShow) {
+        this.sundayShow = sundayShow;
     }
 
     @Override

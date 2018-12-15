@@ -73,8 +73,9 @@
                                     message:'别忘记自我介绍下哦'
                                 },
                                 stringLength: {
-                                    max: 120,
-                                    message: '不是警察办案,不用太详细哦'
+                                    min:100,
+                                    max: 390,
+                                    message: '自我介绍字数要适当哦'
                                 },
 
                             }
@@ -146,7 +147,7 @@
                                 url: /basic_information/+username,
                                 async:true,
                                 success: function(data){
-                                    $("#").html(data);
+                                    $("#rightContainer").html(data);
                                 },
                                 error: function() {
                                 swal({

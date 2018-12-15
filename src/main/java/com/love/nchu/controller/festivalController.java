@@ -1,7 +1,9 @@
 package com.love.nchu.controller;
 
 import com.love.nchu.demain.Festival;
+import com.love.nchu.demain.Sign_in_Status;
 import com.love.nchu.service.FestivalServer;
+import com.love.nchu.service.Sign_in_StatusServer;
 import com.love.nchu.vo.deleteFestivalVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ public class festivalController {
     boolean flag = false;
     @Autowired
     FestivalServer festivalServer;
+    @Autowired
+    Sign_in_StatusServer sign_in_statusServer;
     @GetMapping("/festival")
     public ModelAndView festival(Model model) {
 
@@ -49,6 +53,24 @@ public class festivalController {
         if(a==null){
             result = "success";
             festivalServer.save(f);
+
+            List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(date);
+            for(Sign_in_Status s : list){
+
+                s.setMon_in(null);s.setMon_out(null);
+                s.setAft_in(null);s.setAft_out(null);
+                s.setMon_in(null);s.setMon_out(null);
+                if(type.equals("1")){
+                    s.setFestival(true);
+                    s.setCount(0);
+                }
+                else if(type.equals("2")){
+                    s.setFestival(false);
+                    s.setCount(6);
+                }
+
+                sign_in_statusServer.save(s);
+            }
             return new ModelAndView("redirect:/festival");
         }
         result = "error";
@@ -58,10 +80,34 @@ public class festivalController {
     @PostMapping("/delete/festival")
     public ModelAndView delete(@RequestBody deleteFestivalVo deleteFestivalVo){
 
+
         for(Integer id : deleteFestivalVo.getListFestivalId())
         {
-            festivalServer.delete(id);
-        }
+
+            Festival festival = festivalServer.getFestivalById(id);
+            List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(festival.getDate());
+
+            for(Sign_in_Status s : list) {
+                s.setMon_in(null);
+                s.setMon_out(null);
+                s.setAft_in(null);
+                s.setAft_out(null);
+                s.setMon_in(null);
+                s.setMon_out(null);
+                System.out.println(deleteFestivalVo.getFlag());
+                if(deleteFestivalVo.getFlag().equals("2"))
+                {
+                    s.setFestival(true);
+                    s.setCount(0);
+                }
+               else if(deleteFestivalVo.getFlag().equals("1")) {
+                    s.setFestival(false);
+                    s.setCount(6);
+                }
+                sign_in_statusServer.save(s);
+            }
+             festivalServer.delete(id);
+            }
         return new ModelAndView("redirect:/festival");
     }
 }

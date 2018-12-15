@@ -61,7 +61,7 @@
                     <li><a th:href="@{'/user/'+${username}}">个人中心</a></li>
                     <!--<li><a href="#">我的发布</a></li>-->
                     <li role="separator" class="divider"></li>
-                    <li><a th:href="@{/log_out}" th:method="POST">退出登录</a></li>
+                    <li><a th:href="@{/login_out}" th:method="POST">退出登录</a></li>
                 </ul>
             </li>
             <li th:if="${username}==null">

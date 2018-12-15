@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 @RestController
@@ -96,9 +97,12 @@ public class PasswordController {
         }
         return errorVo;
     }
-
     @GetMapping("/password/success")
-    public ModelAndView succeess(Model model){
+    public ModelAndView succeess(Model model, HttpServletResponse response){
+        Cookie cookie = new Cookie("user","");
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         model.addAttribute("TitleEdit",TitleTool.getTitle(titleEditServer));
         return new ModelAndView("changePasswordSuccess","model",model);
     }

@@ -51,6 +51,10 @@ public  class MyDate {
         return hour*100+minute;
     }
 
+    public static long getDateTime(String date) throws  Exception{
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.parse(date).getTime();
+    }
 
 
     public static int[] get(String time){

@@ -1,6 +1,14 @@
 
 
 
+
+
+
+
+
+
+
+
 function rem(flag){
     var obj = document.getElementsByClassName(flag);
     var username;
@@ -24,7 +32,7 @@ function rem(flag){
 
         swal({
             title: "Are you sure?",
-            text: "数据删除后将无法恢复",
+            text: "删除该天的节假日登记后,系统将会将所有用户该天的状态更改为未签到。如果需要更改的话可以到签到情况栏进行自定义更改",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -139,6 +147,9 @@ function dateCheck(note,value,type){
                    add_submit(note,value,type);
                 }
             });
+    }
+    else{
+        add_submit(note,value,type);
     }
 }
 function add_submit(note,date,type){

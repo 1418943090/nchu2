@@ -30,7 +30,7 @@ public class PaperController {
        return new ModelAndView("redirect:/userPapers/"+deletePaperVo.getUserName());
     }
     @PostMapping("/update/paper")
-    public String updatePaper(int updateId,String updateTitle,String updateUsername){
+    public String updatePaper(int updateId,String updateTitle){
        paperServer.updatePaper(updateId,updateTitle);
        return null;
     }

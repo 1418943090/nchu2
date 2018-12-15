@@ -11,4 +11,5 @@ public interface FestivalServer {
 
     void delete(Integer id);
     Festival getFestivalByDate(String date);
+    Festival getFestivalById(Integer id);
 }

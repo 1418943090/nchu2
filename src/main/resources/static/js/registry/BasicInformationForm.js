@@ -135,14 +135,11 @@ $(function(){
                         }
                     }
                 }
-
             }
         });
     }
     validator_Init();
 });
-
-
 function form_check(){
     var bootstrapValidator = $('#BasicInformationForm').data('bootstrapValidator');
     bootstrapValidator.validate();
@@ -151,11 +148,16 @@ function form_check(){
     }
 }
  function submit() {
-
         $("#BasicInformationForm").ajaxSubmit(function(message) {
             if(message=='success')
                 window.location.href="/registry/step3";
-            toastr.error(message);
+           // toastr.error(message);
+            swal({
+                title: "Error!",
+                text:message,
+                icon: "error",
+                button: "确定",
+            });
         });
         return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-    }
+}

@@ -1,8 +1,10 @@
 package com.love.nchu.demain;
 
+
 import javax.persistence.*;
 
-@Entity
+@Entity()
+@org.hibernate.annotations.Entity(dynamicInsert=true,dynamicUpdate=true)
 @Table(name="sign_in_status")
 public class Sign_in_Status {
 
@@ -17,18 +19,23 @@ public class Sign_in_Status {
     private String aft_out;
     private String eve_in;
     private String eve_out;
-    //private int count= 6;
+    private boolean isFestival;
+    private int count= 6;
 
     protected  Sign_in_Status(){
 
     }
 
-    public Sign_in_Status(String username,String date) {
+
+
+    public Sign_in_Status(String username,String date,boolean isFestival,int count) {
         this.username = username;
         this.date = date;
+        this.isFestival = isFestival;
+        this.count = count;
     }
 
-    public Sign_in_Status(String username, String date, String mon_in, String mon_out, String aft_in, String aft_out, String eve_in, String eve_out) {
+    public Sign_in_Status(String username, String date, String mon_in, String mon_out, String aft_in, String aft_out, String eve_in, String eve_out, boolean isFestival, int count) {
         this.username = username;
         this.date = date;
         this.mon_in = mon_in;
@@ -37,25 +44,29 @@ public class Sign_in_Status {
         this.aft_out = aft_out;
         this.eve_in = eve_in;
         this.eve_out = eve_out;
+        this.isFestival = isFestival;
+        this.count = count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getCount(){
 
-        int num = 0;
-        if(mon_in==null)
-            num++;
-        if(mon_out==null)
-            num++;
-        if(aft_in==null)
-            num++;
-        if(aft_out==null)
-            num++;
-        if(eve_in==null)
-            num++;
-        if(eve_out==null)
-            num++;
-        return num;
+        int sum =0;
+        if(mon_in==null)sum++;
+        if(mon_out==null)sum++;
+        if(aft_in==null)sum++;
+        if(aft_out==null)sum++;
+        if(eve_in==null)sum++;
+        if(eve_out==null)sum++;
+
+
+        return sum;
     }
+
+
 
 
 //    public int getCount() {
@@ -183,6 +194,13 @@ public class Sign_in_Status {
         this.eve_out = eve_out;
     }
 
+    public boolean isFestival() {
+        return isFestival;
+    }
+
+    public void setFestival(boolean festival) {
+        isFestival = festival;
+    }
 
     @Override
     public String toString() {
@@ -196,7 +214,8 @@ public class Sign_in_Status {
                 ", aft_out='" + aft_out + '\'' +
                 ", eve_in='" + eve_in + '\'' +
                 ", eve_out='" + eve_out + '\'' +
-               // ", count=" + count +
+                ", isFestival=" + isFestival +
+                ", count=" + count +
                 '}';
     }
 }

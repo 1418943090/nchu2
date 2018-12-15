@@ -4,8 +4,10 @@ package com.love.nchu.controller;
 import com.love.nchu.demain.UserInfo;
 import com.love.nchu.service.TitleEditServer;
 import com.love.nchu.service.UserInfoServer;
+import com.love.nchu.tool.LoginTool;
 import com.love.nchu.tool.TitleTool;
 import com.love.nchu.vo.Menu;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,14 @@ public class UserController {
     @Autowired
     TitleEditServer titleEditServer;
     @GetMapping("/user/{username}")
-    public ModelAndView user(@PathVariable("username") String username, Model model){
+    public ModelAndView user(@PathVariable("username") String username, Model model, HttpServletRequest request){
+
+
+        if(!LoginTool.isLoginUser(request,username)){
+            return new ModelAndView("redirect:/login");
+        }
+
+
 
         UserInfo userInfo = userInfoServer.getUserByUsername(username);
         List<Menu> list = new ArrayList();
