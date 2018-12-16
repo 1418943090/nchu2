@@ -61,6 +61,7 @@ public class Sign_inController {
 //            error = "只能修改过去日期签到信息";
 //            return new ModelAndView("redirect:/sign_in/show/all/"+date);
 //        }
+        error="";
         boolean flag = false;
         List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(date);
         if(list.size()==0){
