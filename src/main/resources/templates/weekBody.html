@@ -32,13 +32,6 @@
                     <td ><p class="text-center"   th:text="${weekShow.getSundayShow()}"></p></td>
                     <td><P class="text-center" th:text="${weekShow.getCount()}"></P></td>
                 </tr>
-                <div th:if="${isFestival} ne true">
-                <tr>
-                <td colspan="9">
-               <h style="color: #2a6496">ps:点击用户名可修改指定用户签到信息</h>
-                </td>
-                </tr>
-                </div>
                 </tbody>
             </table>
 </html>

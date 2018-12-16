@@ -1,5 +1,6 @@
 package com.love.nchu.controller;
 
+import com.love.nchu.demain.User;
 import com.love.nchu.service.Sign_in_TimeServer;
 import com.love.nchu.service.TitleEditServer;
 import com.love.nchu.tool.TitleTool;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 @RestController
 public class Main {
@@ -23,13 +23,11 @@ public class Main {
     }
     @GetMapping(value = "/index")
     public ModelAndView index(Model model, HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null){
-            for(Cookie cookie2 : cookies){
-                if(cookie2.getName().equals("user")){
-                    model.addAttribute("username",cookie2.getValue());
-                }
-            }
+
+        User user = (User) request.getSession().getAttribute("user");
+        if(user!=null)
+        {
+            model.addAttribute("username",user.getUsername());
         }
         model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
         return new ModelAndView("index","login-success",model);

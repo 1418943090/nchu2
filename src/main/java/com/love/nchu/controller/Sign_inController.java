@@ -61,13 +61,21 @@ public class Sign_inController {
 //            error = "只能修改过去日期签到信息";
 //            return new ModelAndView("redirect:/sign_in/show/all/"+date);
 //        }
-
+        boolean flag = false;
         List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(date);
         if(list.size()==0){
             error = "没有查询到"+date+"的签到记录";
             return new ModelAndView("redirect:/sign_in/show/all/"+date);
         }
+
+        if(FestivalTool.isFestival(date,festivalServer)){
+
+            error = date+"是节假日哦,没有签到记录可以修改";
+            return new ModelAndView("redirect:/sign_in/show/all/"+date);
+        }
+
         if(mon_in!=null){
+            flag = true;
             if(signinstatus.equals("未签到")){
                 sign_in_statusServer.updateSign_in_Status_Mon_in(null,date);
             }
@@ -76,6 +84,7 @@ public class Sign_inController {
             }
         }
         if(mon_out!=null){
+            flag = true;
             if(signinstatus.equals("未签到")){
                 sign_in_statusServer.updateSign_in_Status_Mon_out(null,date);
             }
@@ -84,6 +93,7 @@ public class Sign_inController {
             }
         }
         if(aft_in!=null){
+            flag = true;
             if(signinstatus.equals("未签到")){
                 sign_in_statusServer.updateSign_in_Status_Aft_in(null,date);
             }
@@ -92,6 +102,7 @@ public class Sign_inController {
             }
         }
         if(aft_out!=null){
+            flag = true;
             if(signinstatus.equals("未签到")){
                 sign_in_statusServer.updateSign_in_Status_Aft_out(null,date);
             }
@@ -100,6 +111,7 @@ public class Sign_inController {
             }
         }
         if(eve_in!=null){
+            flag = true;
             if(signinstatus.equals("未签到")){
 
                 sign_in_statusServer.updateSign_in_Status_Eve_in(null,date);
@@ -109,6 +121,7 @@ public class Sign_inController {
             }
         }
         if(eve_out!=null){
+            flag = true;
             if(signinstatus.equals("未签到")){
 
                 sign_in_statusServer.updateSign_in_Status_Eve_out(null,date);
@@ -116,6 +129,9 @@ public class Sign_inController {
             else if(signinstatus.equals("已签到")){
                 sign_in_statusServer.updateSign_in_Status_Eve_out(SignInTool.getTime(sign_in_timeServer).getEve_out().substring(1,6),date);
             }
+        }
+        if(flag==false){
+            error = "你没有选择要更改的时间点";
         }
         cound_change(date);
         return new ModelAndView("redirect:/sign_in/show/all/"+date);

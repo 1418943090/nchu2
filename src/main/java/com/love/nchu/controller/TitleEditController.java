@@ -26,6 +26,7 @@ public class TitleEditController {
     public String edit(TitleEdit titleEdit){
         System.out.print(titleEdit);
         titleEditServer.save(titleEdit);
+        TitleTool.titleEdit = titleEdit;
         return "更改成功";
     }
 }

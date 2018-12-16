@@ -14,21 +14,16 @@ import java.util.List;
 
 @Component
 public class scheduleTask {
-
-
     @Autowired
     Sign_in_StatusServer sign_in_statusServer;
     @Autowired
     FestivalServer festivalServer;
     @Autowired
     UserServer userServer;
-   //0 0 12 * * ?
-
+    //0 0 12 * * ?
     //@Scheduled(cron="0 5/1 * * * ?")
-
     @Scheduled(cron="0 0 1,12,6 * * ?")
     public void sign_in_Init() throws  Exception{
-
         List<String> userlist = userServer.getAllOrdinaryUsernmae();
         String today = MyDate.getDate();
         for(String username : userlist){

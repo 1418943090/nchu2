@@ -24,7 +24,7 @@ public class loginController {
         return new ModelAndView("login","model",model);
   }
   @RequestMapping(value = "/login_valid",method = {RequestMethod.POST})
-  public String logining(String username,String password,HttpServletResponse response) throws Exception {
+  public String logining(String username,String password,HttpServletRequest request,HttpServletResponse response) throws Exception {
       User user = userServer.findUserByUsername(username);
       if (user != null) {
           if(!user.isEnabled()==true){
@@ -33,9 +33,11 @@ public class loginController {
           else if(user.isAccountNonLocked()==false){
               return "该账号已被管理员禁用,有疑问请联系管理员";
           } else if (user.getPassword().equals(SHAencrypt.encryptSHA(password))) {
-              Cookie cookie = new Cookie("user", username);
-              cookie.setPath("/");
-              response.addCookie(cookie);
+
+               request.getSession().setAttribute("user",user);
+               Cookie cookie = new Cookie("sessionId",user.getPassword());
+               cookie.setPath("/");
+               response.addCookie(cookie);
               return "success";
           }
       }
@@ -46,11 +48,11 @@ public class loginController {
         return new ModelAndView("redirect:/index");
     }
     @GetMapping("/login_out")
-    public ModelAndView logout(HttpServletResponse response) {
-        Cookie cookie = new Cookie("user","");
-        cookie.setPath("/");
+    public ModelAndView logout(HttpServletRequest request,HttpServletResponse response) {
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("sessionId",null);
         cookie.setMaxAge(0);
-        response.addCookie(cookie);
+        cookie.setPath("/");
         return new ModelAndView("redirect:/index");
     }
 }

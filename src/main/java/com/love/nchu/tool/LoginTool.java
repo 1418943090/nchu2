@@ -5,7 +5,6 @@ import com.love.nchu.security.SHAencrypt;
 import com.love.nchu.service.UserServer;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
@@ -19,19 +18,13 @@ public class LoginTool {
         }
         return false;
     }
-
-
     public static boolean isLoginUser(HttpServletRequest request,String username) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie2 : cookies) {
-                if (cookie2.getName().equals("user")) {
-                    if (cookie2.getValue().equals(username))
-                        return true;
-                    else return false;
-                }
-            }
-        }
+
+        if(request.getSession().getAttribute("user")==null)
+            return false;
+
+        if(((User)request.getSession().getAttribute("user")).getUsername().equals(username))
+            return true;
         return false;
     }
 }

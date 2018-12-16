@@ -231,7 +231,7 @@
                     <td th:attr="class=${sign_in_status.getEve_in_class()}"><p class="text-center"   th:text="${sign_in_status.getEve_in()}"></p></td>
                     <td th:attr="class=${sign_in_status.getEve_out_class()}" ><p class="text-center"   th:text="${sign_in_status.getEve_out()}"></p></td>
                 </tr>
-                <div th:if="${isFestival} ne true">
+                <div th:if="${isFestival} ne true and ${isEmpty} ne true">
                 <tr>
                 <td colspan="7">
                <h style="color: #2a6496">ps:点击用户名可修改指定用户签到信息</h>
@@ -360,11 +360,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title text-center" id="myModalLabel" style="color:orangered">
-
+                    <h4 class="modal-title text-center" id="myModalLabel" style="color: #d2322d">
+                       全局修改
                     </h4>
                 </div>
                 <div class="modal-body">
+                <div class="alert alert-warning" role="alert">Warning:此修改将作用于所有用户,一旦确认操作将会覆盖之前的签到记录,且无法撤销,请谨慎操作</div>
                     <form id="globalChangeSigninForm" th:action="@{/sign_in/globalmodify}" target="frameName" onsubmit="return false" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >
                        <div class="form-group">
                          <label for="" class="col-sm-4 control-label">日期选择
