@@ -307,11 +307,11 @@ public class Sign_inController {
 
       ErrorVo errorVo = new ErrorVo("");
 
-      Festival f = festivalServer.getFestivalByDate(MyDate.getDate());
-      if(f!=null){
-          errorVo.setData("今天放假不用签到哦,世界那么大，出去看看吧");
-          return errorVo;
-      }
+//      Festival f = festivalServer.getFestivalByDate(MyDate.getDate());
+//      if(f!=null){
+//          errorVo.setData("今天放假不用签到哦,世界那么大，出去看看吧");
+//          return errorVo;
+//      }
         //ip校验
       String ip = Net.getIP(request);
       if(!ip.equals(public_ip)){
@@ -363,7 +363,7 @@ public class Sign_inController {
     public ModelAndView Sign_in(@PathVariable String username, Model model)throws Exception{
 
         String s = MyDate.getDate();
-        if(festivalServer.getFestivalByDate(MyDate.getDate())!=null){
+        if(FestivalTool.isFestival(MyDate.getDate(),festivalServer)){
             return new ModelAndView("festivalday");
         }
         SignInTool.sign_in_status_check(sign_in_statusServer,festivalServer,username,s);

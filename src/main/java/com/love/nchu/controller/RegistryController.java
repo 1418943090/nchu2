@@ -58,7 +58,7 @@ public class RegistryController {
         System.out.println(email);
         code = EmailTool.getCode();
         System.out.println(code);
-        mailServer.sendSimpleMail(email, "欢迎注册TDN之家账号", "本次的验证码为(十分钟内有效):" + code);
+        mailServer.sendSimpleMail(email, "欢迎注册TDY之家账号", "本次的验证码为(十分钟内有效):" + code);
     }
 
     @GetMapping("/registry/step2")

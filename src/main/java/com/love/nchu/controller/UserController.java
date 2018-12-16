@@ -27,21 +27,18 @@ public class UserController {
     TitleEditServer titleEditServer;
     @GetMapping("/user/{username}")
     public ModelAndView user(@PathVariable("username") String username, Model model, HttpServletRequest request){
-
-
         if(!LoginTool.isLoginUser(request,username)){
             return new ModelAndView("redirect:/login");
         }
-
         UserInfo userInfo = userInfoServer.getUserByUsername(username);
         List<Menu> list = new ArrayList();
         list.add(new Menu("基本信息","/basic_information/"+username));
         list.add(new Menu("发表论文","/userPapers/"+username));
-        list.add(new Menu("学术研究",""));
-        list.add(new Menu("产品","/protect/"+username));
+       // list.add(new Menu("学术研究",""));
+       // list.add(new Menu("产品","/protect/"+username));
         if(userInfo.getUsername().equals("admin"))
         {
-            list.add(new Menu("研究生",""));
+           // list.add(new Menu("研究生",""));
             list.add(new Menu("签到情况","/sign_in/show/all/today"));
             list.add(new Menu("节假日登记","/festival"));
             list.add(new Menu("注册申请","/review"));

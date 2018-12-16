@@ -15,8 +15,8 @@ $(function(){
                         },
                         stringLength: {
                             min: 3,
-                            max: 30,
-                            message: '论文标题长度在3~30个字符哦'
+                            max: 60,
+                            message: '论文标题长度在3~60个字符哦'
                         }
                     }
                 }

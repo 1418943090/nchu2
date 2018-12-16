@@ -38,9 +38,11 @@ public interface UserInfoRepository extends JpaRepository<UserInfo,String> {
     @Query("select name from UserInfo u where u.username=?1")
     String getNameByUsername(String username);
 
+
+    @Query("select u from UserInfo  u where u.identity=?1 and EXISTS (select 1 from User u2 where u2.username=u.username and u2.enabled=1)")
     List<UserInfo> findUserInfoByIdentity(String identity);
 
-    @Query("select u.username from UserInfo u where u.identity='student'")
+    @Query("select u.username from UserInfo u where u.identity='student' and exists (select 1 from User u2 where u2.username=u.username and u2.enabled=1 )")
     List<String> getAllStudentUsername();
 
 

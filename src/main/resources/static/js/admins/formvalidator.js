@@ -19,8 +19,8 @@ $(function(){
                         },
                         stringLength: {
                             min: 3,
-                            max: 30,
-                            message: '论文标题长度在3~30个字符哦'
+                            max: 60,
+                            message: '论文标题长度在3~60个字符哦'
                         }
                     }
                 },
@@ -31,8 +31,8 @@ $(function(){
                         },
                         stringLength: {
                             min: 50,
-                            max: 300,
-                            message: '摘要不要太短也不要太长哦'
+                            max: 500,
+                            message: '摘要长度范围为50~500'
                         }
                     }
                 },

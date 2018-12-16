@@ -24,6 +24,6 @@ public interface UserRepository extends JpaRepository<User,String> {
     List<String> getAllUsernmae();
 
 
-    @Query("select u.username from User u where u.role='ordinary'")
+    @Query("select u.username from User u where u.role='ordinary' and u.enabled= 1 ")
     List<String> getAllOrdinaryUsernmae();
 }

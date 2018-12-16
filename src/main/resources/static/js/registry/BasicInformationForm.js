@@ -37,7 +37,7 @@ $(function(){
                     }
                 },
                 birthDate:{
-                   trigger:"click",
+                   trigger:'click',
                     validators:{
                         notEmpty:{
                             message:'请输入出生日期'
@@ -54,7 +54,6 @@ $(function(){
                                 }
                             }
                         }
-
                     }
                 }, name:{
                     validators: {
@@ -131,7 +130,7 @@ $(function(){
                         stringLength: {
                             min: 50,
                             max: 400,
-                            message: "自我简介字数要适当哦"
+                            message: '自我简介字数要适当哦'
                         }
                     }
                 }
@@ -152,12 +151,14 @@ function form_check(){
             if(message=='success')
                 window.location.href="/registry/step3";
            // toastr.error(message);
+            else{
             swal({
                 title: "Error!",
                 text:message,
                 icon: "error",
                 button: "确定",
             });
+            }
         });
         return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
