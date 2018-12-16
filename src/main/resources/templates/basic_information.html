@@ -106,7 +106,7 @@
             var bootstrapValidator = $('#editForm').data('bootstrapValidator');
             bootstrapValidator.validate();
             if(bootstrapValidator.isValid()){//如果校验成功后执行的操作
-                 var user = [[${user_info}]];
+                var user = [[${user_info}]];
                 var username = user.username;
                 var school =  document.getElementById("editSchool").value;
                 var email  =  document.getElementById("editEmail").value;
@@ -114,7 +114,6 @@
                 var research_direct =  document.getElementById("editResearch_Direct").value;
                 var self_introduction =  document.getElementById("details").value;
                 var identity = $('input:radio[name="editIdentity"]:checked').val();
-
                 var data = {
                     "editUsername":username,
                     "editSchool":school,
