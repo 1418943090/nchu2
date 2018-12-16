@@ -1,14 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
 function rem(flag){
     var obj = document.getElementsByClassName(flag);
     var username;
@@ -132,8 +122,20 @@ function add(type){
 }
 
 function dateCheck(note,value,type){
+
     var now = (new Date()).getTime();
     var date = (new Date(value)).getTime();
+    var week = (new Date(value)).getDay();
+    if(week!=0 && week!=6){
+        swal({
+            title: "Warning!",
+            text: value+"并不是周末哦",
+            icon: "warning",
+            button: "确定",
+        });
+    }
+   else
+
     if(now>date){
         swal({
             title: "Are you sure?",

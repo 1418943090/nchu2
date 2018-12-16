@@ -4,6 +4,7 @@ import com.love.nchu.demain.Festival;
 import com.love.nchu.demain.Sign_in_Status;
 import com.love.nchu.service.FestivalServer;
 import com.love.nchu.service.Sign_in_StatusServer;
+import com.love.nchu.vo.MyDate;
 import com.love.nchu.vo.deleteFestivalVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -44,10 +45,22 @@ public class festivalController {
         return new ModelAndView("festival","model",model);
     }
     @GetMapping("/festival/add/{note}/{date}/{type}")
-    public ModelAndView add(@PathVariable String note,@PathVariable String date,@PathVariable String type){
+    public ModelAndView add(@PathVariable String note,@PathVariable String date,@PathVariable String type)throws Exception{
 
 
         flag = true;
+         if(type.equals("2")){
+
+            if(MyDate.getWeek(date)==1 || MyDate.getWeek(date)==7){
+
+            }
+            else{
+
+            }
+         }
+
+
+
         Festival f = new Festival(note,date,type);
         Festival a = festivalServer.getFestivalByDate(date);
         if(a==null){
