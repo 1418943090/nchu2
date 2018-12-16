@@ -14,7 +14,6 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        System.out.println("prehandle");
         User user =(User)request.getSession().getAttribute("user");
 
         if(user==null)
@@ -22,7 +21,6 @@ public class MyInterceptor implements HandlerInterceptor {
             response.sendRedirect("/login");
             return false;
         }
-
         Cookie[] cookies = request.getCookies();
         if(cookies!=null){
             for(Cookie cookie2 : cookies){

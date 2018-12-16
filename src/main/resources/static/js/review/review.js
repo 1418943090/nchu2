@@ -121,7 +121,7 @@ function submitDeal(data,url){
         async:true,
         data: JSON.stringify(data),
         success: function(data){
-            $("#").html(data);
+            $("#rightContainer").html(data);
         },
         error: function() {
             swal({

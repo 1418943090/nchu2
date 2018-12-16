@@ -10,4 +10,5 @@ public interface ReviewTableServer {
     List<ReviewTable> getAll();
 
     int delReviewTableByUsername(String username);
+    void deleteReviewTableById(Integer id);
 }

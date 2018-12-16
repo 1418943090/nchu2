@@ -34,7 +34,7 @@ public class ReviewController {
                userServer.delUserByUsername(r.getUsername());
                 userInfoServer.delUserInfoByUsername(r.getUsername());
             }
-            reviewTableServer.delReviewTableByUsername(r.getUsername());
+            reviewTableServer.deleteReviewTableById(r.getId());
         }
         return new ModelAndView("redirect:/review");
     }
@@ -42,10 +42,11 @@ public class ReviewController {
     public ModelAndView review(Model model){
 
         List<ReviewTable> list =  reviewTableServer.getAll();
+        System.out.println(list);
         List<UserInfo> list2 = userInfoServer.getAll();
         model.addAttribute("list",list);
         model.addAttribute("list2",list2);
-        System.out.println("AAAAA");
+        model.addAttribute("isEmpty",(list.size()==0)?true:false);
         return new ModelAndView("review","model",model);
     }
     @PostMapping("/review/refuse")

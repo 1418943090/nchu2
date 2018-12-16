@@ -15,4 +15,5 @@ public interface ReviewTableRepository extends JpaRepository<ReviewTable,Integer
     @Query("delete from ReviewTable  r where r.username=?1")
     int deleteReviewTableByUsername(String username);
 
+
 }

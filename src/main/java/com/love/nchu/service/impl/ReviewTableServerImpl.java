@@ -29,4 +29,9 @@ public class ReviewTableServerImpl implements ReviewTableServer {
     public int delReviewTableByUsername(String username) {
         return reviewTableRepository.deleteReviewTableByUsername(username);
     }
+
+    @Override
+    public  void deleteReviewTableById(Integer id){
+        reviewTableRepository.deleteById(id);
+    }
 }

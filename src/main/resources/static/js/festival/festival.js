@@ -32,7 +32,7 @@ function rem(flag){
 
         swal({
             title: "Are you sure?",
-            text: "删除该天的节假日登记后,系统将会将所有用户该天的状态更改为未签到。如果需要更改的话可以到签到情况栏进行自定义更改",
+            text: "删除该天的节假日登记后,系统将会覆盖所有用户该天的签到状态。如果需要更改的话可以到签到情况栏进行自定义更改",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -137,7 +137,7 @@ function dateCheck(note,value,type){
     if(now>date){
         swal({
             title: "Are you sure?",
-            text: value+"是过去的时间哦,如果你执意添加该登记日期,那么该天的签到记录会失效哦",
+            text: value+"是过去的时间哦,如果你执意添加该登记日期,那么该天的签到记录会覆盖哦",
             icon: "warning",
             buttons: true,
             dangerMode: true,

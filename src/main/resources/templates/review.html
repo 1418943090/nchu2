@@ -4,46 +4,35 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script th:inline="javascript" src="/js/admins/review.js"></script>
+    <script th:inline="javascript" src="/js/review/review.js"></script>
     <script th:inline="javascript">
 
         $(".btn-pass").click(function(){
-
             var list = [[${model.list}]];
             fa(list,"pass");
         });
-
         $(".btn-refuse").click(function(){
-
             var list = [[${model.list}]];
             fa(list,"refuse");
         });
         $(".btn-del").click(function(){
-
             var list = [[${model.list}]];
             del(list);
         });
-
-
         $('.more').click(function(){
-
             var username = $(this).attr("id");
-
             var list2 = [[${model.list2}]];
             var date;
             for(n in list2){
-
                 if(list2[n].username == username){
                     date = list2[n];
                     break;
                 }
             }
          document.getElementById("img").src = date.picture;
-
             $("#name").text(date.name);
             $("#sex").text(date.sex);
             $("#birthplace").text(date.birthplace);
-
             $("#age").text((date.age).toString());
             $("#school").text(date.school);
             $("#tel").text(date.tel);
@@ -51,9 +40,7 @@
             $("#research_direct").text(date.research_direct);
             $("#identity").text(date.identity);
             $("#self_introduction").text(date.self_introduction);
-
          $("#moreModal").modal("show");
-
         });
     </script>
     <style>
@@ -87,10 +74,10 @@
                 </button>
             </p>
              <div class="panel panel-default">
-                              <div class="panel-heading">
-                               申请列表
-                              </div>
-                           <div class="panel-body">
+              <div class="panel-heading">
+               申请列表
+              </div>
+           <div class="panel-body">
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -104,7 +91,6 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 <tr  th:each="ReviewTable : ${model.list}" th:class="${ReviewTable.cla}" th:attr="nnn=${ReviewTable.status}">
                     <td><input type="checkbox" class="review re" th:attr="id=${ReviewTable.id}"></td>
                     <td th:text="${ReviewTable.id}"></td>
@@ -114,7 +100,13 @@
                     <td th:text="${ReviewTable.status}"></td>
                     <td th:text="${ReviewTable.ending}"></td>
                 </tr>
-
+                <div th:if="${isEmpty} eq true">
+                 <tr>
+                   <td colspan="7">
+                      <h1 style="color: #c7254e" class="text-center">目前还没有任何注册申请记录哦</h1>
+                   </td>
+                 </tr>
+                </div>
                 </tbody>
             </table>
             </div>
@@ -174,8 +166,6 @@
         </div><!-- /.modal -->
     </div>
     <!--*******************************************************************************************************-->
-
 </div>
-
 </body>
 </html>
