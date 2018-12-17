@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="/js/bootstrapValidate/bootstrapValidator.css" ></script>
     <script src="/js/bootstrapValidate/bootstrapValidator.js" ></script>
+    <script src="/js/basicinformation/1.js"></script>
+     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
     <style type="text/css">
         span{font-size:25px}
         p{font-size:25px}
@@ -33,16 +35,16 @@
                                 }
                             }
                         },
-                        editEmail: {
-                            validators: {
-                                notEmpty: {
-                                    message: '你还没输入邮箱哦'
-                                },
-                                emailAddress: {
-                                    message: '邮箱格式错误'
-                                }
-                            }
-                        },
+                        // editEmail: {
+                        //     validators: {
+                        //         notEmpty: {
+                        //             message: '你还没输入邮箱哦'
+                        //         },
+                        //         emailAddress: {
+                        //             message: '邮箱格式错误'
+                        //         }
+                        //     }
+                        // },
                         editTel:{
                             validators:{
                                 notEmpty:{
@@ -73,8 +75,8 @@
                                     message:'别忘记自我介绍下哦'
                                 },
                                 stringLength: {
-                                    min:100,
-                                    max: 390,
+                                    min:50,
+                                    max: 400,
                                     message: '自我介绍字数要适当哦'
                                 },
 
@@ -86,7 +88,7 @@
             $('.btn-edit').click(function(){
                 var user = [[${user_info}]];
                document.getElementById("editSchool").value=user.school;
-               document.getElementById("editEmail").value=user.email;
+              // document.getElementById("editEmail").value=user.email;
                document.getElementById("editTel").value=user.tel;
                document.getElementById("editResearch_Direct").value=user.research_direct;
                 if(user.identity=="teacher")
@@ -101,6 +103,10 @@
                 edit_form_validator_Init();
                 $("#show_basic_Information_Edit_Modal").modal('show');
             });
+
+
+
+
         });
         function edit_check(){
             var bootstrapValidator = $('#editForm').data('bootstrapValidator');
@@ -109,7 +115,7 @@
                 var user = [[${user_info}]];
                 var username = user.username;
                 var school =  document.getElementById("editSchool").value;
-                var email  =  document.getElementById("editEmail").value;
+              //  var email  =  document.getElementById("editEmail").value;
                 var tel    =  document.getElementById("editTel").value;
                 var research_direct =  document.getElementById("editResearch_Direct").value;
                 var self_introduction =  document.getElementById("details").value;
@@ -117,7 +123,7 @@
                 var data = {
                     "editUsername":username,
                     "editSchool":school,
-                    "editEmail":email,
+                    // "editEmail":email,
                     "editTel":tel,
                     "editResearch_Direct":research_direct,
                     "editSelf_Introduction":self_introduction,
@@ -184,6 +190,9 @@
 
           <button class="btn btn-success btn-edit" type="button">
                <span class="glyphicon glyphicon-pencil" style="font-size: 15px"></span>编辑</button>
+             <button class="btn btn-info btn-pic" type="button">
+                  <span class="" style="font-size: 15px"></span>更改头像</button>
+
         </div>
         <div class="row" id="edit" th:attr="user_info=${user_info}">
             <div class="col-sm-2">
@@ -250,13 +259,13 @@
                         </div>
                     </div>
                     <!--************************************************************************************-->
-                    <div class="form-group">
+                  <!--  <div class="form-group">
                         <label for="" class="col-sm-4 control-label">Email:</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="editEmail" name="editEmail"  placeholder="请输入Email"/>
                         </div>
                         <label for="" class="col-sm-0 control-label" style="color: red" ></label>
-                    </div>
+                    </div>-->
                     <!--************************************************************************************-->
                   <div class="form-group">
                         <label for="" class="col-sm-4 control-label">电话:</label>
@@ -309,5 +318,38 @@
     </div><!-- /.modal -->
 </div>
     <!--************************************************************************************************-->
+<!--*******************************************************************************************************-->
+<div class="modal fade" id="editPicModal" tabindex="-1" role="dialog" onclick="cancer();" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">
+                    更改个人头像
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="editPicForm" th:action="@{/update/pic}" target="frameName" onsubmit="return false" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >
+
+                      <div class="form-group">
+                         <label for="" class="col-sm-2 control-label">头像:</label>
+                         <div class="col-sm-10">
+                             <input type="file" class="form-control" id="pic" name="pic" placeholder="">
+                         </div>
+                     </div>
+                    <!--***************************************************************88-->
+                </form>
+                <iframe src="" frameborder="0" name="frameName" style="display:none;"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="closeupdatemodal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="edit_pic_check();" >
+                    更新
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 </body>
 </html>

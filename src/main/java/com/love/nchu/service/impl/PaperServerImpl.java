@@ -34,7 +34,6 @@ public class PaperServerImpl implements PaperServer {
         paperRepository.save(paper);
     }
 
-
     @Override
     public List<Paper> findPaperByUsername(String username) {
         return paperRepository.findPaperByUsername(username);

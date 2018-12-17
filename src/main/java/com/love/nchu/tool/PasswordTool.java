@@ -19,9 +19,9 @@ public class PasswordTool {
         }
         return false;
     }
-    public static void updatePassword(UserServer userServer,String username,String newpassword) throws Exception{
+    public static void updatePassword(UserServer userServer,String email,String newpassword) throws Exception{
 
-        User user = userServer.findUserByUsername(username);
+        User user = userServer.findUserByEmail(email);
         user.setPassword(SHAencrypt.encryptSHA(newpassword));
         userServer.save(user);
     }

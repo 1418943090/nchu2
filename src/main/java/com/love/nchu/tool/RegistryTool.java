@@ -82,8 +82,11 @@ public class RegistryTool {
          if(!newfile.exists()){
              newfile.mkdirs();
          }
+
+         String filenamestr = userInfo.getUsername()+String.valueOf((int)(Math.random()*100)) +".jpg";
+
          System.out.println(img_path);
-         File bfile = new File(newfile,userInfo.getUsername()+".jpg");
+         File bfile = new File(newfile,filenamestr);
          if(!bfile.exists()){
              try{
              bfile.createNewFile();
@@ -97,7 +100,7 @@ public class RegistryTool {
                out.write(file.getBytes());
                out.flush();
                out.close();
-               String filename = img_vm_path + userInfo.getUsername() + ".jpg";
+               String filename = img_vm_path + filenamestr;
               userInfo.setPicture(filename);
            } catch (FileNotFoundException e) {
                e.printStackTrace();
@@ -109,9 +112,9 @@ public class RegistryTool {
         return true;
        }
 
-       public static boolean NewAndOldPasswordEqualsCheck(UserServer userServer,String username,String newPassword) throws  Exception{
+       public static boolean NewAndOldPasswordEqualsCheck(UserServer userServer,String email,String newPassword) throws  Exception{
 
-       User user = userServer.findUserByUsername(username);
+       User user = userServer.findUserByEmail(email);
        if(user.getPassword().equals(SHAencrypt.encryptSHA(newPassword))){
            return true;
        }

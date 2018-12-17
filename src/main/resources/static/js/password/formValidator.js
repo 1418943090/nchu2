@@ -33,6 +33,7 @@ function form_check(val,i){
         if(i==1)
         getCode(val);
         else if(i==2){
+
             form_submit();
         }
     }
@@ -42,6 +43,7 @@ var countdown=60;
 function getCode(val) {
 
     var email = $("#email").val();
+
     settime(val,0);
         $.ajax({
             url: "/password/getVcode",

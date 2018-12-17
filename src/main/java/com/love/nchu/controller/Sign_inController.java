@@ -47,7 +47,6 @@ public class Sign_inController {
 
             List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(date);
                 for(Sign_in_Status s : list){
-
                     s.setCount(s.getCount());
                     sign_in_statusServer.save(s);
                 }
@@ -280,8 +279,6 @@ public class Sign_inController {
             return new ModelAndView("signinshow","model",model);
         }
 
-
-
         List<Sign_in_Status> list = new ArrayList<>();
         list = sign_in_statusServer.getSign_in_StatusByDate(d);
         if(list.size()==0){
@@ -314,10 +311,11 @@ public class Sign_inController {
 //      }
         //ip校验
       String ip = Net.getIP(request);
-      if(!ip.equals(public_ip)){
-        errorVo.setData("签到失败,不是实验室环境网络");
-        return errorVo;
-      }
+      System.out.println(ip);
+//      if(!(ip.substring(0,8)).equals(public_ip)){
+//        errorVo.setData("签到失败,不是实验室环境网络");
+//        return errorVo;
+//      }
        boolean isSignIn = false;
        boolean signIn = false;
        String date = MyDate.getDate();
@@ -361,7 +359,6 @@ public class Sign_inController {
     //如果是新的一天则将空的签到信息存到数据中，确保有数据返回给前台
     @GetMapping("/sign_in/{username}")
     public ModelAndView Sign_in(@PathVariable String username, Model model)throws Exception{
-
         String s = MyDate.getDate();
         if(FestivalTool.isFestival(MyDate.getDate(),festivalServer)){
             return new ModelAndView("festivalday");

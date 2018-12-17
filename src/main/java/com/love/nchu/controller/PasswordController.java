@@ -10,11 +10,13 @@ import com.love.nchu.tool.RegistryTool;
 import com.love.nchu.tool.TitleTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
@@ -28,6 +30,10 @@ public class PasswordController {
     UserServer userServer;
     @Autowired
     TitleEditServer titleEditServer;
+
+    String useremail;
+
+    boolean step1 = false;
 
     @GetMapping("/password/login")
     public ModelAndView login(){
@@ -47,6 +53,8 @@ public class PasswordController {
 
     @PostMapping("/password/getVcode")
     public void emailValidator(@RequestBody  String email){
+
+        useremail = email;
         date = new Date();
         System.out.println(email);
         code = EmailTool.getCode();
@@ -55,6 +63,10 @@ public class PasswordController {
 
     @PostMapping("/password/step1")
     public ErrorVo vcodeCheck(@RequestBody String vcode){
+
+
+         step1 = true;
+
          ErrorVo errorVo = new ErrorVo("");
          if(!PasswordTool.vcoedCheck(code,vcode)||date==null){
              errorVo.setData("验证码错误");
@@ -67,29 +79,25 @@ public class PasswordController {
     }
     @GetMapping("/password/step2")
     public ModelAndView updatePassword(Model model){
+
+        if(step1==false){
+            return new ModelAndView("lllegal");
+        }
         model.addAttribute("TitleEdit",TitleTool.getTitle(titleEditServer));
        return new ModelAndView("updatepassword","model",model);
     }
 
     @PostMapping("/password/updatepassword")
-    public ErrorVo updatePassword2(@RequestBody String firstpassword,HttpServletRequest request){
+    public ErrorVo updatePassword2(@RequestBody String firstpassword){
 
-        String username="";
         ErrorVo errorVo = new ErrorVo("");
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null){
-            for(Cookie cookie2 : cookies){
-                if(cookie2.getName().equals("user")){
-                   username = cookie2.getValue();
-                }
-            }
-        }
         try {
-            if (RegistryTool.NewAndOldPasswordEqualsCheck(userServer, username, firstpassword)) {
+            if (RegistryTool.NewAndOldPasswordEqualsCheck(userServer,useremail, firstpassword)) {
                 errorVo.setData("新密码不能和原来一样");
             }
             else{
-              PasswordTool.updatePassword(userServer,username,firstpassword);
+              PasswordTool.updatePassword(userServer,useremail,firstpassword);
+              useremail = "";
             }
         }catch(Exception e){
             e.printStackTrace();

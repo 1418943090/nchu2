@@ -7,7 +7,6 @@ public class editUserInfo {
 
     private String editUsername;
     private String editSchool;
-    private String editEmail;
     private String editTel;
     private String editIdentity;
     private String editResearch_Direct;
@@ -16,10 +15,9 @@ public class editUserInfo {
 
     }
 
-    public editUserInfo(String editUsername, String editSchool, String editEmail, String editTel, String editIdentity, String editResearch_Direct, String editSelf_Introduction) {
+    public editUserInfo(String editUsername, String editSchool, String editTel, String editIdentity, String editResearch_Direct, String editSelf_Introduction) {
         this.editUsername = editUsername;
         this.editSchool = editSchool;
-        this.editEmail = editEmail;
         this.editTel = editTel;
         this.editIdentity = editIdentity;
         this.editResearch_Direct = editResearch_Direct;
@@ -40,14 +38,6 @@ public class editUserInfo {
 
     public void setEditSchool(String editSchool) {
         this.editSchool = editSchool;
-    }
-
-    public String getEditEmail() {
-        return editEmail;
-    }
-
-    public void setEditEmail(String editEmail) {
-        this.editEmail = editEmail;
     }
 
     public String getEditTel() {
@@ -87,7 +77,6 @@ public class editUserInfo {
         return "editUserInfo{" +
                 "editUsername='" + editUsername + '\'' +
                 ", editSchool='" + editSchool + '\'' +
-                ", editEmail='" + editEmail + '\'' +
                 ", editTel='" + editTel + '\'' +
                 ", editIdentity='" + editIdentity + '\'' +
                 ", editResearch_Direct='" + editResearch_Direct + '\'' +

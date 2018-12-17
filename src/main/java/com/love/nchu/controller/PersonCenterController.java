@@ -27,11 +27,14 @@ public class PersonCenterController {
     @Value("${spring.paper.path}")
     String paper_path;
     String nowuser;
+
+    String filenamestr;
     @Autowired
     private UserInfoServer userInfoServer;
     @GetMapping("/basic_information/{username}")
     public ModelAndView basic_Information(@PathVariable String username, Model model){
         UserInfo userInfo = userInfoServer.getUserByUsername(username);
+        System.out.println(userInfo.toString());
         model.addAttribute("user_info",userInfo);
         return new ModelAndView("basic_information","basic_information",model);
     }
@@ -53,7 +56,8 @@ public class PersonCenterController {
     public String upload_paper(Model model, Paper paper, MultipartFile file){
         paper.setDate(new Date());
         paper.setUsername(nowuser);
-        paper.setPath(paper_vm_path+nowuser+"/"+file.getOriginalFilename());
+        filenamestr = String.valueOf((int)(Math.random()*100))+file.getOriginalFilename();
+        paper.setPath(paper_vm_path+nowuser+"/"+filenamestr);
         paper.setName(userInfoServer.getNameByUsername(paper.getUsername()));
         if( savePaper(file).equals("success")){
             paperServer.save(paper);
@@ -66,7 +70,7 @@ public class PersonCenterController {
         if(!f.exists()){
             f.mkdirs();
         }
-        File realFile = new File(f,file.getOriginalFilename());
+        File realFile = new File(f,filenamestr);
         try{
           if(!realFile.exists()){
             realFile.createNewFile();
