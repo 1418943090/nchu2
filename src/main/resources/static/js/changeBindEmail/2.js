@@ -31,7 +31,7 @@ function form_check(val,i){
     if(bootstrapValidator.isValid()){//如果校验成功后执行的操作
 
         if(i==1)
-        getCode(val);
+            getCode(val);
         else if(i==2){
 
             form_submit();
@@ -44,19 +44,19 @@ function getCode(val) {
 
     var email = $("#email").val();
     settime(val,0);
-        $.ajax({
-            url: "/password/getVcode",
-            contentType: 'application/json;charset=utf-8',
-            type: 'post',
-            async:true,
-            data: email,
-            success: function (data) {
-                toastr.success("验证码已发送至你的邮箱");
-            },
-            error: function () {
-                toastr.error("操作失败");
-            }
-        });
+    $.ajax({
+        url: "/emailValidator/getVcode",
+        contentType: 'application/json;charset=utf-8',
+        type: 'post',
+        async:true,
+        data: email,
+        success: function (data) {
+            toastr.success("验证码已发送至你的邮箱");
+        },
+        error: function () {
+            toastr.error("操作失败");
+        }
+    });
 
 }
 function settime(val,flag) {
@@ -78,13 +78,10 @@ function settime(val,flag) {
     }
 }
 
-
-
-
 function form_submit(){
 
     $.ajax({
-        url: "/password/step1",
+        url: "/emailValidator/step3",
         contentType: 'application/json;charset=utf-8',
         type: 'post',
         async:true,
@@ -93,14 +90,11 @@ function form_submit(){
         success: function (data) {
             var jsonStr = JSON.parse(data);
             if(jsonStr.data=="")
-                window.location.href="/password/step2";
+                window.location.href="/emailValidator/step4";
             toastr.error(jsonStr.data);
         },
         error: function () {
             toastr.error("操作失败");
         }
     });
-
-
-
 }

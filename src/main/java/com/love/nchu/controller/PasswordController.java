@@ -45,37 +45,34 @@ public class PasswordController {
         return new ModelAndView("redirect:/index");
     }
 
-    @GetMapping("/ForgetOrChangePassword")
-    public ModelAndView ForgetOrChangePassword(Model model){
-        model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
-       return new ModelAndView("ForgetOrChangePassword","model",model);
-    }
 
     @PostMapping("/password/getVcode")
-    public void emailValidator(@RequestBody  String email){
-
-        useremail = email;
+    public void getVcode(@RequestBody String email){
         date = new Date();
         System.out.println(email);
         code = EmailTool.getCode();
+        useremail = email;
         mailServer.sendSimpleMail(email,"邮箱验证","本次的验证码为(十分钟内有效):"+code);
+    }
+
+    @GetMapping("/ForgetOrChangePassword")
+    public ModelAndView ForgetOrChangePassword(Model model){
+        model.addAttribute("TitleEdit",TitleTool.getTitle(titleEditServer));
+       return new ModelAndView("ForgetOrChangePassword");
     }
 
     @PostMapping("/password/step1")
     public ErrorVo vcodeCheck(@RequestBody String vcode){
-
-
-         step1 = true;
-
-         ErrorVo errorVo = new ErrorVo("");
-         if(!PasswordTool.vcoedCheck(code,vcode)||date==null){
-             errorVo.setData("验证码错误");
-             return errorVo;
-         }
+        step1 = true;
+        ErrorVo errorVo = new ErrorVo("");
+        if(!PasswordTool.vcoedCheck(code,vcode)||date==null){
+            errorVo.setData("验证码错误");
+            return errorVo;
+        }
         if(!EmailTool.isNotExpiredCheck(date,new Date())){
             errorVo.setData("验证码已过期，请重新获取");//验证码过期
         }
-         return errorVo;
+        return errorVo;
     }
     @GetMapping("/password/step2")
     public ModelAndView updatePassword(Model model){

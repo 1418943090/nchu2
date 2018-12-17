@@ -38,6 +38,13 @@ public class Main {
     }
     @GetMapping("/forgetPassword")
     public ModelAndView forgetPassword(){
-        return new ModelAndView("ForgetOrChangePassword");
+        return new ModelAndView("emailValidator");
+    }
+
+    @GetMapping("/changebindemail")
+    public ModelAndView changebindemail(){
+
+        return new ModelAndView("redirect:/emailValidator");
+
     }
 }
