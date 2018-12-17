@@ -150,7 +150,6 @@ function form_check(){
         $("#BasicInformationForm").ajaxSubmit(function(message) {
             if(message=='success')
                 window.location.href="/registry/step3";
-           // toastr.error(message);
             else{
             swal({
                 title: "Error!",

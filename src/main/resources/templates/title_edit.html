@@ -11,11 +11,11 @@
         function saveReport() {
             $("#TitleEditForm").ajaxSubmit(function(message) {
                 swal({
-                                     title: "修改成功",
-                                     text: "",
-                                     icon: "success",
-                                      button: "确定",
-                                    });
+                     title: "修改成功",
+                     text: "",
+                     icon: "success",
+                      button: "确定",
+                    });
             });
             return false; // 必须返回false,否则表单会自己再做一次提交操作,并且页面跳转
         }

@@ -11,24 +11,18 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
         .container{
-
             padding-top: 5%;
             padding-left: 5%;
-
         }
-
         html,body{
             height:100%;
             margin:0px;
         }
-
         body {
             background:url(/img/304234.jpg) fixed;
-               background-size:100% 100%;
-
+            background-size:100% 100%;
         }
         .bg{
-
             font-size: .85em;
         }
         .title{
@@ -36,7 +30,6 @@
             font-size: 1.3em;
             font-weight: bold;
         }
-
         .page-header{
             color: #d58512;
         }
@@ -69,7 +62,6 @@
                     <h5 class="title" th:text="${TitleEdit.getTitle1()}"></h5>
                 </li>
             </ul>
-
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -92,13 +84,11 @@
                     <a th:href="@{/projects}"  th:method="POST" th:type="post"><h5 class="title"><strong>Projects</strong></h5></a>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>
 <div class="row bg">
     <div class="container">
-
         <div class="row">
             <div class="col-sm-10">
                 <div class="projects-header page-header text-left">
@@ -117,7 +107,6 @@
                     <a class="date-more">查看更多</a>
                 </div>
             </div>
-
         </div>
          </div>
             </div>
@@ -131,7 +120,6 @@
                     <span class="glyphicon glyphicon-search"></span>搜索</button>
             </form>
         </div>
-
     <!--************************************************************************************-->
         <div class="row">
             <div class="col-md-10">

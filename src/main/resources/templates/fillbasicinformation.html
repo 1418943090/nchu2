@@ -8,10 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
@@ -25,7 +23,6 @@
     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
     <link rel="stylesheet" type="text/css" href="/js/main.css">
     <script type="text/javascript" th:inline="javascript">
-
         //恢复单选按钮状态
         $(document).ready(function(){
             document.getElementById("teachername").value="null";
@@ -47,10 +44,7 @@
             {
                 $("#student").attr("checked",true);
                 $("#teachername_div").show();
-
             }
-
-
             $("#birthDate").datetimepicker({
                 format: 'YYYY-MM-DD',
                  minDate: new Date( new Date()-1000*24*60*60*365*100),
@@ -58,22 +52,16 @@
                 locale: moment.locale('zh-cn'),
 
             });
-
-
             $('input[name="identity"]').click(function(){
                 if($(this).val()=="teacher"){
-
                     document.getElementById("teachername").value="null";
-
                     $("#teachername_div").hide();
                 }
                 if($(this).val()=="student"){
-
                     $("#teachername_div").show();
                 }
             });
         });
-
         toastr.options = {
             positionClass: 'toast-top-center',              // 设置提示款显示的位置
         };
@@ -83,7 +71,6 @@
       padding-top: 2%;
       }
 </style>
-
 </head>
 <body>
 <nav class="navbar  navbar-fixed-top" role="navigation">

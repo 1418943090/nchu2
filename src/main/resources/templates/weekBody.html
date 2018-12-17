@@ -6,32 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
-            <table class="table table-bordered table-hover table-striped">
-                <thead>
-                <tr>
-                    <th class="text-center">用户名</th>
-                    <th class="text-center">Monday<br><P th:text="${datelist[0]}"></P></th>
-                    <th class="text-center">Tuesday<br><P th:text="${datelist[1]}"></P></th>
-                    <th class="text-center">Wednesday<br><P th:text="${datelist[2]}"></P></th>
-                    <th class="text-center">Thursday<br><P th:text="${datelist[3]}"></P></th>
-                    <th class="text-center">Friday<br><P th:text="${datelist[4]}"></P></th>
-                    <th class="text-center">Saturday<br><P th:text="${datelist[5]}"></P></th>
-                    <th class="text-center">Sunday<br><P th:text="${datelist[6]}"></P></th>
-                    <th class="text-center">Count</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="weekShow: ${model.list}">
-                    <td class="text-center "  th:text="${weekShow.username}"></td>
-                    <td ><p class="text-center"  th:text="${weekShow.getMondayShow()}"></p></td>
-                    <td ><p class="text-center"  th:text="${weekShow.getTuesdayShow()}"></p></td>
-                    <td ><p class="text-center"   th:text="${weekShow.getWednesdayShow()}"></p></td>
-                    <td ><p class="text-center"   th:text="${weekShow.getThursdayShow()}"></p></td>
-                    <td ><p class="text-center"   th:text="${weekShow.getFridayShow()}"></p></td>
-                    <td ><p class="text-center"   th:text="${weekShow.getSaturdayShow()}"></p></td>
-                    <td ><p class="text-center"   th:text="${weekShow.getSundayShow()}"></p></td>
-                    <td><P class="text-center" th:text="${weekShow.getCount()}"></P></td>
-                </tr>
-                </tbody>
-            </table>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+        <tr>
+            <th class="text-center">用户名</th>
+            <th class="text-center">Monday<br><P th:text="${datelist[0]}"></P></th>
+            <th class="text-center">Tuesday<br><P th:text="${datelist[1]}"></P></th>
+            <th class="text-center">Wednesday<br><P th:text="${datelist[2]}"></P></th>
+            <th class="text-center">Thursday<br><P th:text="${datelist[3]}"></P></th>
+            <th class="text-center">Friday<br><P th:text="${datelist[4]}"></P></th>
+            <th class="text-center">Saturday<br><P th:text="${datelist[5]}"></P></th>
+            <th class="text-center">Sunday<br><P th:text="${datelist[6]}"></P></th>
+            <th class="text-center">Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="weekShow: ${model.list}">
+            <td class="text-center "  th:text="${weekShow.username}"></td>
+            <td ><p class="text-center"  th:text="${weekShow.getMondayShow()}"></p></td>
+            <td ><p class="text-center"  th:text="${weekShow.getTuesdayShow()}"></p></td>
+            <td ><p class="text-center"   th:text="${weekShow.getWednesdayShow()}"></p></td>
+            <td ><p class="text-center"   th:text="${weekShow.getThursdayShow()}"></p></td>
+            <td ><p class="text-center"   th:text="${weekShow.getFridayShow()}"></p></td>
+            <td ><p class="text-center"   th:text="${weekShow.getSaturdayShow()}"></p></td>
+            <td ><p class="text-center"   th:text="${weekShow.getSundayShow()}"></p></td>
+            <td><P class="text-center" th:text="${weekShow.getCount()}"></P></td>
+        </tr>
+        </tbody>
+    </table>
 </html>

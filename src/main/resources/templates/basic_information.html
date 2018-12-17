@@ -35,16 +35,6 @@
                                 }
                             }
                         },
-                        // editEmail: {
-                        //     validators: {
-                        //         notEmpty: {
-                        //             message: '你还没输入邮箱哦'
-                        //         },
-                        //         emailAddress: {
-                        //             message: '邮箱格式错误'
-                        //         }
-                        //     }
-                        // },
                         editTel:{
                             validators:{
                                 notEmpty:{
@@ -103,10 +93,6 @@
                 edit_form_validator_Init();
                 $("#show_basic_Information_Edit_Modal").modal('show');
             });
-
-
-
-
         });
         function edit_check(){
             var bootstrapValidator = $('#editForm').data('bootstrapValidator');
@@ -192,7 +178,6 @@
                <span class="glyphicon glyphicon-pencil" style="font-size: 15px"></span>编辑</button>
              <button class="btn btn-info btn-pic" type="button">
                   <span class="" style="font-size: 15px"></span>更改头像</button>
-
         </div>
         <div class="row" id="edit" th:attr="user_info=${user_info}">
             <div class="col-sm-2">
@@ -258,16 +243,7 @@
                             <input type="text" class="form-control" id="editSchool" name="editSchool" placeholder="请输入目前所在高校">
                         </div>
                     </div>
-                    <!--************************************************************************************-->
-                  <!--  <div class="form-group">
-                        <label for="" class="col-sm-4 control-label">Email:</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="editEmail" name="editEmail"  placeholder="请输入Email"/>
-                        </div>
-                        <label for="" class="col-sm-0 control-label" style="color: red" ></label>
-                    </div>-->
-                    <!--************************************************************************************-->
-                  <div class="form-group">
+                    <div class="form-group">
                         <label for="" class="col-sm-4 control-label">电话:</label>
                         <div class="col-sm-5">
                             <input type="number" size="16" class="form-control" id="editTel" name="editTel"  placeholder="请输入电话号码" />

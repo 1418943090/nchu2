@@ -14,18 +14,17 @@
       background-color: white;
       }
     </style>
-
      <script type="text/javascript" th:inline="javascript">
            //恢复单选按钮状态
            $(document).ready(function(){
                if([[${result}]]=="error")
                    {
-                         swal({
-                            title: "操作失败!",
-                            text: "该日期已被登记,若要更改请删除之前的登记",
-                            icon: "warning",
-                            button: "确定",
-                        });
+                     swal({
+                        title: "操作失败!",
+                        text: "该日期已被登记,若要更改请删除之前的登记",
+                        icon: "warning",
+                        button: "确定",
+                    });
                    }
              });
            </script>
@@ -98,9 +97,7 @@
                          <button class=" btn btn-success" onclick="add(2);">
                          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;添加
                          </button>
-
-
-                       <button class=" btn btn-danger" onclick="rem(2);">
+                         <button class=" btn btn-danger" onclick="rem(2);">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;删除
                         </button>
                         </p>
@@ -115,7 +112,6 @@
                  </tr>
                  </thead>
                  <tbody>
-
                         <div th:if="${isEmptyB} eq true">
                           <tr>
                              <td colspan="3">
