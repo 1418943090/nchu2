@@ -109,7 +109,7 @@ $(function(){
                         stringLength: {
                             min: 2,
                             max: 20,
-                            message: "格式错误"
+                            message: '格式错误'
                         }
                     }
                 },file:{
@@ -130,7 +130,7 @@ $(function(){
                         stringLength: {
                             min: 50,
                             max: 400,
-                            message: '自我简介字数要适当哦'
+                            message: '自我简介长度为50~400个字符'
                         }
                     }
                 }

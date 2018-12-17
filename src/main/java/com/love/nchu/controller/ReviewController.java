@@ -29,7 +29,7 @@ public class ReviewController {
     public ModelAndView del(@RequestBody List<ReviewTable> list){
 
         for(ReviewTable r : list){
-            System.out.println(r.toString());
+
             if(!r.getEnding().equals("通过")) {
                userServer.delUserByUsername(r.getUsername());
                 userInfoServer.delUserInfoByUsername(r.getUsername());
@@ -42,7 +42,7 @@ public class ReviewController {
     public ModelAndView review(Model model){
 
         List<ReviewTable> list =  reviewTableServer.getAll();
-        System.out.println(list);
+
         List<UserInfo> list2 = userInfoServer.getAll();
         model.addAttribute("list",list);
         model.addAttribute("list2",list2);

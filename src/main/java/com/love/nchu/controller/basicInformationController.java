@@ -33,30 +33,21 @@ public class basicInformationController {
     @RequestMapping("/update/pic")
     public ModelAndView updatePic(MultipartFile pic, HttpServletRequest request)
     {
-        System.out.println(pic.getOriginalFilename());
         User user =(User) request.getSession().getAttribute("user");
         UserInfo userInfo = userInfoServer.getUserByUsername(user.getUsername());
         RegistryTool.Save_Image(pic,userInfo,img_path,img_vm_path);
         userInfoServer.save(userInfo);
-        System.out.println(userInfo.toString());
         return new ModelAndView("redirect:/basic_information/"+user.getUsername());
     }
-
 
     @RequestMapping("/update/basic_information")
     public Object update(@RequestBody  editUserInfo userInfo, Model model){
         ErrorVo error = new ErrorVo("");
-       // UserInfo u = userInfoServer.getUserByEmail(userInfo.getEditEmail());
-       // if(u!=null && !u.getUsername().equals(userInfo.getEditUsername())){
-            error.setData("邮箱已被注册");
-        //}else{
         UserInfo  u = userInfoServer.getUserByTel((userInfo.getEditTel()));
             if(u!=null && !u.getUsername().equals(userInfo.getEditUsername()))
             {
                 error.setData("电话号码已被注册");
             }
-
-        System.out.println(userInfo);
         if(error.getData().equals("")){
             userInfoServer.updateUserInfo(userInfo);
         }

@@ -39,7 +39,6 @@ public class PaperController {
        boolean isEmptyA = false;
        List<Paper> list = paperServer.getAllPapers();
        model.addAttribute("list",list);
-       System.out.println(list);
        if(list.size()==0)
             isEmptyA = true;
        model.addAttribute("isEmptyA",isEmptyA);
@@ -49,11 +48,9 @@ public class PaperController {
     }
     @GetMapping("/papers/search/{condition}/{value}")
     public ModelAndView search(@PathVariable String condition,@PathVariable  String value,Model model){
-       System.out.println(condition+" "+value);
        List list = null;
        if(condition.equals("all")){
             list =  paperServer.getPaperByNameLikeOrTitleLike(value);
-           System.out.println(list);
            model.addAttribute("list",list);
        }
        else if(condition.equals("author")){
@@ -62,7 +59,6 @@ public class PaperController {
            model.addAttribute("list",list);
        }else if(condition.equals("title")){
            list = paperServer.getPaperByTitleLike(value);
-           System.out.println(list);
            model.addAttribute("list",list);
        }
        boolean isEmptyB = false;

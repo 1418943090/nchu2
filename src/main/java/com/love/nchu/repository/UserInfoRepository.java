@@ -31,7 +31,7 @@ public interface UserInfoRepository extends JpaRepository<UserInfo,String> {
     String isExistUserByEmail(String email);
 
     @Modifying
-    @Query("update UserInfo u set u.tel=:#{#editUserInfo.editTel},u.email=:#{#editUserInfo.editEmail},u.school=:#{#editUserInfo.editSchool},u.self_introduction=:#{#editUserInfo.editSelf_Introduction},u.research_direct=:#{#editUserInfo.editResearch_Direct},u.identity=:#{#editUserInfo.editIdentity} where u.username=:#{#editUserInfo.editUsername}")
+    @Query("update UserInfo u set u.tel=:#{#editUserInfo.editTel},u.school=:#{#editUserInfo.editSchool},u.self_introduction=:#{#editUserInfo.editSelf_Introduction},u.research_direct=:#{#editUserInfo.editResearch_Direct},u.identity=:#{#editUserInfo.editIdentity} where u.username=:#{#editUserInfo.editUsername}")
     int updateUserInfo(@Param("editUserInfo") editUserInfo editUserInfo);
 
 

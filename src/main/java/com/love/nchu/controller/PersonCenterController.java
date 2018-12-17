@@ -34,7 +34,6 @@ public class PersonCenterController {
     @GetMapping("/basic_information/{username}")
     public ModelAndView basic_Information(@PathVariable String username, Model model){
         UserInfo userInfo = userInfoServer.getUserByUsername(username);
-        System.out.println(userInfo.toString());
         model.addAttribute("user_info",userInfo);
         return new ModelAndView("basic_information","basic_information",model);
     }
@@ -47,7 +46,6 @@ public class PersonCenterController {
         if(list.size()==0) {
             hasPaper = false;
         }
-        System.out.println(hasPaper);
         model.addAttribute("hasPaper",hasPaper);
         model.addAttribute("list",list);
         return new ModelAndView("userPapers","model",model);

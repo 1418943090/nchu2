@@ -55,9 +55,7 @@ public class RegistryController {
     @PostMapping("/registry/email/code")
     public void getCode(@RequestBody String email) {
         date = new Date();
-        System.out.println(email);
         code = EmailTool.getCode();
-        System.out.println(code);
         mailServer.sendSimpleMail(email, "欢迎注册TDY之家账号", "本次的验证码为(十分钟内有效):" + code);
     }
 
@@ -71,7 +69,6 @@ public class RegistryController {
     public ModelAndView step3() {
         //提醒管理员有新的注册请求
         mailServer.sendSimpleMail(adminEmailUrl,"注册请求","你有新的注册请求,赶紧去管理中心看看吧");
-
         return new ModelAndView("step3");
     }
 
@@ -108,10 +105,6 @@ public class RegistryController {
 
         if (!userInfo.getUsername().equals("admin"))
             reviewTableServer.save(new ReviewTable(userInfo.getUsername(), new Date(), "未处理", "未处理", "warning"));
-        // ErrorVo errorVo = new ErrorVo("");
-        System.out.println(userInfo);
-        System.out.println(file.getOriginalFilename());
-
         return "success";
     }
 
@@ -128,7 +121,6 @@ public class RegistryController {
     @PostMapping("/registry/step1")
     public Object validator(@RequestBody userTem usertem) throws Exception {
 
-        System.out.println(usertem);
         ErrorVo errorVo = new ErrorVo("");
         if (RegistryTool.isUsernameExist(userServer, usertem.getUsername())) {
             errorVo.setData("用户名已存在");//用户名已存在

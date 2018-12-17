@@ -4,7 +4,6 @@ import com.love.nchu.demain.Festival;
 import com.love.nchu.demain.Sign_in_Status;
 import com.love.nchu.service.FestivalServer;
 import com.love.nchu.service.Sign_in_StatusServer;
-import com.love.nchu.vo.MyDate;
 import com.love.nchu.vo.deleteFestivalVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -47,29 +46,14 @@ public class festivalController {
     @GetMapping("/festival/add/{note}/{date}/{type}")
     public ModelAndView add(@PathVariable String note,@PathVariable String date,@PathVariable String type)throws Exception{
 
-
-        flag = true;
-         if(type.equals("2")){
-
-            if(MyDate.getWeek(date)==1 || MyDate.getWeek(date)==7){
-
-            }
-            else{
-
-            }
-         }
-
-
-
+         flag = true;
         Festival f = new Festival(note,date,type);
         Festival a = festivalServer.getFestivalByDate(date);
         if(a==null){
             result = "success";
             festivalServer.save(f);
-
             List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(date);
             for(Sign_in_Status s : list){
-
                 s.setMon_in(null);s.setMon_out(null);
                 s.setAft_in(null);s.setAft_out(null);
                 s.setMon_in(null);s.setMon_out(null);
@@ -81,7 +65,6 @@ public class festivalController {
                     s.setFestival(false);
                     s.setCount(6);
                 }
-
                 sign_in_statusServer.save(s);
             }
             return new ModelAndView("redirect:/festival");
@@ -93,13 +76,10 @@ public class festivalController {
     @PostMapping("/delete/festival")
     public ModelAndView delete(@RequestBody deleteFestivalVo deleteFestivalVo){
 
-
         for(Integer id : deleteFestivalVo.getListFestivalId())
         {
-
             Festival festival = festivalServer.getFestivalById(id);
             List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(festival.getDate());
-
             for(Sign_in_Status s : list) {
                 s.setMon_in(null);
                 s.setMon_out(null);

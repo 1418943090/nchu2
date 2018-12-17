@@ -298,7 +298,7 @@ public class Sign_inController {
         model.addAttribute("date",d);
         model.addAttribute("error",error);
         model.addAttribute("isFestival",false);
-        System.out.println(d);
+
         return new ModelAndView("signinshow","model",model);
     }
     //用户点击签到后，判断是否满足签到条件不满足返回原因，满足后将签到时间保存到签到状态表中

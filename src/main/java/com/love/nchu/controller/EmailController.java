@@ -55,14 +55,10 @@ public class EmailController {
       return new ModelAndView("emailValidator","model",model);
     }
 
-
-
     @PostMapping("/emailValidator/getVcode")
     public void emailValidator(@RequestBody String email){
 
-
         date = new Date();
-        System.out.println(email);
         useremail = email;
         code = EmailTool.getCode();
         mailServer.sendSimpleMail(email,"邮箱验证","本次的验证码为(十分钟内有效):"+code);
@@ -94,10 +90,6 @@ public class EmailController {
         model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
         return new ModelAndView("changeBindEmail");
     }
-
-
-
-
 
     @PostMapping("/emailValidator/step3")
     public ErrorVo vcodeCheck3(@RequestBody String vcode, HttpServletRequest request){

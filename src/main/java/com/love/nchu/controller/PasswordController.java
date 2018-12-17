@@ -49,7 +49,6 @@ public class PasswordController {
     @PostMapping("/password/getVcode")
     public void getVcode(@RequestBody String email){
         date = new Date();
-        System.out.println(email);
         code = EmailTool.getCode();
         useremail = email;
         mailServer.sendSimpleMail(email,"邮箱验证","本次的验证码为(十分钟内有效):"+code);
