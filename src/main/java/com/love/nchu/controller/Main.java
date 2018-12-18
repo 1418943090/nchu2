@@ -1,6 +1,8 @@
 package com.love.nchu.controller;
 
+import com.love.nchu.demain.News;
 import com.love.nchu.demain.User;
+import com.love.nchu.service.NewsServer;
 import com.love.nchu.service.Sign_in_TimeServer;
 import com.love.nchu.service.TitleEditServer;
 import com.love.nchu.tool.TitleTool;
@@ -11,12 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @RestController
 public class Main {
     @Autowired
     TitleEditServer titleEditServer;
     @Autowired
     Sign_in_TimeServer sign_in_timeServer;
+
+    @Autowired
+    NewsServer newsServer;
+
     @GetMapping("/")
     public ModelAndView main(){
         return new ModelAndView("redirect:/index");
@@ -24,12 +32,16 @@ public class Main {
     @GetMapping(value = "/index")
     public ModelAndView index(Model model, HttpServletRequest request){
 
+
+        List<News> list = newsServer.getRencentNews();
+        System.out.println(list);
         User user = (User) request.getSession().getAttribute("user");
         if(user!=null)
         {
             model.addAttribute("username",user.getUsername());
         }
         model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
+        model.addAttribute("RencentNews",list);
         return new ModelAndView("index","login-success",model);
     }
     @GetMapping("/more")

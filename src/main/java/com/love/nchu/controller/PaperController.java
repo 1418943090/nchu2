@@ -7,10 +7,12 @@ import com.love.nchu.service.UserInfoServer;
 import com.love.nchu.tool.TitleTool;
 import com.love.nchu.vo.deletePaperVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -22,8 +24,21 @@ public class PaperController {
     @Autowired
     private UserInfoServer userInfoServer;
     //删除论文控制器
+
+    @Value("${spring.paper.path}")
+    String paper_path;
+
+
+
    @PostMapping("/delete/paper")
     public ModelAndView deletePaper(@RequestBody deletePaperVo deletePaperVo){
+
+       for(String s : deletePaperVo.getListPaperPath()){
+           File file = new File(paper_path.substring(0,9)+s);
+           if(file.exists()){
+               file.delete();
+           }
+       }
         for(Integer i : deletePaperVo.getListPaperId()){
             paperServer.deletePaper(i);
         }

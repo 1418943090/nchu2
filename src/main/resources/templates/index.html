@@ -133,35 +133,35 @@
         <div class="links mdl-grid">
             <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
                 <div style="height: 150px; overflow: hidden" class="icon">
-                    <img src="images/BestPaperSenseApp2018.png">
+                    <img th:src="${RencentNews[0].pic}">
                 </div>
-                <a href="http://span.ece.utah.edu/news.html#epifi2018runnerup" style="color:black"><h4>EpiFi at SenseApp</h4></a>
+                <a th:href="@{'/news/recentNews/'+${RencentNews[0].id}}" style="color:black"><h4 th:text="${RencentNews[0].title}"></h4></a>
             </div>
 
             <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
                 <div style="height: 150px; overflow: hidden" class="icon">
-                    <img src="images/SmartAir.png">
+                    <img th:src="${RencentNews[1].pic}">
                 </div>
-                <a href="http://span.ece.utah.edu/news.html#chase2018smartair" style="color:black"><h4>Diffusing SmartAir</h4></a>
+                <a th:href="@{'/news/recentNews/'+${RencentNews[1].id}}" style="color:black"><h4 th:text="${RencentNews[1].title}"></h4></a>
             </div>
 
             <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
                 <div style="height: 150px; overflow: hidden" class="icon">
-                    <img src="images/ECE6960Flyer400.png">
+                    <img th:src="${RencentNews[2].pic}">
                 </div>
-                <a href="http://span.ece.utah.edu/news.html#rfsensingcourse" style="color:black"><h4>RF Sensing Course</h4></a>
+                <a th:href="@{'/news/recentNews/'+${RencentNews[2].id}}" style="color:black"><h4 th:text="${RencentNews[2].title}"></h4></a>
             </div>
 
             <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
                 <div style="height: 150px; overflow: hidden" class="icon">
-                    <img src="images/epifi.png">
+                    <img th:src="${RencentNews[3].pic}">
                 </div>
-                <a href="http://span.ece.utah.edu/news.html#lundrigan2018epifi" style="color:black"><h4>EpiFi System Presentation</h4></a>
+                <a th:href="@{'/news/recentNews/'+${RencentNews[3].id}}" style="color:black"><h4 th:text="${RencentNews[3].title}"></h4></a>
             </div>
 
         </div>
         <div>
-            <a href="http://span.ece.utah.edu/news.html" style="color:black"><h6>More News...</h6></a>
+            <a href="/news" style="color:black"><h6>More News...</h6></a>
         </div>
     </div>
 </div>

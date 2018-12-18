@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>News • TDY</title>
+    <meta name="description" content="The Sensing and Processing Across Networks (SPAN) Lab at the University of Utah develops new  technologies at the intersection of wireless networking, radio propagation, and signal processing.  The SPAN Lab has been at the forefront of the development of the use of standard wireless devices for the purpose of monitoring the state of the environment, for example, for localization and tracking, breathing monitoring, and context awareness, and to provide increased reliability and security for wireless networks.
+">
+
+    <link rel="stylesheet" href="http://span.ece.utah.edu/css/material.css">
+    <link rel="stylesheet" href="http://span.ece.utah.edu/css/main.css">
+
+    <link rel="canonical" href="http://span.ece.utah.eduhttp://span.ece.utah.edu/news.html">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <!-- <script src="./material.min.js"></script> -->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="http://span.ece.utah.eduicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://span.ece.utah.eduicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://span.ece.utah.eduicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://span.ece.utah.eduicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://span.ece.utah.eduicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://span.ece.utah.eduicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://span.ece.utah.eduicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://span.ece.utah.eduicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://span.ece.utah.eduicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="http://span.ece.utah.eduicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://span.ece.utah.eduicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://span.ece.utah.eduicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://span.ece.utah.eduicon/favicon-16x16.png">
+    <link rel="manifest" href="http://span.ece.utah.eduicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="http://span.ece.utah.eduicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <script th:inline="javascript">
+
+    window.onload=function(){
+
+        //location.href = "#"+[[${id}]];
+      // document.querySelector("#"+[[${id}]]).scrollIntoView();
+      $("html,body").animate({scrollTop: $("#"+[[${id}]]).offset().top}, 500);
+    }
+    </script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+   <span>南昌航空大学 TDY之家</span>
+
+    <nav class="site-nav">
+
+
+      <div class="trigger">
+        <a class="page-link" href="/index">Home</a>
+          <a class="page-link" href="/news">News</a>
+          <a class="page-link" href="/papers">Papers</a>
+          <a class="page-link" href="/people">People</a>
+          <a class="page-link" href="/products">Products</a>
+          <a class="page-link" href="/projects">Projects</a>
+      </div>
+    </nav>
+  </div>
+</header>
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="news">
+    <h3 id="0">TDY News</h3>
+      <div th:each="news : ${model.list}">
+      <div class="news mdl-grid" th:attr="id=${news.id}">
+          <div class="mdl-cell mdl-cell--4-col">
+                  <a href="https://wustl.edu/">
+              <img th:src="${news.pic}" width=225px >
+                  </a>
+          </div>
+          <div class="mdl-cell mdl-cell--8-col">
+              <h4 id="spanMovesToWashU" class="newsitem-name" th:text="${news.title}"></h4>
+              <p  class="newsitem-description" th:text="${news.content}">
+             </p>
+
+             <a th:if="${news.url} ne '' " th:href="${news.url}" target="_blank">原文链接</a>
+          </div>
+      </div>
+      <hr>
+
+      </div>
+
+      </div>
+    </div>
+ </div>
+  </body>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+
+</html>

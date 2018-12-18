@@ -39,6 +39,7 @@ public class UserController {
         if(userInfo.getUsername().equals("admin"))
         {
            // list.add(new Menu("研究生",""));
+            list.add(new Menu("新闻中心","/newsCenter"));
             list.add(new Menu("签到情况","/sign_in/show/all/today"));
             list.add(new Menu("节假日登记","/festival"));
             list.add(new Menu("注册申请","/review"));

@@ -108,12 +108,12 @@ public class testController {
     @RequestMapping("/test")
     public void test() throws Exception{
 
-        Sign_in_Time s = new Sign_in_Time("(7:30~8:10)","(11:35~11:50)","(13:30~14:10)","(17:35~17:50)",
-                "(18:30~19:10)","(20:55~23:00)","5-1","9-30","summer");
+        Sign_in_Time s = new Sign_in_Time("(6:10~8:55)","(11:00~12:20)","(12:21~14:00)","(17:05~18:20)",
+                "(18:21~20:00)","(20:55~23:00)","5-1","9-30","summer");
 
 
-        Sign_in_Time s2 = new Sign_in_Time("(7:30~8:10)","(11:35~11:50)","(13:00~13:40)","(17:05~17:20)",
-                "(18:30~19:10)","(20:55~23:00)","10-1","4-30","spring");
+        Sign_in_Time s2 = new Sign_in_Time("(6:10~8:55)","(11:00~12:20)","(12:21~14:00)","(17:05~18:20)",
+                "(18:21~20:00)","(20:55~23:00)","10-1","4-30","spring");
 
         sign_in_timeServer.save(s);
         sign_in_timeServer.save(s2);

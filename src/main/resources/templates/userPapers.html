@@ -59,7 +59,7 @@
                   </tr>
                 </div>
                   <tr th:each="paper : ${model.list}">
-                      <th><input type="checkbox" class="cb" th:attr="id=${paper.id},title=${paper.title}" ></th>
+                      <th><input type="checkbox" class="cb" th:attr="id=${paper.id},title=${paper.title},value=${paper.path}" ></th>
                       <th id="user" th:attr="username=${paper.username}" th:text="${paper.id}"></th>
                       <th th:text="${paper.title}"></th>
                       <th><a th:href="${paper.path}" target="_blank">查看原文</a></th>

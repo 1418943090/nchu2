@@ -2,11 +2,13 @@ function deletePaper(){
   var obj = document.getElementsByClassName("cb");
   var username;
   var check_id = [];
+  var paper_path=[];
   var k;
   for(k in obj){
       if(obj[k].checked && obj[k].id!=undefined)
       {
           check_id.push(obj[k].id);
+          paper_path.push(obj[k].value);
       }
   }
   if(check_id.length==0)
@@ -28,16 +30,17 @@ function deletePaper(){
       })
           .then((willDelete) => {
               if (willDelete) {
-                 dele(check_id);
+                 dele(check_id,paper_path);
               }
           });
   }
 }
-function dele(check_id){
+function dele(check_id,paper_path){
     username = $("#user").attr("username");
     var data = {
         "userName": username,
-        "listPaperId": check_id
+        "listPaperId": check_id,
+        "listPaperPath":paper_path
     };
     $.ajax
     ({

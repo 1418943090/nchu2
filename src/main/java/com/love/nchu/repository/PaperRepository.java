@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface PaperRepository extends JpaRepository<Paper,String> {
+public interface PaperRepository extends JpaRepository<Paper,Integer> {
 
     List<Paper> findPaperByUsername(String usernaem);
     List<Paper> getAllByIdIsNotNull();

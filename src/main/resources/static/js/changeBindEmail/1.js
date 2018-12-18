@@ -73,8 +73,8 @@ function settime(val,flag) {
     if(flag<=0) {
 
         setTimeout(function () {
-            settime(val,flag)
-        }, 1000)
+            settime(val,flag);
+        }, 1000);
     }
 }
 

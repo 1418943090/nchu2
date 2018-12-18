@@ -56,4 +56,9 @@ public class PaperServerImpl implements PaperServer {
         System.out.println(title);
         return paperRepository.findPaperByTitleLike(title);
     }
+
+    @Override
+    public Paper findPaperById(Integer id) {
+        return paperRepository.getOne(id);
+    }
 }

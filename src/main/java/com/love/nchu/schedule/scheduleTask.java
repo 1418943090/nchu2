@@ -25,7 +25,7 @@ public class scheduleTask {
     @Scheduled(cron="0 0 1,12,6 * * ?")
     public void sign_in_Init() throws  Exception{
         List<String> userlist = userServer.getAllOrdinaryUsernmae();
-        String today = MyDate.getDate();
+        String today = MyDate.getDate("yyyy-MM-dd");
         for(String username : userlist){
             SignInTool.sign_in_status_check(sign_in_statusServer,festivalServer,username,today);
         }

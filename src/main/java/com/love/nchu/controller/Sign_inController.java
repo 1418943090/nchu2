@@ -270,7 +270,7 @@ public class Sign_inController {
         isChange = false;
         String d = date;
         if(date.equals("today")) {
-            d = MyDate.getDate();
+            d = MyDate.getDate("yyyy-MM-dd");
         }
         if(FestivalTool.isFestival(d,festivalServer)){
             model.addAttribute("sign_in_time",SignInTool.getTime(sign_in_timeServer));
@@ -315,13 +315,13 @@ public class Sign_inController {
         //ip校验
       String ip = Net.getIP(request);
       System.out.println(ip);
-      if(!((ip.substring(0,8)).equals(public_ip) || (ip.substring(0,8)).equals(public_ip)) ){
+      if(!((ip.substring(0,8)).equals(public_ip) || (ip.substring(0,8)).equals(public_ip2)) ){
           errorVo.setData("签到失败,不是实验室环境网络");
           return errorVo;
       }
        boolean isSignIn = false;
        boolean signIn = false;
-       String date = MyDate.getDate();
+       String date = MyDate.getDate("yyyy-MM-dd");
        int signTime  = MyDate.getTimeInt();
        String signTimeStr = MyDate.getTimeString();
        Sign_in_Status sign_in_status = sign_in_statusServer.getSign_in_StatusByUsernaemAndDate(username,date);
@@ -362,8 +362,8 @@ public class Sign_inController {
     //如果是新的一天则将空的签到信息存到数据中，确保有数据返回给前台
     @GetMapping("/sign_in/{username}")
     public ModelAndView Sign_in(@PathVariable String username, Model model)throws Exception{
-        String s = MyDate.getDate();
-        if(FestivalTool.isFestival(MyDate.getDate(),festivalServer)){
+        String s = MyDate.getDate("yyyy-MM-dd");
+        if(FestivalTool.isFestival(MyDate.getDate("yyyy-MM-dd"),festivalServer)){
             return new ModelAndView("festivalday");
         }
         SignInTool.sign_in_status_check(sign_in_statusServer,festivalServer,username,s);

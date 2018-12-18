@@ -61,13 +61,13 @@ public class RegistryTool {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String s = sdf.format(birthDate);
         int birthYear =Integer.parseInt(s.substring(0,4));
-        int nowYear = Integer.parseInt(MyDate.getDate().substring(0,4));
+        int nowYear = Integer.parseInt(MyDate.getDate("yyyy-MM-dd").substring(0,4));
         return nowYear-birthYear;
     }
 
    public static void saveUserInfo(UserInfoServer userInfoServer,UserServer userServer,UserInfo userInfo){
 
-           userInfo.setRegistry_date(MyDate.getDate());
+           userInfo.setRegistry_date(MyDate.getDate("yyyy-MM-dd"));
            userInfo.setAge(get_Age(userInfo.getBirthDate()));
            User user = userServer.findUserByUsername(userInfo.getUsername());
            userInfo.setEmail(user.getEmail());
@@ -82,9 +82,7 @@ public class RegistryTool {
          if(!newfile.exists()){
              newfile.mkdirs();
          }
-
          String filenamestr = userInfo.getUsername()+String.valueOf((int)(Math.random()*100)) +".jpg";
-
          System.out.println(img_path);
          File bfile = new File(newfile,filenamestr);
          if(!bfile.exists()){

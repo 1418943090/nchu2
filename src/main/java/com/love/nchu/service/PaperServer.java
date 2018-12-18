@@ -15,5 +15,6 @@ public interface PaperServer {
     List<Paper> getPaperByNameLikeOrTitleLike(String value);
     List<Paper> getPaperByNameLike(String name);
     List<Paper> getPaperByTitleLike(String title);
+    Paper findPaperById(Integer id);
 
 }

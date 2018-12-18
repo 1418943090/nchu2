@@ -27,9 +27,9 @@ public  class MyDate {
        return cal.get(Calendar.DAY_OF_WEEK) ;
    }
 
-   public static String getDate(){
+   public static String getDate(String pattern){
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
         String s = format.format(date);
         return s;
     }
