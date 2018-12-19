@@ -315,7 +315,9 @@ public class Sign_inController {
         //ip校验
       String ip = Net.getIP(request);
       System.out.println(ip);
-      if(!((ip.substring(0,8)).equals(public_ip) || (ip.substring(0,8)).equals(public_ip2)) ){
+
+      System.out.println(ip.substring(0,ip.lastIndexOf(".")));
+      if(!((ip.substring(0,ip.lastIndexOf("."))).equals(public_ip) || (ip.substring(0,ip.lastIndexOf("."))).equals(public_ip2)) ){
           errorVo.setData("签到失败,不是实验室环境网络");
           return errorVo;
       }

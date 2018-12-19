@@ -17,6 +17,6 @@ public interface NewsRepository extends JpaRepository<News,Integer> {
     @Query("update News n set n.content=?2 where n.id=?1")
     void updateNews(Integer id,String content);
 
-    @Query(value = "select * from News n order by n.date desc limit 4",nativeQuery = true)
+    @Query(value = "select * from news n order by n.date desc limit 4",nativeQuery = true)
     List<News> getRencentNews();
 }

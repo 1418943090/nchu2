@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--不能引入jquery会和主界面js冲突导致bootstrapvalidator异常-->
+    <!--<script src="/bt/js/jquery.min.js" ></script>-->
+    <link href="/css/ani.css" type="text/css" rel="stylesheet"/>
+    <script src="/js/bootstrapValidate/bootstrapValidator.css" ></script>
+    <script src="/js/bootstrapValidate/bootstrapValidator.js" ></script>
+    <script type="text/javascript" src="/js/bootstrapValidate.js"></script>
+    <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
+    <script th:inline="javascript">
+
+      introduction="";
+    window.onload=function() {
+
+      introduction = [[${introduction}]];
+
+    };
+    function introduction_edit(){
+        alert(introduction);
+        alert($("#introduction_str").val());
+        if(introduction==$("#introduction_str").val()){
+              swal({
+                 title: "修改失败",
+                 text: "你没有做任何更改哦",
+                 icon: "warning",
+                 button: "确定",
+             });
+        }
+else{
+     var str = $("#introduction_str").val();
+           $.ajax({
+                  url: "/introduction/edit",
+                  contentType: 'application/json;charset=utf-8',
+                  type: 'post',
+                  async:true,
+                  data: str,
+                  success: function () {
+           swal({
+                 title: "修改成功",
+                 text: "",
+                 icon: "success",
+                 button: "确定",
+             });
+                  },
+                  error: function () {
+           swal({
+                 title: "修改失败",
+                 text: "服务器处理错误",
+                 icon: "error",
+                 button: "确定",
+             });
+                  }
+              });
+      }
+    }
+</script>
+</head>
+ <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">编辑介绍文档</h1>
+    </div>
+</div>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <p><!--data-toggle="modal" data-target="#myModal"-->
+                <button class="btn btn-primary"  type="button" onclick="introduction_edit()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;确定更改</button>
+            </p>
+             <div class="panel panel-default">
+                  <div class="panel-heading">
+                  介绍文档
+                  </div>
+               <div class="panel-body">
+                  <textarea class="form-control" rows="17" id="introduction_str" th:text="${introduction}"></textarea>
+              </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

@@ -33,7 +33,7 @@ public class NewsController {
     public ModelAndView index(Model model){
         List<News> list = newsServer.getAllNews();
         model.addAttribute("list",list);
-        return new ModelAndView("News","model",model);
+        return new ModelAndView("news","model",model);
     }
     @GetMapping("/news/recentNews/{id}")
     public ModelAndView news(Model model,@PathVariable(required = false) Integer id ){
@@ -44,7 +44,7 @@ public class NewsController {
         model.addAttribute("list",list);
         model.addAttribute("id",id);
 
-        return new ModelAndView("News","model",model);
+        return new ModelAndView("news","model",model);
     }
     @GetMapping("/newsCenter")
     public ModelAndView newsCenter(Model model) {

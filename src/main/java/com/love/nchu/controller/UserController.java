@@ -44,6 +44,7 @@ public class UserController {
             list.add(new Menu("节假日登记","/festival"));
             list.add(new Menu("注册申请","/review"));
             list.add(new Menu("自定义标题","/title_edit"));
+            list.add(new Menu("介绍文档","/introduction"));
         }else
             list.add(new Menu("签到系统","/sign_in/"+username));
         model.addAttribute("list",list);
