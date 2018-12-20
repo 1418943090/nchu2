@@ -11,4 +11,7 @@ public interface NewsServer {
     void updateNews(Integer id,String content);
     void deleteNewsById(Integer id);
     List<News> getRencentNews();
+
+    void updatePosition(int position,int id);
+    void newsSetInt();
 }

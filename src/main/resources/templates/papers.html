@@ -1,182 +1,72 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="/js/CodeSeven-toastr-50092cc/build/toastr.css" rel="stylesheet" >
-     <script src="/js/CodeSeven-toastr-50092cc/build/toastr.min.js"></script>
-     <link rel="stylesheet" type="text/css" href="/js/main.css">
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <style>
-        .container{
-            padding-top: 5%;
-            padding-left: 5%;
-            padding-right: 2%;
-        }
-        .paper-author{
-            font-size:1.5em;
-        }
-        .paper-name{
-            color:#FF6347;
-        }
-        .page-header{
-            color: #d58512;
-        }
-        .btn-lookPaper{
-            background-color:#FF8C00;
-        }
-        .paper-title{
-            margin: 0;
-            font-size: 4em;
-            text-decoration: none;
-            -webkit-transition: all 0.2s ease;
-            -o-transition: all 0.2s ease;
-            transition: all 0.2s ease;
-            word-break:break-all
-        }
-        .navbar-header{
-            padding-top: 1em;
-        }
-        .search{
-            position: absolute;
-            right:1%;
-            top: 7%;
-        }
-        .search-condition{
-            position: absolute;
-            right:3%;
-            top: 13%;
-        }
-    </style>
-    <script>
-        function oncheck(){
-            if($("#all").is(":checked")==false){
-                $("#all").prop("checked",true);
-            }
-            $("#author").attr("checked",false);
-            $("#title").attr("checked",false);
-        }
-        function search(){
-            var str = document.getElementById("input_search").value;
-           if(str==""){
-                 swal({
-                      title: "你还没有输入要搜索的内容哦",
-                      text: "",
-                      icon: "warning",
-                       button: "确定",
-                     });
-           }
-           else {
-               if (document.getElementById("all").checked == true) {
-                   data = "all";
-               }
-               else {
-                   data = $('input:radio[name="search-condition"]:checked').val();
-               }
-               location.href = '/papers/search/' + data + "/" + str;
-           }
-        }
-        $(function () {
-            $("#all").attr("checked",true);
-            $("input[name='search-condition']").click(function(){
-                    $("#all").attr("checked",false);
-            });
-        });
-         toastr.options = {
-                     positionClass: 'toast-top-center',              // 设置提示款显示的位置
-                   };
-    </script>
-</head>
-<body>
-<nav class="navbar  navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav navbar-left">
-                <li>
-                    <h5 class="title" th:text="${TitleEdit.getTitle1()}"></h5>
-                </li>
-            </ul>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-               <li>
-                  <a  th:href="@{/index}"  th:method="POST" th:type="post"><h5 class="title"><strong>Home</strong></h5></a>
-              </li>
-               <li>
-                  <a  th:href="@{/people}"  th:method="POST" th:type="post"><h5 class="title"><strong>People</strong></h5></a>
-              </li>
-               <li>
-                  <a  th:href="@{/products}"  th:method="POST" th:type="post"><h5 class="title"><strong>Products</strong></h5></a>
-              </li>
-              <li>
-                  <a th:href="@{/projects}"  th:method="POST" th:type="post"><h5 class="title"><strong>Projects</strong></h5></a>
-              </li>
-              <li>
-                  <a  th:href="@{/news}"  th:method="POST" th:type="post"><h5 class="title"><strong>News</strong></h5></a>
-              </li>
-              <li>
-                  <a  th:href="@{/papers}"  th:method="POST" th:type="post"><h5 class="title"><strong>Papers</strong></h5></a>
-              </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="row bg">
-    <div class="container">
-        <div class="row" >
-            <div class="col-md-10">
-            <div th:if="${isEmptyA} eq true">
-                 <h1 class="text-center" style="color: white">论文库空空如也,赶紧去个人中心添加一篇吧</h1>
-            </div>
-           <div th:if="${isEmptyB} eq true">
-                 <h1 class="text-center" style="color: white">一篇论文也没有搜索到哦,试试其他关键字吧</h1>
-            </div>
-            <div th:each="paper : ${model.list}" >
-             <div class="well " >
-                <div class="paper-header text-center" >
-                    <h class="paper-title" th:text="${paper.title}"></h><br>
-                    <span class="paper-author">作者:<span class="paper-name" th:text="${paper.name}"></span>•<span th:text="${paper.date}"></span></span>
-                </div>
-                <div class="paper-content">
-                    <h3 th:text="${paper.summary}"></h3>
-                </div>
-                <div class="paper-footer">
-                    <h5 class="page-header"></h5>
-                    <ul class="nav nav-list">
-                        <li class="divider"></li>
-                    </ul>
-                    <button class="btn btn-lookPaper"><span><a th:href="${paper.path}"  target="_blank"  style="color: white">阅读全文</a></span></button>
-                </div>
-             </div>
-            </div>
-            </div>
-            <div class="search" style="position:fixed;">
-                <form class="navbar-form navbar-left" onsubmit="return false">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" id="input_search">
-                    </div>
-                    <button  class="btn btn-default" onclick="search();">
-                        <span class="glyphicon glyphicon-search"></span>搜索</button>
-                </form>
-            </div>
-        </div>
-        <div class="search-condition " style="position:fixed;font-size: 16px; font-family: Tahoma;">
-            <label style="color: white">
-                <input type="checkbox" id="all" style="vertical-align:middle; margin-top:0;" onclick="oncheck();">全部字段&nbsp&nbsp
-            </label>
-            <label style="color: white">
-                <input type="radio" name="search-condition" id="author" value="author" style="vertical-align:middle; margin-top:0;"> 作者&nbsp&nbsp
-            </label>
-            <label style="color: white">
-                <input type="radio" name="search-condition" id="title" value="title" style="vertical-align:middle; margin-top:0;"> 标题&nbsp&nbsp
-            </label>
-        </div>
+<!DOCTYPE html>
+<html>
 
-    </div>
-</div>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Papers • TDY</title>
+    <meta name="description" content="The Sensing and Processing Across Networks (SPAN) Lab at the University of Utah develops new  technologies at the intersection of wireless networking, radio propagation, and signal processing.  The SPAN Lab has been at the forefront of the development of the use of standard wireless devices for the purpose of monitoring the state of the environment, for example, for localization and tracking, breathing monitoring, and context awareness, and to provide increased reliability and security for wireless networks.
+">
+
+    <link rel="stylesheet" href="http://span.ece.utah.edu/css/material.css">
+    <link rel="stylesheet" href="http://span.ece.utah.edu/css/main.css">
+
+    <link rel="canonical" href="http://span.ece.utah.eduhttp://span.ece.utah.edu/papers.html">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <!-- <script src="./material.min.js"></script> -->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="http://span.ece.utah.eduicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://span.ece.utah.eduicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://span.ece.utah.eduicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://span.ece.utah.eduicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://span.ece.utah.eduicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://span.ece.utah.eduicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://span.ece.utah.eduicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://span.ece.utah.eduicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://span.ece.utah.eduicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="http://span.ece.utah.eduicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://span.ece.utah.eduicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="http://span.ece.utah.eduicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://span.ece.utah.eduicon/favicon-16x16.png">
+    <link rel="manifest" href="http://span.ece.utah.eduicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="http://span.ece.utah.eduicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+  <body>
+    <header class="site-header">
+  <div class="wrapper">
+    <a class="" href="">&nbsp;</a> <span>南昌航空大学 • TDY</span>
+    <nav class="site-nav">
+      <div class="trigger">
+         <a class="page-link" href="/index">Home</a>
+         <a class="page-link" href="/people">People</a>
+         <a class="page-link" href="/products">Products</a>
+         <a class="page-link" href="/projects">Projects</a>
+         <a class="page-link" href="/news">News</a>
+         <a class="page-link" href="/papers">Papers</a>
+      </div>
+    </nav>
+  </div>
+</header>
+    <div class="page-content">
+      <div class="wrapper">
+    <div th:each="key : ${model.hashMap}">
+    <p> <h3 th:text="${key.key}">  </h3> </p>
+      <ul th:each="paper : ${key.value}">
+        <li>
+           <p th:text="${paper.title}">
+           </p>
+           <a th:href="${paper.path}" target="_blank">查看原文</a>
+         </li>
+     </ul>
+   </div>
+  </div>
+ </div>
+  </body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </html>

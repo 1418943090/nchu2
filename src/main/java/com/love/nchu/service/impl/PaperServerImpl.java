@@ -61,4 +61,24 @@ public class PaperServerImpl implements PaperServer {
     public Paper findPaperById(Integer id) {
         return paperRepository.getOne(id);
     }
+
+    @Override
+    public List<Paper> findPaperByYear(int year) {
+        return paperRepository.findPaperByYear(year);
+    }
+
+    @Override
+    public List<Paper> getAllOeder() {
+        return paperRepository.getAllOeder();
+    }
+
+    @Override
+    public void updatePosition(int position, int id) {
+          paperRepository.updatePosition(position,id);
+    }
+
+    @Override
+    public void paperSetInit() {
+      paperRepository.papersetInit();
+    }
 }

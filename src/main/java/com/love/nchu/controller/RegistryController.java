@@ -88,7 +88,6 @@ public class RegistryController {
     public String save(Model model, UserInfo userInfo, @RequestParam(name = "file", required = false)
             MultipartFile file,
                        @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
-
         try {
             if (!LoginTool.loginValidator(userServer, userInfo.getUsername(), userInfo.getPassword())) {
                 return "用户名或密码错误";
@@ -96,7 +95,6 @@ public class RegistryController {
         } catch (Exception e) {
             return "服务器错误,操作失败";
         }
-
         if (RegistryTool.isFillBasicInformation(userInfoServer, userInfo.getUsername())) {
             return "个人信息已经填写，如果需要修改。请登录后到个人中心修改";
         }
@@ -107,20 +105,16 @@ public class RegistryController {
             reviewTableServer.save(new ReviewTable(userInfo.getUsername(), new Date(), "未处理", "未处理", "warning"));
         return "success";
     }
-
     @GetMapping("/registry/index")
     public ModelAndView index() {
         return new ModelAndView("redirect:/index");
     }
-
     @GetMapping("/registry/login")
     public ModelAndView login() {
         return new ModelAndView("redirect:/login");
     }
-
     @PostMapping("/registry/step1")
     public Object validator(@RequestBody userTem usertem) throws Exception {
-
         ErrorVo errorVo = new ErrorVo("");
         if (RegistryTool.isUsernameExist(userServer, usertem.getUsername())) {
             errorVo.setData("用户名已存在");//用户名已存在
@@ -130,7 +124,6 @@ public class RegistryController {
             errorVo.setData("邮箱已被注册");//邮箱已被注册
             return errorVo;
         }
-
         if ((!RegistryTool.codeVolidator(code, usertem.getVcode())) || date==null) {
             errorVo.setData("验证码错误");//验证码错误
             return errorVo;

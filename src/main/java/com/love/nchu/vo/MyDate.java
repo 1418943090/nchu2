@@ -27,6 +27,15 @@ public  class MyDate {
        return cal.get(Calendar.DAY_OF_WEEK) ;
    }
 
+    public static int getYear() throws Exception{
+
+
+        Date d = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        return cal.get(Calendar.YEAR) ;
+    }
+
    public static String getDate(String pattern){
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat(pattern);

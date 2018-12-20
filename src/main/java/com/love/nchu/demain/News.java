@@ -16,7 +16,7 @@ public class News implements Serializable {
     private String content;
     private String url;
     private String pic;
-
+    private int position = 4;
     protected News(){
 
     }
@@ -77,6 +77,14 @@ public class News implements Serializable {
         this.pic = pic;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     @Override
     public String toString() {
         return "News{" +
@@ -86,6 +94,7 @@ public class News implements Serializable {
                 ", content='" + content + '\'' +
                 ", url='" + url + '\'' +
                 ", pic='" + pic + '\'' +
+                ", position=" + position +
                 '}';
     }
 }

@@ -10,11 +10,23 @@
     <script src="/js/bootstrapValidate/bootstrapValidator.css" ></script>
     <script src="/js/bootstrapValidate/bootstrapValidator.js" ></script>
     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
- <script type="text/javascript" src="/js/news/1.js"></script>
+     <script type="text/javascript" src="/js/news/1.js"></script>
       <script type="text/javascript" src="/js/news/2.js"></script>
       <script type="text/javascript" src="/js/news/3.js"></script>
+       <script type="text/javascript" src="/js/news/4.js"></script>
 
-    <script type="text/javascript">
+    <script th:inline="javascript">
+
+      $(document).ready(function(){
+                     if([[${newsSet}]]==true){
+                         swal({
+                                title: "操作成功",
+                                text: "",
+                                icon: "success",
+                                button: "确定",
+                            });
+                    }
+                 });
 
     </script>
 
@@ -55,6 +67,9 @@
                 <button class="btn btn-danger btn-news-del" type="button" onclick="deleteNews();">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;删除
                 </button>
+                 <button class="btn btn-success btn-news-set" type="button" onclick="newsSet();">
+                    <span class="" aria-hidden="true"></span>&nbsp;置顶News
+                 </button>
             </p>
              <div class="panel panel-default">
                   <div class="panel-heading">
@@ -144,7 +159,7 @@
                 <iframe src="" frameborder="0" name="frameName" style="display:none;"></iframe>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="closemodal">关闭
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="closemodal_add">关闭
                 </button>
                 <button type="button" class="btn btn-primary" onclick="upload_check_add();" >
                     添加
@@ -214,6 +229,59 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-
+<!--*****************************************************************************************************************-->
+<!-- 模态框（Modal） -->
+<div class="modal fade " id="newsSetModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="myModalLabel" >
+                    置顶News
+                </h4>
+            </div>
+            <div class="modal-body">
+            <form role="form"  class="form-horizontal">
+                  <div class="form-group">
+                     <label for="" class="col-sm-2 control-label">1:</label>
+                      <div class="col-sm-10">
+                         <select class="form-control" id="no1">
+                             <div th:each="news : ${model.list}">
+                              <option th:attr="id=${news.id}" th:text="${news.title}"></option>
+                             </div>
+                          </select>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                       <label for="" class="col-sm-2 control-label">2:</label>
+                        <div class="col-sm-10">
+                           <select class="form-control" id="no2">
+                               <div th:each="news : ${model.list}">
+                                <option th:attr="id=${news.id}" th:text="${news.title}"></option>
+                               </div>
+                            </select>
+                       </div>
+                    </div>
+                    <div class="form-group">
+                         <label for="" class="col-sm-2 control-label">3:</label>
+                          <div class="col-sm-10">
+                             <select class="form-control" id="no3" >
+                                <div th:each="news : ${model.list}">
+                                  <option th:attr="id=${news.id}" th:text="${news.title}"></option>
+                                </div>
+                               </select>
+                         </div>
+                      </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="closemodal_newsSet">关闭
+                </button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="newsSetSure();">确定
+                                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 </body>
 </html>

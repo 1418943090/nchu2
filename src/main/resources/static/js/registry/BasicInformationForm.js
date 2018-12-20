@@ -43,7 +43,7 @@ $(function(){
                             message:'请输入出生日期'
                         },
                         callback: {
-                            message: '开始时间必须小于结束时间',
+                            message: '不能是将来的时间',
                             callback: function (value, validator, $field) {
                                 var   d=new   Date(Date.parse(value .replace(/-/g,"/")));
                                 var   curDate=new   Date();
@@ -99,6 +99,26 @@ $(function(){
                             min: 4,
                             max: 20,
                             message: '请输入正确的学校全称'
+                        }
+                    }
+                },
+                schoolDate:{
+                    trigger:'click',
+                    validators:{
+                        notEmpty:{
+                            message:'请输入入学日期'
+                        },
+                        callback: {
+                            message: '不能是将来的时间',
+                            callback: function (value, validator, $field) {
+                                var   d=new   Date(Date.parse(value .replace(/-/g,"/")));
+                                var   curDate=new   Date();
+                                if(d <=curDate){
+                                    return true;
+                                }else{
+                                    return false;
+                                }
+                            }
                         }
                     }
                 },research_direct:{

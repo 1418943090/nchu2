@@ -1,6 +1,8 @@
 package com.love.nchu.controller;
 
-import com.love.nchu.demain.*;
+import com.love.nchu.demain.ErrorVo;
+import com.love.nchu.demain.Sign_in_Status;
+import com.love.nchu.demain.Sign_in_Time;
 import com.love.nchu.service.FestivalServer;
 import com.love.nchu.service.Sign_in_StatusServer;
 import com.love.nchu.service.Sign_in_TimeServer;
@@ -21,10 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 @RestController
 public class Sign_inController {
     @Autowired
@@ -41,8 +41,10 @@ public class Sign_inController {
     @Value("${spring.net.public.ip}")
     String public_ip;
 
-    @Value("${spring.net.public.ip2}")
+    @Value("${spring.net.public.aip}")
     String public_ip2;
+    @Value("${spring.net.public.bip}")
+    String public_ip3;
 
     String error="";
     Boolean isChange = false;
@@ -313,11 +315,14 @@ public class Sign_inController {
 //          return errorVo;
 //      }
         //ip校验
+        // System.out.println(public_ip2 +"  "+public_ip3);
       String ip = Net.getIP(request);
       System.out.println(ip);
-
+      System.out.println(new Date());
       System.out.println(ip.substring(0,ip.lastIndexOf(".")));
-      if(!((ip.substring(0,ip.lastIndexOf("."))).equals(public_ip) || (ip.substring(0,ip.lastIndexOf("."))).equals(public_ip2)) ){
+      String userip = ip.substring(0,ip.lastIndexOf("."));
+      System.out.println(!(userip.equals(public_ip) && userip.equals(public_ip2)) && userip.equals(public_ip3));
+      if((!userip.equals(public_ip) && !userip.equals(public_ip2)) && !userip.equals(public_ip3)){
           errorVo.setData("签到失败,不是实验室环境网络");
           return errorVo;
       }

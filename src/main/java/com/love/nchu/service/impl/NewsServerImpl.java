@@ -14,7 +14,7 @@ public class NewsServerImpl implements NewsServer {
     NewsRepository newsRepository;
     @Override
     public List<News> getAllNews() {
-        return newsRepository.findAll();
+        return newsRepository.getAll();
     }
 
     @Override
@@ -37,5 +37,17 @@ public class NewsServerImpl implements NewsServer {
     public List<News> getRencentNews() {
         return newsRepository.getRencentNews();
     }
+
+    @Override
+    public void updatePosition(int position,int id) {
+        newsRepository.updateSet(position,id);
+    }
+
+    @Override
+    public void newsSetInt() {
+        newsRepository.newssetInit();
+    }
+
+
 }
 

@@ -13,24 +13,9 @@
     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
     <script th:inline="javascript">
 
-      introduction="";
-    window.onload=function() {
 
-      introduction = [[${introduction}]];
-
-    };
     function introduction_edit(){
-        alert(introduction);
-        alert($("#introduction_str").val());
-        if(introduction==$("#introduction_str").val()){
-              swal({
-                 title: "修改失败",
-                 text: "你没有做任何更改哦",
-                 icon: "warning",
-                 button: "确定",
-             });
-        }
-else{
+
      var str = $("#introduction_str").val();
            $.ajax({
                   url: "/introduction/edit",
@@ -55,7 +40,7 @@ else{
              });
                   }
               });
-      }
+
     }
 </script>
 </head>

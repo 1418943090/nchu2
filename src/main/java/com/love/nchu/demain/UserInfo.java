@@ -10,10 +10,8 @@ import java.util.Date;
 public class UserInfo  implements Serializable {
     @Id
     private String username;
-
     @Transient
     private String password;
-
     private int age;
     private Date  birthDate;
     private String email;
@@ -22,29 +20,34 @@ public class UserInfo  implements Serializable {
     private String tel;
     private String birthplace;
     private String school;
+    private String schoolDate;
     private String identity;
-    private String teachername;
     private String research_direct;
     private String picture;
     @Column(length = 400)
     private String self_introduction;
     private String registry_date;
+
     protected UserInfo(){
 
     }
-    public UserInfo(String username, String email, String name, String sex, String tel, String birthplace, String school, String identity,String teachername, String research_direct, String picture, String self_introduction) {
+
+    public UserInfo(String username, String password, Date birthDate, String email, String name, String sex, String tel, String birthplace, String school, String schoolDate, String identity, String research_direct, String picture, String self_introduction, String registry_date) {
         this.username = username;
+        this.password = password;
+        this.birthDate = birthDate;
         this.email = email;
         this.name = name;
         this.sex = sex;
         this.tel = tel;
         this.birthplace = birthplace;
         this.school = school;
+        this.schoolDate = schoolDate;
         this.identity = identity;
         this.research_direct = research_direct;
         this.picture = picture;
-        this.teachername = teachername;
         this.self_introduction = self_introduction;
+        this.registry_date = registry_date;
     }
 
     public String getUsername() {
@@ -127,6 +130,14 @@ public class UserInfo  implements Serializable {
         this.school = school;
     }
 
+    public String getSchoolDate() {
+        return schoolDate;
+    }
+
+    public void setSchoolDate(String schoolDate) {
+        this.schoolDate = schoolDate;
+    }
+
     public String getIdentity() {
         return identity;
     }
@@ -135,13 +146,6 @@ public class UserInfo  implements Serializable {
         this.identity = identity;
     }
 
-    public String getTeachername() {
-        return teachername;
-    }
-
-    public void setTeachername(String teachername) {
-        this.teachername = teachername;
-    }
 
     public String getResearch_direct() {
         return research_direct;
@@ -188,8 +192,8 @@ public class UserInfo  implements Serializable {
                 ", tel='" + tel + '\'' +
                 ", birthplace='" + birthplace + '\'' +
                 ", school='" + school + '\'' +
+                ", schoolDate='" + schoolDate + '\'' +
                 ", identity='" + identity + '\'' +
-                ", teachername='" + teachername + '\'' +
                 ", research_direct='" + research_direct + '\'' +
                 ", picture='" + picture + '\'' +
                 ", self_introduction='" + self_introduction + '\'' +

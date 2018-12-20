@@ -11,25 +11,26 @@ public class Paper implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
     private int id;
+    @Column(name="title",length = 500)
     private String title;
-    @Column(name = "summary",length = 500)
-    private String summary;
     private String path;
     private String username;
     private String name;
     private Date  date;
 
+    private int position=4;
+
     protected Paper(){
 
     }
 
-    public Paper(String title, String summary, String path, String username, String name, Date date) {
+    public Paper(String title, String path, String username, String name, Date date) {
         this.title = title;
-        this.summary = summary;
         this.path = path;
         this.username = username;
         this.name = name;
         this.date = date;
+
     }
 
     public int getId() {
@@ -48,13 +49,6 @@ public class Paper implements Serializable {
         this.title = title;
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
 
     public String getPath() {
         return path;
@@ -88,16 +82,24 @@ public class Paper implements Serializable {
         this.date = date;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     @Override
     public String toString() {
         return "Paper{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", summary='" + summary + '\'' +
                 ", path='" + path + '\'' +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", date=" + date +
+                ", position=" + position +
                 '}';
     }
 }

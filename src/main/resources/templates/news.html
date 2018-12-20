@@ -37,25 +37,17 @@
     <meta name="theme-color" content="#ffffff">
 
     <script th:inline="javascript">
-
     window.onload=function(){
-
         //location.href = "#"+[[${id}]];
       // document.querySelector("#"+[[${id}]]).scrollIntoView();
       $("html,body").animate({scrollTop: $("#"+[[${id}]]).offset().top}, 500);
     }
     </script>
 </head>
-
-
   <body>
-
-    <header class="site-header">
-
+  <header class="site-header">
   <div class="wrapper">
-
    <span>南昌航空大学 TDY之家</span>
-
     <nav class="site-nav">
       <div class="trigger">
          <a class="page-link" href="/index">Home</a>
@@ -83,14 +75,11 @@
               <h4 id="spanMovesToWashU" class="newsitem-name" th:text="${news.title}"></h4>
               <p  class="newsitem-description" th:text="${news.content}">
              </p>
-
              <a th:if="${news.url} ne '' " th:href="${news.url}" target="_blank">原文链接</a>
           </div>
       </div>
       <hr>
-
       </div>
-
       </div>
     </div>
  </div>

@@ -16,5 +16,11 @@ public interface PaperServer {
     List<Paper> getPaperByNameLike(String name);
     List<Paper> getPaperByTitleLike(String title);
     Paper findPaperById(Integer id);
+    List<Paper> findPaperByYear(int year);
+
+
+    List<Paper> getAllOeder();
+    void updatePosition(int position,int id);
+    void paperSetInit();
 
 }

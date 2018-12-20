@@ -41,6 +41,11 @@ public class PersonCenterController {
     public ModelAndView paper(@PathVariable String username, Model model)
     {
         nowuser = username;
+
+        if(username.equals("admin")){
+            return new ModelAndView("redirect:/paper/admin");
+        }
+
         List<Paper> list = paperServer.findPaperByUsername(username);
         boolean hasPaper = true;
         if(list.size()==0) {
@@ -51,7 +56,7 @@ public class PersonCenterController {
         return new ModelAndView("userPapers","model",model);
     }
     @PostMapping("/upload/paper")
-    public String upload_paper(Model model, Paper paper, MultipartFile file){
+    public String upload_paper(Paper paper, MultipartFile file){
         paper.setDate(new Date());
         paper.setUsername(nowuser);
         filenamestr = String.valueOf((int)(Math.random()*100))+file.getOriginalFilename();

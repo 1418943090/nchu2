@@ -6,6 +6,7 @@ import com.love.nchu.service.NewsServer;
 import com.love.nchu.tool.NewsTool;
 import com.love.nchu.vo.MyDate;
 import com.love.nchu.vo.deleteNewsVo;
+import com.love.nchu.vo.PositionSetVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -28,12 +29,25 @@ public class NewsController {
     @Value("${spring.news.img.path}")
     String news_img_path;
 
+    boolean newsSet = false;
 
     @GetMapping("/news")
     public ModelAndView index(Model model){
         List<News> list = newsServer.getAllNews();
         model.addAttribute("list",list);
         return new ModelAndView("news","model",model);
+    }
+
+    @PostMapping("/news/set")
+    public ModelAndView set(@RequestBody PositionSetVo newsSetVo){
+
+        newsSet = true;
+        System.out.println(newsSetVo.toString());
+        newsServer.newsSetInt();
+        newsServer.updatePosition(1,newsSetVo.getNo1());
+        newsServer.updatePosition(2,newsSetVo.getNo2());
+        newsServer.updatePosition(3,newsSetVo.getNo3());
+        return new ModelAndView("redirect:/newsCenter");
     }
     @GetMapping("/news/recentNews/{id}")
     public ModelAndView news(Model model,@PathVariable(required = false) Integer id ){
@@ -55,6 +69,8 @@ public class NewsController {
         }
         model.addAttribute("list",list);
         model.addAttribute("hasNews",hasNews);
+        model.addAttribute("newsSet",newsSet);
+        newsSet = false;
         return new ModelAndView("newsCenter","model",model);
     }
 
