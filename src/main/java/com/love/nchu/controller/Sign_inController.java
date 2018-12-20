@@ -3,6 +3,7 @@ package com.love.nchu.controller;
 import com.love.nchu.demain.ErrorVo;
 import com.love.nchu.demain.Sign_in_Status;
 import com.love.nchu.demain.Sign_in_Time;
+import com.love.nchu.demain.User;
 import com.love.nchu.service.FestivalServer;
 import com.love.nchu.service.Sign_in_StatusServer;
 import com.love.nchu.service.Sign_in_TimeServer;
@@ -367,15 +368,17 @@ public class Sign_inController {
     }
     //用户点击签到信息后，返回签到状态信息
     //如果是新的一天则将空的签到信息存到数据中，确保有数据返回给前台
-    @GetMapping("/sign_in/{username}")
-    public ModelAndView Sign_in(@PathVariable String username, Model model)throws Exception{
+    @GetMapping("/sign_in")
+    public ModelAndView Sign_in(HttpServletRequest request, Model model)throws Exception{
+
+        User user = (User)request.getSession().getAttribute("user");
         String s = MyDate.getDate("yyyy-MM-dd");
         if(FestivalTool.isFestival(MyDate.getDate("yyyy-MM-dd"),festivalServer)){
             return new ModelAndView("festivalday");
         }
-        SignInTool.sign_in_status_check(sign_in_statusServer,festivalServer,username,s);
+        SignInTool.sign_in_status_check(sign_in_statusServer,festivalServer,user.getUsername(),s);
         model.addAttribute("sign_in_time", SignInTool.getTime(sign_in_timeServer));
-        model.addAttribute("sign_in_status",sign_in_statusServer.getSign_in_StatusByUsernaemAndDate(username,s));
+        model.addAttribute("sign_in_status",sign_in_statusServer.getSign_in_StatusByUsernaemAndDate(user.getUsername(),s));
         return new ModelAndView("signin","model",model);
     }
 }

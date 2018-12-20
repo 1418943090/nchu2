@@ -28,16 +28,11 @@ public class PaperController {
     @Autowired
     private UserInfoServer userInfoServer;
     //删除论文控制器
-
     @Value("${spring.paper.path}")
     String paper_path;
-
     boolean paperSet = false;
-
     @GetMapping("/paper/admin")
     public ModelAndView admin(Model model){
-
-
         List<Paper> list = paperServer.getAllOeder();
         boolean hasPaper = true;
         if(list.size()==0) {
@@ -49,23 +44,15 @@ public class PaperController {
         model.addAttribute("list",list);
         return new ModelAndView("userPapers","model",model);
     }
-
     @PostMapping("/paper/set")
     public ModelAndView set(@RequestBody PositionSetVo paperSetVo){
-
-
         paperSet = true;
         paperServer.paperSetInit();
         paperServer.updatePosition(1,paperSetVo.getNo1());
         paperServer.updatePosition(2,paperSetVo.getNo2());
         paperServer.updatePosition(3,paperSetVo.getNo3());
-
-
-
-      return  new ModelAndView("redirect:/userPapers/admin");
+      return  new ModelAndView("redirect:/userPapers");
     }
-
-
    @PostMapping("/delete/paper")
     public ModelAndView deletePaper(@RequestBody deletePaperVo deletePaperVo){
 
@@ -87,10 +74,7 @@ public class PaperController {
     }
     @GetMapping("/papers")
     public ModelAndView papers(Model model)throws Exception{
-       boolean isEmptyA = false;
-
        int year = MyDate.getYear();
-
        System.out.println(year);
        List<Paper> list= new ArrayList<>();
        HashMap<Integer,List> hashMap = new HashMap<>();
@@ -100,10 +84,6 @@ public class PaperController {
        }
        model.addAttribute("hashMap",hashMap);
        model.addAttribute("list",hashMap.get(MyDate.getYear()));
-       //if(list.size()==0)
-          //  isEmptyA = true;
-       //model.addAttribute("isEmptyA",isEmptyA);
-        //model.addAttribute("isEmptyB",false);
        model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
        return new ModelAndView("papers","model",model);
     }
@@ -125,11 +105,9 @@ public class PaperController {
        boolean isEmptyB = false;
        if(list.size()==0)
            isEmptyB = true;
-
        model.addAttribute("isEmptyB",isEmptyB);
        model.addAttribute("isEmptyA",false);
        model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
        return new ModelAndView("papers1","model",model);
     }
-
 }

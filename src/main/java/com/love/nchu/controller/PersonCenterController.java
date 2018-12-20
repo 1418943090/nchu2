@@ -1,5 +1,7 @@
 package com.love.nchu.controller;
+
 import com.love.nchu.demain.Paper;
+import com.love.nchu.demain.User;
 import com.love.nchu.demain.UserInfo;
 import com.love.nchu.service.PaperServer;
 import com.love.nchu.service.UserInfoServer;
@@ -7,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.Date;
 import java.util.List;
@@ -31,22 +33,26 @@ public class PersonCenterController {
     String filenamestr;
     @Autowired
     private UserInfoServer userInfoServer;
-    @GetMapping("/basic_information/{username}")
-    public ModelAndView basic_Information(@PathVariable String username, Model model){
-        UserInfo userInfo = userInfoServer.getUserByUsername(username);
+    @GetMapping("/basic_information")
+    public ModelAndView basic_Information(Model model, HttpServletRequest request){
+
+        User user = (User)request.getSession().getAttribute("user");
+
+        UserInfo userInfo = userInfoServer.getUserByUsername(user.getUsername());
         model.addAttribute("user_info",userInfo);
         return new ModelAndView("basic_information","basic_information",model);
     }
-    @GetMapping("/userPapers/{username}")
-    public ModelAndView paper(@PathVariable String username, Model model)
+    @GetMapping("/userPapers")
+    public ModelAndView paper(HttpServletRequest request,Model model)
     {
-        nowuser = username;
 
-        if(username.equals("admin")){
+        User user = (User)request.getSession().getAttribute("user");
+
+        nowuser = user.getUsername();
+        if(user.getUsername().equals("admin")){
             return new ModelAndView("redirect:/paper/admin");
         }
-
-        List<Paper> list = paperServer.findPaperByUsername(username);
+        List<Paper> list = paperServer.findPaperByUsername(user.getUsername());
         boolean hasPaper = true;
         if(list.size()==0) {
             hasPaper = false;

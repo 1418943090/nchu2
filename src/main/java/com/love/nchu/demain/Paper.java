@@ -90,6 +90,13 @@ public class Paper implements Serializable {
         this.position = position;
     }
 
+
+    public String getOptionTitle(){
+
+        if(this.title.length()>60)
+            return this.title.substring(0,60);
+        return this.title;
+    }
     @Override
     public String toString() {
         return "Paper{" +

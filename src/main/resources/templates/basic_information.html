@@ -135,7 +135,7 @@
                             },200);
                             setTimeout(function(){
                             $.ajax({
-                                url: /basic_information/+username,
+                                url: '/basic_information',
                                 async:true,
                                 success: function(data){
                                     $("#rightContainer").html(data);
@@ -251,15 +251,15 @@
                         <label for="" class="col-sm-0 control-label" style="color: red"></label>
                     </div>
                     <!--**********************************************************************************************************************-->
-                    <div class="form-group" id="registered_identity">
+                    <div th:if="${user_info.identity} ne 'admin' " class="form-group" id="registered_identity">
                         <label for="" class="col-sm-4 control-label">身份:
                         </label>
                         <div class="col-sm-5" >
                             <label class="radio-inline">
-                                <input type="radio" value="teacher" id="editTeacher" name="editIdentity" checked/>本科生
+                                <input type="radio" value="undergraduate" id="undergraduate" name="editIdentity" checked/>本科生
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" value="student" id="editStudent" name="editIdentity">研究生
+                                <input type="radio" value="postgraduate" id="undergraduate" name="editIdentity">研究生
                             </label>
                         </div>
                     </div>

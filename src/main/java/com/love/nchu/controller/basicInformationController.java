@@ -37,7 +37,7 @@ public class basicInformationController {
         UserInfo userInfo = userInfoServer.getUserByUsername(user.getUsername());
         RegistryTool.Save_Image(pic,userInfo,img_path,img_vm_path);
         userInfoServer.save(userInfo);
-        return new ModelAndView("redirect:/basic_information/"+user.getUsername());
+        return new ModelAndView("redirect:/basic_information");
     }
 
     @RequestMapping("/update/basic_information")
@@ -49,6 +49,10 @@ public class basicInformationController {
                 error.setData("电话号码已被注册");
             }
         if(error.getData().equals("")){
+            if(userInfo.getEditIdentity()==null)
+            {
+                userInfo.setEditIdentity("admin");
+            }
             userInfoServer.updateUserInfo(userInfo);
         }
         return error;

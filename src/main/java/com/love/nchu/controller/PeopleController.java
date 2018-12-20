@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -22,10 +23,16 @@ public class PeopleController {
     TitleEditServer titleEditServer;
     @RequestMapping("/people")
     public ModelAndView people(Model model){
-        List<UserInfo> teacher = userInfoServer.getUserInfoByIdentity("teacher");
-        List<UserInfo> student = userInfoServer.getUserInfoByIdentity("student");
-        model.addAttribute("teacher",teacher);
-        model.addAttribute("student",student);
+
+
+        List<UserInfo> undergraduate = userInfoServer.getUserInfoByIdentity("undergraduate");
+        List<UserInfo> postgraduate = userInfoServer.getUserInfoByIdentity("postgraduate");
+        model.addAttribute("facult",userInfoServer.getUserInfoByIdentity("admin"));
+
+        HashMap<String,List<UserInfo>> hashMap = new HashMap<>();
+        hashMap.put("undergraduate",undergraduate);
+        hashMap.put("postgraduate",postgraduate);
+        model.addAttribute("hashMap",undergraduate);
         model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
         return new ModelAndView("people","model",model);
     }

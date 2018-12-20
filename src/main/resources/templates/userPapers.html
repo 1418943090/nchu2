@@ -196,7 +196,7 @@
                       <div class="col-sm-10">
                          <select class="form-control" id="no1">
                              <div th:each="paper : ${model.list}">
-                              <option th:attr="id=${paper.id}" th:text="${paper.title}"></option>
+                              <option th:attr="id=${paper.id}" th:text="${paper.getOptionTitle()}"></option>
                              </div>
                           </select>
                      </div>
@@ -206,7 +206,7 @@
                         <div class="col-sm-10">
                            <select class="form-control" id="no2">
                                <div th:each="paper : ${model.list}">
-                                <option th:attr="id=${paper.id}" th:text="${paper.title}"></option>
+                                <option th:attr="id=${paper.id}" th:text="${paper.getOptionTitle()}"></option>
                                </div>
                             </select>
                        </div>
@@ -216,7 +216,7 @@
                           <div class="col-sm-10">
                              <select class="form-control" id="no3" >
                                 <div th:each="paper : ${model.list}">
-                                 <option th:attr="id=${paper.id}" th:text="${paper.title}"></option>
+                                 <option th:attr="id=${paper.id}" th:text="${paper.getOptionTitle()}"></option>
                                 </div>
                                </select>
                          </div>

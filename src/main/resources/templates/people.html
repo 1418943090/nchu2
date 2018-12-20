@@ -94,16 +94,16 @@
                 <div class="projects-header page-header text-left">
                     <h2>Facult</h2>
                 </div>
-        <div th:each="teacher : ${model.teacher}">
+        <div th:each="facult : ${model.facult}">
         <div class="well">
 
             <div class="row">
                 <div class="col-sm-3 col-md-offset-0.5">
-                 <img th:src="${teacher.picture}" width="150px" height="250px">
+                 <img th:src="${facult.picture}" width="150px" height="250px">
                 </div>
                 <div class="col-sm-9">
-                 <h4 th:text="${teacher.name}" class="date-name"></h4>
-                 <p th:text="${teacher.self_introduction}" class="date-selfIntroduction"></p>
+                 <h4 th:text="${facult.name}" class="date-name"></h4>
+                 <p th:text="${facult.self_introduction}" class="date-selfIntroduction"></p>
                     <a class="date-more">查看更多</a>
                 </div>
             </div>
@@ -123,10 +123,11 @@
     <!--************************************************************************************-->
         <div class="row">
             <div class="col-md-10">
+            <div th:each="hashMap : ${model.hashMap}">
                 <div class="projects-header page-header text-left">
-                    <h2>Student</h2>
+                    <h2 th:text="${hashMap.key}"></h2>
                 </div>
-                 <div th:each="student : ${model.student}">
+                 <div th:each="student : ${hashMap.value}">
                     <div class="well">
                        <div class="row">
                          <div class="col-sm-3">
@@ -141,6 +142,7 @@
                        </div>
                     </div>
                  </div>
+                </div>
             </div>
         </div>
     </div>
