@@ -42,6 +42,9 @@ function dele(check_id){
     var data = {
         "listNewsId":check_id,
     };
+
+    $("#sk-three-bounce").show();
+
     $.ajax
     ({
         url: '/news/delete',

@@ -64,6 +64,7 @@ function upload_check_add(){
 }
 function uploadSubmit_add(){
     $("#closemodal_add").click();
+    $("#sk-three-bounce").show();
     setTimeout(function(){
         $("#addNewsForm").ajaxSubmit(function(message) {
 

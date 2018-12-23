@@ -8,6 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
     <script type="text/javascript">
+
+  $(document).ready(function(){
+
+      $("#sk-three-bounce").hide();
+
+  });
+
         function saveReport() {
             $("#TitleEditForm").ajaxSubmit(function(message) {
                 swal({
@@ -35,6 +42,11 @@
                     自定义标题
                 </div>
          <div class="panel-body">
+            <div class="sk-three-bounce text-center" id="sk-three-bounce">
+              <div class="sk-child sk-bounce1"></div>
+              <div class="sk-child sk-bounce2"></div>
+              <div class="sk-child sk-bounce3"></div>
+          </div>
             <div class="row">
                 <br><br>
                 <div class="col-md-7 col-md-offset-3">

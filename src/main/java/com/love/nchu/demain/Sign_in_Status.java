@@ -26,8 +26,6 @@ public class Sign_in_Status {
 
     }
 
-
-
     public Sign_in_Status(String username,String date,boolean isFestival,int count) {
         this.username = username;
         this.date = date;
@@ -47,13 +45,10 @@ public class Sign_in_Status {
         this.isFestival = isFestival;
         this.count = count;
     }
-
     public void setCount(int count) {
         this.count = count;
     }
-
     public int getCount(){
-
         int sum =0;
         if(mon_in==null)sum++;
         if(mon_out==null)sum++;
@@ -61,14 +56,8 @@ public class Sign_in_Status {
         if(aft_out==null)sum++;
         if(eve_in==null)sum++;
         if(eve_out==null)sum++;
-
-
         return sum;
     }
-
-
-
-
 //    public int getCount() {
 //        return count;
 //    }

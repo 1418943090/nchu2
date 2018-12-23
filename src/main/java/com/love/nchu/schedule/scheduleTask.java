@@ -1,8 +1,9 @@
 package com.love.nchu.schedule;
 
+import com.love.nchu.demain.UserInfo;
 import com.love.nchu.service.FestivalServer;
 import com.love.nchu.service.Sign_in_StatusServer;
-import com.love.nchu.service.UserServer;
+import com.love.nchu.service.UserInfoServer;
 import com.love.nchu.tool.SignInTool;
 import com.love.nchu.vo.MyDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,15 @@ public class scheduleTask {
     @Autowired
     FestivalServer festivalServer;
     @Autowired
-    UserServer userServer;
+    UserInfoServer userInfoServer;
     //0 0 12 * * ?
     //@Scheduled(cron="0 5/1 * * * ?")
     @Scheduled(cron="0 0 1,12,6 * * ?")
     public void sign_in_Init() throws  Exception{
-        List<String> userlist = userServer.getAllOrdinaryUsernmae();
+        List<UserInfo> userlist =userInfoServer.getUserInfoByIdentity("postgraduate");
         String today = MyDate.getDate("yyyy-MM-dd");
-        for(String username : userlist){
-            SignInTool.sign_in_status_check(sign_in_statusServer,festivalServer,username,today);
+        for(UserInfo userInfo : userlist){
+            SignInTool.sign_in_status_check(sign_in_statusServer,festivalServer,userInfo.getUsername(),today);
         }
        System.out.println(new Date());
     }

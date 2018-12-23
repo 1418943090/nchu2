@@ -17,6 +17,8 @@
      <script type="text/javascript" th:inline="javascript">
            //恢复单选按钮状态
            $(document).ready(function(){
+
+               $("#sk-three-bounce").hide();
                if([[${result}]]=="error")
                    {
                      swal({
@@ -44,6 +46,14 @@
                     平常节假日登记
                   </div>
                <div class="panel-body">
+
+
+                <div class="sk-three-bounce text-center" id="sk-three-bounce">
+                     <div class="sk-child sk-bounce1"></div>
+                     <div class="sk-child sk-bounce2"></div>
+                     <div class="sk-child sk-bounce3"></div>
+                 </div>
+
                    <div class="row">
                        <div class="col-sm-4 col-sm-offset-8">
                        <p>

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!--不能引入jquery会和主界面js冲突导致bootstrapvalidator异常-->
     <!--<script src="/bt/js/jquery.min.js" ></script>-->
-    <link href="/css/ani.css" type="text/css" rel="stylesheet"/>
     <script src="/js/bootstrapValidate/bootstrapValidator.css" ></script>
     <script src="/js/bootstrapValidate/bootstrapValidator.js" ></script>
     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
@@ -18,6 +17,7 @@
     <script th:inline="javascript">
 
       $(document).ready(function(){
+           $("#sk-three-bounce").hide();
                      if([[${newsSet}]]==true){
                          swal({
                                 title: "操作成功",
@@ -76,11 +76,11 @@
                    新闻列表
                   </div>
                <div class="panel-body">
-           <!--  <div class="sk-three-bounce text-center" id="sk-three-bounce">
-                 <div class="sk-child sk-bounce1"></div>
-                 <div class="sk-child sk-bounce2"></div>
-                 <div class="sk-child sk-bounce3"></div>
-             </div>-->
+          <div class="sk-three-bounce text-center" id="sk-three-bounce">
+                          <div class="sk-child sk-bounce1"></div>
+                          <div class="sk-child sk-bounce2"></div>
+                          <div class="sk-child sk-bounce3"></div>
+                      </div>
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>

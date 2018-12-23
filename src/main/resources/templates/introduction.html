@@ -12,10 +12,7 @@
     <script type="text/javascript" src="/js/bootstrapValidate.js"></script>
     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
     <script th:inline="javascript">
-
-
     function introduction_edit(){
-
      var str = $("#introduction_str").val();
            $.ajax({
                   url: "/introduction/edit",
@@ -62,12 +59,11 @@
                   介绍文档
                   </div>
                <div class="panel-body">
-                  <textarea class="form-control" rows="17" id="introduction_str" th:text="${introduction}"></textarea>
+               <textarea class="form-control" rows="17" id="introduction_str" th:text="${introduction}"></textarea>
               </div>
         </div>
     </div>
 </div>
 </div>
-
 </body>
 </html>

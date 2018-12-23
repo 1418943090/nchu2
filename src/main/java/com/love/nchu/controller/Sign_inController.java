@@ -322,7 +322,6 @@ public class Sign_inController {
       System.out.println(new Date());
       System.out.println(ip.substring(0,ip.lastIndexOf(".")));
       String userip = ip.substring(0,ip.lastIndexOf("."));
-      System.out.println(!(userip.equals(public_ip) && userip.equals(public_ip2)) && userip.equals(public_ip3));
       if((!userip.equals(public_ip) && !userip.equals(public_ip2)) && !userip.equals(public_ip3)){
           errorVo.setData("签到失败,不是实验室环境网络");
           return errorVo;
@@ -336,8 +335,6 @@ public class Sign_inController {
        HashMap<String,int[]> hash = MyDate.getTimeTable(SignInTool.getTime(sign_in_timeServer));
        Set<String> s = hash.keySet();
        for(String a : s){
-           System.out.println(a);
-           System.out.println(hash.get(a)[0]+"　"+hash.get(a)[1]);
            if (signTime >= hash.get(a)[0] && signTime<=hash.get(a)[1]) {
                switch (a){
                    case "mon_in":   if(sign_in_status.getMon_in().equals("未签到")) { sign_in_status.setMon_in(signTimeStr); } else{ isSignIn = true; } break;
@@ -350,7 +347,7 @@ public class Sign_inController {
                }
                if(isSignIn == false) {
                    signIn = true;
-                   sign_in_status.setCount(sign_in_status.getCount()-1);
+                   sign_in_status.setCount(sign_in_status.getCount());
                    sign_in_statusServer.save(sign_in_status);//将签到信息存储到数据库中
                }
              break;

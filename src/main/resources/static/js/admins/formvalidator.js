@@ -2,8 +2,6 @@
 $(function(){
 
     $("#sk-three-bounce").hide();
-
-
     function validator_Init() {
         $('#upForm').bootstrapValidator({
             feedbackIcons: {

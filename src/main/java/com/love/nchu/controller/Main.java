@@ -33,13 +33,10 @@ public class Main {
     @GetMapping(value = "/index")
     public ModelAndView index(Model model, HttpServletRequest request)throws Exception{
 
-
         List<News> list = newsServer.getRencentNews();
-        System.out.println(list);
         boolean isNewsFour = false;
         if(list.size()>=4)
             isNewsFour = true;
-
         User user = (User) request.getSession().getAttribute("user");
         if(user!=null)
         {
@@ -55,6 +52,7 @@ public class Main {
     public ModelAndView getMore(){
         return new ModelAndView("more");
     }
+
     @GetMapping("/forgetPassword")
     public ModelAndView forgetPassword(){
         return new ModelAndView("emailValidator");
@@ -62,8 +60,6 @@ public class Main {
 
     @GetMapping("/changebindemail")
     public ModelAndView changebindemail(){
-
         return new ModelAndView("redirect:/emailValidator");
-
     }
 }

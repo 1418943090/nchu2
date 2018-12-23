@@ -15,6 +15,9 @@
     </style>
     <script th:inline="javascript">
         $(function(){
+
+            $("#sk-three-bounce").hide();
+
             function edit_form_validator_Init() {
                 $('#editForm').bootstrapValidator({
                     feedbackIcons: {
@@ -179,6 +182,12 @@
              <button class="btn btn-info btn-pic" type="button">
                   <span class="" style="font-size: 15px"></span>更改头像</button>
         </div>
+
+           <div class="sk-three-bounce text-center" id="sk-three-bounce">
+             <div class="sk-child sk-bounce1"></div>
+             <div class="sk-child sk-bounce2"></div>
+             <div class="sk-child sk-bounce3"></div>
+         </div>
         <div class="row" id="edit" th:attr="user_info=${user_info}">
             <div class="col-sm-2">
                 <img th:src="${user_info.picture}" width="180px" height="250px">
@@ -238,23 +247,23 @@
                     </div>
                     <!--**************************************************************-->
                     <div class="form-group">
-                        <label for="" class="col-sm-4 control-label">所在高校</label>  <!--placeholder="frank"  -->
-                        <div class="col-sm-5">
+                        <label for="" class="col-sm-4 control-label">所在高校:</label>  <!--placeholder="frank"  -->
+                        <div class="col-sm-6">
                             <input type="text" class="form-control" id="editSchool" name="editSchool" placeholder="请输入目前所在高校">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-4 control-label">电话:</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-6">
                             <input type="number" size="16" class="form-control" id="editTel" name="editTel"  placeholder="请输入电话号码" />
                         </div>
-                        <label for="" class="col-sm-0 control-label" style="color: red"></label>
+
                     </div>
                     <!--**********************************************************************************************************************-->
                     <div th:if="${user_info.identity} ne 'admin' " class="form-group" id="registered_identity">
                         <label for="" class="col-sm-4 control-label">身份:
                         </label>
-                        <div class="col-sm-5" >
+                        <div class="col-sm-6" >
                             <label class="radio-inline">
                                 <input type="radio" value="undergraduate" id="undergraduate" name="editIdentity" checked/>本科生
                             </label>
@@ -266,18 +275,16 @@
                     <!--**************************************************88-->
                     <div class="form-group">
                         <label for="" class="col-sm-4 control-label">研究方向:</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-6">
                             <input  size="16" class="form-control" id="editResearch_Direct" name="editResearch_Direct" placeholder="请输入研究方向"/>
                         </div>
-                        <label for="" class="col-sm-0 control-label" style="color: red"></label>
                     </div>
                     <!--**************************************************************************************************-->
                     <div class="form-group">
                         <label for="" class="col-sm-4 control-label">个人简介:</label>
-                        <div class="col-sm-5">
-                            <textarea class="form-control" rows="5" id="details" name="editSelf_Introduction"  placeholder="自我描述(身份,目前所在高校，研究方向，座右铭等)100字左右"></textarea>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" rows="7" id="details" name="editSelf_Introduction"  placeholder="自我描述(身份,目前所在高校，研究方向，座右铭等)100字左右"></textarea>
                         </div>
-                        <label for="" class="col-sm-0 control-label" style="color: red" ></label>
                     </div>
                     <!--***************************************************************88-->
                 </form>

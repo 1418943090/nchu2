@@ -39,6 +39,7 @@ function upload_check_edit(){
 function uploadSubmit(){
 
     $("#closemodal_edit").click();
+    $("#sk-three-bounce").show();
     setTimeout(function(){
         $("#editContentForm").ajaxSubmit(function(message) {
             $("#rightContainer").html(message);

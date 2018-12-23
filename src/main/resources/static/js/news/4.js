@@ -24,7 +24,7 @@ function newsSetSure(){
  };
 
     $("#closemodal_newsSet").click();
-
+    $("#sk-three-bounce").show();
     setTimeout(function(){
         $.ajax
         ({

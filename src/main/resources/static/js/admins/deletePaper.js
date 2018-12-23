@@ -42,6 +42,8 @@ function dele(check_id,paper_path){
         "listPaperId": check_id,
         "listPaperPath":paper_path
     };
+
+    $("#sk-three-bounce").show();
     $.ajax
     ({
         url: '/delete/paper',

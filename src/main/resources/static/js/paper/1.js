@@ -23,7 +23,7 @@ function paperSetSure(){
      "no3":$("#no3").find("option:selected").attr("id")
  };
     $("#closemodal_paperSet").click();
-
+    $("#sk-three-bounce").show();
     setTimeout(function(){
         $.ajax
         ({

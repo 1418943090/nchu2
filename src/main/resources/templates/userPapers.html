@@ -6,26 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!--不能引入jquery会和主界面js冲突导致bootstrapvalidator异常-->
     <!--<script src="/bt/js/jquery.min.js" ></script>-->
-    <link href="/css/ani.css" type="text/css" rel="stylesheet"/>
     <script src="/js/bootstrapValidate/bootstrapValidator.css" ></script>
     <script src="/js/bootstrapValidate/bootstrapValidator.js" ></script>
     <script type="text/javascript" src="/js/bootstrapValidate.js"></script>
     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
      <script type="text/javascript" src="/js/paper/1.js"></script>
-
      <script th:inline="javascript">
-
       $(document).ready(function(){
-                           if([[${paperSet}]]==true){
-                               swal({
-                                      title: "操作成功",
-                                      text: "",
-                                      icon: "success",
-                                      button: "确定",
-                                  });
-                          }
-                       });
-
+               if([[${paperSet}]]==true){
+                   swal({
+                          title: "操作成功",
+                          text: "",
+                          icon: "success",
+                          button: "确定",
+                      });
+              }
+           });
      </script>
    <style type="text/css">
     td {
@@ -175,10 +171,8 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
-
     <!--************************************************************************************************-->
 </div>
-
 <!-- 模态框（Modal） -->
 <div class="modal fade " id="paperSetModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -227,13 +221,11 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="closemodal_paperSet">关闭
                 </button>
                 <button type="button" class="btn btn-success" data-dismiss="modal" onclick="paperSetSure();">确定
-                                </button>
+                </button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-
-
     <script th:src="@{/js/admins/formvalidator.js}"></script>
     <script th:src="@{/js/admins/submit.js}"></script>
     <script th:src="@{/js/admins/deletePaper.js}"></script>

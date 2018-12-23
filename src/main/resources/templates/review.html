@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script th:inline="javascript" src="/js/review/review.js"></script>
     <script th:inline="javascript">
+
+
         $(".btn-pass").click(function(){
             var list = [[${model.list}]];
             fa(list,"pass");
@@ -77,6 +79,11 @@
                申请列表
               </div>
            <div class="panel-body">
+            <div class="sk-three-bounce text-center" id="sk-three-bounce">
+                 <div class="sk-child sk-bounce1"></div>
+                 <div class="sk-child sk-bounce2"></div>
+                 <div class="sk-child sk-bounce3"></div>
+             </div>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>

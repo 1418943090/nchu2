@@ -6,7 +6,7 @@ function  uploadSubmit(){
       $("#upForm").ajaxSubmit(function(message) {
           if(message=='success')
           {
-              var url =  $(".active").attr("url");
+              var url =  "/userPapers";
               setTimeout(function(){
                   $.ajax({
                       url: url,
@@ -45,7 +45,8 @@ function  updateSubmit(){
         document.getElementById("updateForm").submit();//js原生方式表单提交
         //$("#updateForm").submit();//或者jQuery方式,二选一，不过现在已经没啥项目不引入jQuery了吧。。。
     },500);
-    var url =  $(".active").attr("url");
+    $("#sk-three-bounce").show();
+    var url = "/userPapers";
     setTimeout(function(){
         $.ajax({
             url: url,

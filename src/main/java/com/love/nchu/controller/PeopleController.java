@@ -23,16 +23,14 @@ public class PeopleController {
     TitleEditServer titleEditServer;
     @RequestMapping("/people")
     public ModelAndView people(Model model){
-
-
         List<UserInfo> undergraduate = userInfoServer.getUserInfoByIdentity("undergraduate");
         List<UserInfo> postgraduate = userInfoServer.getUserInfoByIdentity("postgraduate");
-        model.addAttribute("facult",userInfoServer.getUserInfoByIdentity("admin"));
-
+        System.out.println(postgraduate);
+        model.addAttribute("faculty",userInfoServer.getUserInfoByIdentity("admin"));
         HashMap<String,List<UserInfo>> hashMap = new HashMap<>();
         hashMap.put("undergraduate",undergraduate);
         hashMap.put("postgraduate",postgraduate);
-        model.addAttribute("hashMap",undergraduate);
+        model.addAttribute("hashMap",hashMap);
         model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
         return new ModelAndView("people","model",model);
     }

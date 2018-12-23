@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Chrome">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+
+     <link href="/css/ani.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -80,8 +84,14 @@
                <li>
                   <a  th:href="@{/products}"  th:method="POST" th:type="post"><h5 class="title"><strong>Products</strong></h5></a>
               </li>
-              <li>
-                  <a th:href="@{/projects}"  th:method="POST" th:type="post"><h5 class="title"><strong>Projects</strong></h5></a>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h5 class="title"><strong>Projects<b class="caret"></b></strong></h5></a>
+                   <ul class="dropdown-menu">
+                      <li><a th:href="@{projects/all}">所有项目</a></li>
+                      <li><a th:href="@{projects/research_project}">科研项目</a></li>
+                      <li><a th:href="@{projects/three_small}">三小项目</a></li>
+                      <li><a th:href="@{projects/others}">横向项目</a></li>
+                   </ul>
               </li>
               <li>
                   <a  th:href="@{/news}"  th:method="POST" th:type="post"><h5 class="title"><strong>News</strong></h5></a>
@@ -102,48 +112,48 @@
                <div class="sidebar-nav navbar-collapse">
                    <ul class="nav list-menu" id="side-menu">
                       <li>
-                         <a  class="list-item text-center" url="/basic_information" ><i class="fa fa-edit fa-fw"></i>基本信息</a>
+                         <a  href="#" class="list-item text-center" url="/basic_information" ><i class="fa fa-edit fa-fw"></i>基本信息</a>
                      </li>
                      <li>
-                        <a  class="list-item text-center" url="/userPapers"><i class="fa fa-files-o fa-fw"></i>论文中心</a>
+                        <a  href="#" class="list-item text-center" url="/userPapers"><i class="fa fa-files-o fa-fw"></i>论文中心</a>
                      </li>
                       <li>
-                       <a  class="list-item text-center" url="/newsCenter"><i class="fa fa-dashboard fa-fw"></i>新闻中心</a>
+                       <a href="#" class="list-item text-center" url="/newsCenter"><i class="fa fa-dashboard fa-fw"></i>新闻中心</a>
                      </li>
                       <li >
-                          <a  class=" text-center"><i class="fa fa-sitemap fa-fw"></i>项目管理<span class="fa arrow"></span></a>
+                          <a href="#" class="text-center"><i class="fa fa-sitemap fa-fw"></i>项目管理<span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level">
                              <li>
-                                <a  class="list-item text-center" url="/title_edit"> 所有项目</a>
+                                 <a  href="#" class="list-item text-center" url="/title_edit">所有项目</a>
                              </li>
                              <li>
-                                 <a  class="list-item text-center" url="/title_edit">科研项目</a>
+                                 <a  href="#" class="list-item text-center" url="/title_edit">科研项目</a>
                              </li>
                              <li>
-                                 <a  class="list-item text-center" url="/title_edit" >三小项目</a>
+                                 <a href="#"  class="list-item text-center" url="/title_edit" >三小项目</a>
                              </li>
                              <li>
-                                <a  class="list-item text-center" url="/title_edit">横向项目</a>
+                                <a href="#" class="list-item text-center" url="/title_edit">横向项目</a>
                             </li>
                          </ul>
                       </li>
                       <li>
-                         <a  class="list-item text-center" url="/sign_in/show/all/today"><i class="fa fa-table fa-fw"></i>签到情况</a>
+                         <a  href="#" class="list-item text-center" url="/sign_in/show/all/today"><i class="fa fa-table fa-fw"></i>签到情况</a>
                        </li>
                         <li>
-                          <a  class="list-item text-center" url="/festival"><i class="fa fa-wrench fa-fw"></i>节假日登记</a>
+                          <a href="#" class="list-item text-center" url="/festival"><i class="fa fa-wrench fa-fw"></i>节假日登记</a>
                         </li>
                          <li>
-                         <a  class="list-item text-center" url="/review"><i class="fa fa-table fa-fw"></i>注册申请</a>
+                         <a href="#" class="list-item text-center" url="/review"><i class="fa fa-table fa-fw"></i>注册申请</a>
                         </li>
                         <li>
-                           <a  class=" text-center"><i class="fa fa-wrench fa-fw"></i>设置中心<span class="fa arrow"></span></a>
+                           <a href="#" class=" text-center"><i class="fa fa-wrench fa-fw"></i>设置中心<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                               <li>
-                                  <a  class="list-item text-center" url="/title_edit" >自定义标题</a>
+                                  <a href="#" class="list-item text-center" url="/title_edit" >自定义标题</a>
                               </li>
                               <li>
-                                  <a  class="list-item text-center" url="/introduction">介绍文档</a>
+                                  <a href="#" class="list-item text-center" url="/introduction">介绍文档</a>
                               </li>
                           </ul>
                         </li>

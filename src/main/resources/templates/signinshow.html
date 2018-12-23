@@ -12,7 +12,10 @@
     <script src="/js/sign_in/function.js" type="text/javascript"></script>
     <script th:inline="javascript">
         $(function() {
-             var message = [[${error}]];
+
+            $("#sk-three-bounce").hide();
+
+            var message = [[${error}]];
             if(message!=""){
                   swal({
                          title: "操作失败!",
@@ -90,7 +93,6 @@
             else{
                  $("#mon_out_yes").prop("checked",true);
             }
-
             if(list[s].aft_in=="未签到"){
                  $("#aft_in_no").prop("checked",true);
             }
@@ -104,14 +106,12 @@
             else{
                  $("#aft_out_yes").prop("checked",true);
             }
-
            if(list[s].eve_in=="未签到"){
                   $("#eve_in_no").prop("checked",true);
              }
              else{
                   $("#eve_in_yes").prop("checked",true);
              }
-
              if(list[s].eve_out=="未签到"){
                   $("#eve_out_no").prop("checked",true);
              }
@@ -120,7 +120,6 @@
              }
              document.getElementById("username").value=username;
              document.getElementById("date").value=date;
-
            $("#myModalLabel").text(username+"---"+date);
            $("#changeSign").modal("show");
            break;
@@ -129,21 +128,13 @@
        }
    }
    function  changeSignSubmit() {
-
-
-
        document.getElementById("closeChangeSignmodal").click();
           setTimeout(function(){
                  $("#changeSignForm").ajaxSubmit(function(message) {
-
                              $("#rightContainer").html(message);
                             });
              },500);
-
-
-
    }
-
 </script>
 </head>
  <div class="row">
@@ -157,16 +148,21 @@
     <div class="ibox float-e-margins">
         <div class="ibox-content">
             <ul class="breadcrumb">
-            	<li ><a onclick="showday();">按日显示</a></li>
-            	<li><a onclick="showweek();">按周显示</a></li>
+            	<li ><a href="#" onclick="showday();">按日显示</a></li>
+            	<li><a  href="#" onclick="showweek();">按周显示</a></li>
 
-            	<li><a onclick="showInterval()">指定区间查询</a></li>
+            	<li><a href="#" onclick="showInterval()">指定区间查询</a></li>
             </ul>
              <div class="panel panel-default">
               <div class="panel-heading">
                 签到情况(显示的数字表示缺到的次数)
               </div>
            <div class="panel-body">
+              <div class="sk-three-bounce text-center" id="sk-three-bounce">
+                            <div class="sk-child sk-bounce1"></div>
+                            <div class="sk-child sk-bounce2"></div>
+                            <div class="sk-child sk-bounce3"></div>
+                        </div>
            <div class="row">
                    <div class="col-md-2 col-md-offset-9">
                        <input type='text' class="form-control" id='datetime' name="birthDate" maxlength="10"/>
@@ -191,7 +187,6 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 <div th:if="${isFestival} eq true">
                 <tr >
                   <td colspan="7">
@@ -207,7 +202,7 @@
                   </tr>
                 </div>
                 <tr th:each="sign_in_status : ${model.list}"><!--th:attr="class=${sign_in_status.username}"-->
-                    <td class="text-center" onclick="changeSign(this)"  th:text="${sign_in_status.username}"></td>
+                    <td style="cursor: pointer;" class="text-center" onclick="changeSign(this)"  th:text="${sign_in_status.username}"><a href="#" >v </a></td>
                     <td th:attr="class=${sign_in_status.getMon_in_class()}" ><p class="text-center"  th:text="${sign_in_status.getMon_in()}"></p></td>
                     <td th:attr="class=${sign_in_status.getMon_out_class()}" ><p class="text-center"  th:text="${sign_in_status.getMon_out()}"></p></td>
                     <td th:attr="class=${sign_in_status.getAft_in_class()}" ><p class="text-center"   th:text="${sign_in_status.getAft_in()}"></p></td>

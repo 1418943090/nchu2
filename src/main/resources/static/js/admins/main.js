@@ -13,6 +13,7 @@ $(function() {
        // $(".blog-menu .list-group-item").removeClass("active");
       //  $(this).addClass("active");
         // 加载其他模块的页面到右侧工作区
+        $("#sk-three-bounce").show();
         $.ajax({
             url: url,
             async:true,

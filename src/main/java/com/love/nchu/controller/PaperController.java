@@ -65,8 +65,9 @@ public class PaperController {
         for(Integer i : deletePaperVo.getListPaperId()){
             paperServer.deletePaper(i);
         }
-       return new ModelAndView("redirect:/userPapers/"+deletePaperVo.getUserName());
-    }
+       return new ModelAndView("redirect:/userPapers");
+   }
+
     @PostMapping("/update/paper")
     public String updatePaper(int updateId,String updateTitle){
        paperServer.updatePaper(updateId,updateTitle);

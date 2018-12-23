@@ -29,7 +29,7 @@
                                    });
                         setTimeout(function(){
                             $.ajax({
-                                url: "/sign_in/"+username,
+                                url: "/sign_in",
                                 async:true,
                                 success: function(data){
                                     $("#rightContainer").html(data);
