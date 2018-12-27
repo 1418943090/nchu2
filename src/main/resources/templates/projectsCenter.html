@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="/js/bootstrapValidate/bootstrapValidator.css" ></script>
+    <script src="/js/bootstrapValidate/bootstrapValidator.js" ></script>
+    <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
+    <script type="text/javascript" src="/js/project/1.js"></script>
+    <script type="text/javascript" src="/js/project/2.js"></script>
+    <script type="text/javascript" src="/js/project/3.js"></script>
+    <script type="text/javascript" src="/js/project/4.js"></script>
+    <script type="text/javascript" src="/js/project/5.js"></script>
+    <script th:inline="javascript">
+      $(document).ready(function(){
+          var obj = document.getElementById("main_type");
+          if([[${type}]]=="all"){
+              obj[0].selected = true;
+          }
+         else if([[${type}]]=="researchProject"){
+               obj[1].selected = true;
+          }
+         else if([[${type}]]=="threesmallProject"){
+               obj[2].selected = true;
+          }
+         else if([[${type}]]=="hengProject"){
+               obj[3].selected = true;
+          }
+         $("#date").datetimepicker({
+              format: 'YYYY-MM-DD',
+               minDate: new Date( new Date()-1000*24*60*60*365*100),
+               maxDate : new Date(),
+              locale: moment.locale('zh-cn'),
+          });
+        $("#edit_date").datetimepicker({
+             format: 'YYYY-MM-DD',
+              minDate: new Date( new Date()-1000*24*60*60*365*100),
+              maxDate : new Date(),
+             locale: moment.locale('zh-cn'),
+         });
+          $("#sk-three-bounce").hide();
+
+               if([[${projectSet}]]==true){
+                   swal({
+                          title: "操作成功",
+                          text: "",
+                          icon: "success",
+                          button: "确定",
+                      });
+              }
+           });
+       $('.card').on('click','.btn-project-edit',function() {
+                       checkbox_check([[${list}]]);
+                    });
+
+     function  projectSet(){
+         projectSet2([[${list}]]);
+     }
+     function projectSetSure(){
+         projectSetSure2([[${list}]]);
+     }
+
+     </script>
+   <style type="text/css">
+</style>
+</head>
+ <div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">项目中心</h1>
+    </div>
+</div>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <p><!--data-toggle="modal" data-target="#myModal"-->
+               <button class="btn btn-primary btn-project-add"  type="button">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;新增项目</button>
+
+                <button class="btn btn-info btn-project-edit" type="button">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>
+
+                <button class="btn btn-danger btn-del" type="button" onclick="deleteProjects();">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;删除
+                </button>
+                 <button th:if="${role} eq 'admin'" class="btn btn-success btn-paper-set" type="button" onclick="projectSet();">
+                    <span class="" aria-hidden="true"></span>&nbsp;置顶Project
+                 </button>
+
+                 <select class="btn" style="background-color:#a1aec7" id="main_type" >
+                   <option>所有项目</option>
+                   <option>科研项目</option>
+                   <option>三小项目</option>
+                   <option>横向项目</option>
+                 </select>
+            </p>
+             <div class="panel panel-default">
+                  <div class="panel-heading">
+                   项目列表
+                  </div>
+               <div class="panel-body">
+             <div class="sk-three-bounce text-center" id="sk-three-bounce">
+                 <div class="sk-child sk-bounce1"></div>
+                 <div class="sk-child sk-bounce2"></div>
+                 <div class="sk-child sk-bounce3"></div>
+             </div>
+
+            <div id="son_body">
+            <table class="table table-bordered table-hover table-striped" >
+                <thead>
+                <tr>
+                    <th><input type="checkbox" id="pro_mainCheckbox"></th>
+                    <th>编号</th>
+                    <th>项目名</th>
+                    <th>负责人</th>
+                    <th>经费</th>
+                    <th>项目文档</th>
+                    <th>立项日期</th>
+                    <th>项目类别</th>
+                </tr>
+                </thead>
+                <tbody>
+               <div th:if="${hasProjects} eq false">
+                  <tr>
+                   <td colspan="8">
+                     <h1 class="text-center" style="color: #d2322d">你还没有添加任何项目哦,立即添加一个吧</h1>
+                   </td>
+                  </tr>
+                </div>
+                  <tr th:each="project : ${model.list}">
+                      <td><input type="checkbox" class="pro"  th:attr="id=${project.id}"></td>
+                      <td th:text="${project.id}"></td>
+                      <td th:title="${project.name}" th:text="${project.getLengthName()}"></td>
+                      <td th:text="${project.principal}"></td>
+                      <td th:text="${project.funding}"></td>
+                      <td><a th:href="${project.document}" target="_blank">项目文档</a></td>
+                      <td th:text="${project.date}"></td>
+                      <td th:text="${project.type}"></td>
+                  </tr>
+             </tbody>
+            </table>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade " id="addProjectModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="myModalLabel" >
+                     添加项目
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="addProjectForm" th:action="@{/projectCenter/add}" target="frameName" onsubmit="return false" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">项目名:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"  id="name" name="name"  placeholder="请输入项目名"/>
+                        </div>
+                    </div>
+                    <!--**************************************************************************************-->
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">项目描述:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="description" name="description"  placeholder="请输入项目描述"/>
+                        </div>
+                    </div>
+                    <!--****************************************************************************************-->
+                       <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目内容:</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="6" id="content" name="content"  placeholder="请输入项目内容"></textarea>
+                            </div>
+                        </div>
+                        <!--****************************************************************************************-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">负责人:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="principal" name="principal"  placeholder="请输入项目负责人"/>
+                            </div>
+                        </div>
+                        <!--****************************************************************************************-->
+                         <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目成员:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="member" name="member"  placeholder="请输入项目成员"/>
+                            </div>
+                        </div>
+                        <!--****************************************************************************************-->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">立项时间:</label>
+                            <div class='col-sm-10'>
+                                <input type='text' class="form-control" id='date'  name="date"  placeholder="请选择项目立项时间"/>
+                            </div>
+                        </div>
+                    <!--*************************************************************************************************************************-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目经费:</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="funding" name="funding"  placeholder="请输入项目经费"/>
+                            </div>
+                        </div>
+                        <!--**************************************************************************************************-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目配图:</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="file_pic" name="file_pic" placeholder="">
+                            </div>
+                        </div>
+                         <!--**************************************************************************************************-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目文档:</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="file_document" name="file_document" placeholder="">
+                            </div>
+                        </div>
+                        <!--******************************************************************************************************-->
+                         <div class="form-group">
+                           <label for="" class="col-sm-2 control-label">项目类别:</label>
+                           <div class="col-sm-10">
+                              <select class="form-control" name="type" id="type">
+                                   <option>科研项目</option>
+                                   <option>三小项目</option>
+                                   <option>横向项目</option>
+                                </select>
+                           </div>
+                         </div>
+                </form>
+                <iframe src="" frameborder="0" name="frameName" style="display:none;"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="close_project_add_modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="add_project_upload_check();" >
+                    添加
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!--****************************************************************************************************************-->
+
+<!-- 模态框（Modal） -->
+<div class="modal fade " id="editProjectModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center"  >
+                     编辑项目
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="editProjectForm" th:action="@{/projectCenter/edit}" target="frameName" onsubmit="return false" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >
+
+                    <div class="form-group" style="display: none">
+                       <label for="" class="col-sm-2 control-label">项目id:</label>
+                       <div class="col-sm-10">
+                           <input type="text" class="form-control"  id="edit_id" name="id"  placeholder="请输入id"/>
+                       </div>
+                   </div>
+                   <!--*******************************************************************************************-->
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">项目名:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control"  id="edit_name" name="name"  placeholder="请输入项目名"/>
+                        </div>
+                    </div>
+                    <!--**************************************************************************************-->
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">项目描述:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="edit_description" name="description"  placeholder="请输入项目描述"/>
+                        </div>
+                    </div>
+                    <!--****************************************************************************************-->
+                       <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目内容:</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="6" id="edit_content" name="content"  placeholder="请输入项目内容"></textarea>
+                            </div>
+                        </div>
+                        <!--****************************************************************************************-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">负责人:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="edit_principal" name="principal"  placeholder="请输入项目负责人"/>
+                            </div>
+                        </div>
+                        <!--****************************************************************************************-->
+                         <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目成员:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="edit_member" name="member"  placeholder="请输入项目成员"/>
+                            </div>
+                        </div>
+                        <!--****************************************************************************************-->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">立项时间:</label>
+                            <div class='col-sm-10'>
+                                <input type='text' class="form-control" id='edit_date'  name="date"  placeholder="请选择项目立项时间"/>
+                            </div>
+                        </div>
+                    <!--*************************************************************************************************************************-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目经费:</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="edit_funding" name="funding"  placeholder="请输入项目经费"/>
+                            </div>
+                        </div>
+                        <!--**************************************************************************************************-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目配图:</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="edit_file_pic" name="file_pic" placeholder="">
+                            </div>
+                        </div>
+                         <!--**************************************************************************************************-->
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">项目文档:</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="edit_file_document" name="file_document" placeholder="">
+                            </div>
+                        </div>
+                        <!--******************************************************************************************************-->
+                         <div class="form-group">
+                           <label for="" class="col-sm-2 control-label">项目类别:</label>
+                           <div class="col-sm-10">
+                              <select class="form-control" name="type" id="edit_type">
+                                   <option>科研项目</option>
+                                   <option>三小项目</option>
+                                   <option>横向项目</option>
+                                </select>
+                           </div>
+                         </div>
+                </form>
+                <iframe src="" frameborder="0" name="frameName" style="display:none;"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="close_project_edit_modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="edit_project_upload_check();" >
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade " id="projectSetModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">
+                    置顶Projects
+                </h4>
+            </div>
+            <div class="modal-body">
+            <form role="form"  class="form-horizontal">
+                  <div class="form-group">
+                     <label for="" class="col-sm-2 control-label">1:</label>
+                      <div class="col-sm-10">
+                         <select class="form-control" id="pro_no1">
+
+                          </select>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                       <label for="" class="col-sm-2 control-label">2:</label>
+                        <div class="col-sm-10">
+                           <select class="form-control" id="pro_no2">
+
+                            </select>
+                       </div>
+                    </div>
+                    <div class="form-group">
+                         <label for="" class="col-sm-2 control-label">3:</label>
+                          <div class="col-sm-10">
+                             <select class="form-control" id="pro_no3" >
+
+                               </select>
+                         </div>
+                      </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="closemodal_projectSet">关闭
+                </button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="projectSetSure();">确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</body>
+</html>

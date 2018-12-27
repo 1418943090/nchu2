@@ -15,9 +15,7 @@
     </style>
     <script th:inline="javascript">
         $(function(){
-
             $("#sk-three-bounce").hide();
-
             function edit_form_validator_Init() {
                 $('#editForm').bootstrapValidator({
                     feedbackIcons: {
@@ -79,9 +77,8 @@
                 })
             }
             $('.btn-edit').click(function(){
-                var user = [[${user_info}]];
+               var user = [[${user_info}]];
                document.getElementById("editSchool").value=user.school;
-              // document.getElementById("editEmail").value=user.email;
                document.getElementById("editTel").value=user.tel;
                document.getElementById("editResearch_Direct").value=user.research_direct;
                 if(user.identity=="teacher")
@@ -92,9 +89,9 @@
                 {
                     $("#editStudent").attr("checked",true);
                 }
-              document.getElementById("details").value=user.self_introduction;
-                edit_form_validator_Init();
-                $("#show_basic_Information_Edit_Modal").modal('show');
+               document.getElementById("details").value=user.self_introduction;
+               edit_form_validator_Init();
+               $("#show_basic_Information_Edit_Modal").modal('show');
             });
         });
         function edit_check(){
@@ -104,7 +101,6 @@
                 var user = [[${user_info}]];
                 var username = user.username;
                 var school =  document.getElementById("editSchool").value;
-              //  var email  =  document.getElementById("editEmail").value;
                 var tel    =  document.getElementById("editTel").value;
                 var research_direct =  document.getElementById("editResearch_Direct").value;
                 var self_introduction =  document.getElementById("details").value;
@@ -112,12 +108,11 @@
                 var data = {
                     "editUsername":username,
                     "editSchool":school,
-                    // "editEmail":email,
                     "editTel":tel,
                     "editResearch_Direct":research_direct,
                     "editSelf_Introduction":self_introduction,
                     "editIdentity":identity
-                }
+                };
                 $.ajax
                 ({
                     url: '/update/basic_information',
@@ -156,12 +151,12 @@
                         }
                     },
                     error : function() {
-                           swal({
-                                 title: "服务器处理错误",
-                                 text: "",
-                                 icon: "error",
-                                  button: "确定",
-                                 });
+                        swal({
+                             title: "服务器处理错误",
+                             text: "",
+                             icon: "error",
+                              button: "确定",
+                             });
                     }
                 });
             }
@@ -176,14 +171,12 @@
 <div class="row ">
 <div class="col-md-10 col-md-offset-2">
         <div class="projects-header page-header">
-
           <button class="btn btn-success btn-edit" type="button">
                <span class="glyphicon glyphicon-pencil" style="font-size: 15px"></span>编辑</button>
-             <button class="btn btn-info btn-pic" type="button">
-                  <span class="" style="font-size: 15px"></span>更改头像</button>
+          <button class="btn btn-info btn-pic" type="button">
+               <span class="" style="font-size: 15px"></span>更改头像</button>
         </div>
-
-           <div class="sk-three-bounce text-center" id="sk-three-bounce">
+         <div class="sk-three-bounce text-center" id="sk-three-bounce">
              <div class="sk-child sk-bounce1"></div>
              <div class="sk-child sk-bounce2"></div>
              <div class="sk-child sk-bounce3"></div>
@@ -199,7 +192,6 @@
                      &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
                     <span class="glyphicon glyphicon-home" aria-hidden="true" >籍贯:<span th:text="${user_info.birthplace}"></span></span>
                   </span>
-
                 <div>
                     <span class="glyphicon glyphicon-cloud " aria-hidden="true" >年龄:<span th:text="${user_info.age}"></span></span><br>
                 </div>
@@ -235,7 +227,6 @@
             </div>
             <div class="modal-body">
                 <form id="editForm" th:action="@{/update/basic_information}" target="frameName" onsubmit="return false" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" >
-
                     <p for="" class="col-sm-4 control-label"></p>
                     <div id="error" class="alert alert-danger col-sm-5  alert-dismissible hidden"  role="alert" ><h id="error_data" ></h></div>
                      <br>
@@ -257,7 +248,6 @@
                         <div class="col-sm-6">
                             <input type="number" size="16" class="form-control" id="editTel" name="editTel"  placeholder="请输入电话号码" />
                         </div>
-
                     </div>
                     <!--**********************************************************************************************************************-->
                     <div th:if="${user_info.identity} ne 'admin' " class="form-group" id="registered_identity">

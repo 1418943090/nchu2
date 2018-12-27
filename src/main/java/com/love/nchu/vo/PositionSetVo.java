@@ -9,6 +9,8 @@ public class PositionSetVo {
     private Integer no2;
     private  Integer no3;
 
+    private String type;
+
     protected PositionSetVo(){
 
     }
@@ -16,6 +18,13 @@ public class PositionSetVo {
         this.no1 = no1;
         this.no2 = no2;
         this.no3 = no3;
+    }
+
+    public PositionSetVo(Integer no1, Integer no2, Integer no3, String type) {
+        this.no1 = no1;
+        this.no2 = no2;
+        this.no3 = no3;
+        this.type = type;
     }
 
     public Integer getNo1() {
@@ -42,12 +51,21 @@ public class PositionSetVo {
         this.no3 = no3;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
-        return "newsSetVo{" +
+        return "PositionSetVo{" +
                 "no1=" + no1 +
                 ", no2=" + no2 +
                 ", no3=" + no3 +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

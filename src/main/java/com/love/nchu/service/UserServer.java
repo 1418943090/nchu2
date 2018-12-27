@@ -12,6 +12,7 @@ public interface UserServer {
     int delUserByUsername(String username);
 
     List<String> getAllUsername();
-    List<String> getAllOrdinaryUsernmae();
+    List<String> getAllPostGraduateUsername();
+
 
 }

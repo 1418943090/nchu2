@@ -2,7 +2,6 @@ package com.love.nchu.controller;
 
 
 import com.love.nchu.demain.User;
-import com.love.nchu.demain.UserInfo;
 import com.love.nchu.service.TitleEditServer;
 import com.love.nchu.service.UserInfoServer;
 import com.love.nchu.tool.TitleTool;
@@ -24,20 +23,16 @@ public class UserController {
     public ModelAndView user( Model model, HttpServletRequest request) {
 
         User user = (User) request.getSession().getAttribute("user");
-
         if(user==null)
             return new ModelAndView("redirect:/login");
         model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
-        UserInfo userInfo = userInfoServer.getUserByUsername(user.getUsername());
-
-        if(userInfo.getIdentity().equals("admin")){
+        if(user.getRole().equals("admin")){
             return new ModelAndView("person_center_admin", "model", model);
         }
         else
-        if (userInfo.getIdentity().equals("postgraduate")) {
+        if (user.getRole().equals("postgraduate")) {
             return new ModelAndView("person_center_postgraduate", "model", model);
         }
         return new ModelAndView("person_center_undergraduate", "model", model);
-
     }
 }

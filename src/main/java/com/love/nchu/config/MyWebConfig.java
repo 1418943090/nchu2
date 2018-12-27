@@ -23,10 +23,27 @@ public class MyWebConfig implements WebMvcConfigurer {
 
     @Value("${spring.news.img.ab.path}")
     String news_img_ab_path;
+
+
+    @Value("${spring.projects.img.vm.path}")
+    String projects_img_vm_path;
+
+    @Value("${spring.projects.img.ab.path}")
+    String projects_img_ab_path;
+
+    @Value("${spring.projects.documents.vm.path}")
+    String projects_documents_vm_path;
+
+    @Value("${spring.projects.documents.ab.path}")
+    String projects_documents_ab_path;
+
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(img_vm_path+"**").addResourceLocations(img_ab_path);
         registry.addResourceHandler(paper_vm_path+"**").addResourceLocations(paper_ab_path);
         registry.addResourceHandler(news_img_vm_path+"**").addResourceLocations(news_img_ab_path);
+        registry.addResourceHandler(projects_img_vm_path+"**").addResourceLocations(projects_img_ab_path);
+        registry.addResourceHandler(projects_documents_vm_path+"**").addResourceLocations(projects_documents_ab_path);
     }
 }

@@ -12,6 +12,11 @@
     <script type="text/javascript" src="/js/bootstrapValidate.js"></script>
     <script type="text/javascript" src="/js/admins/jquery.form.js"></script>
     <script th:inline="javascript">
+    $(document).ready(function(){
+
+          $("#sk-three-bounce").hide();
+
+      });
     function introduction_edit(){
      var str = $("#introduction_str").val();
            $.ajax({
@@ -59,6 +64,11 @@
                   介绍文档
                   </div>
                <div class="panel-body">
+                   <div class="sk-three-bounce text-center" id="sk-three-bounce">
+                    <div class="sk-child sk-bounce1"></div>
+                    <div class="sk-child sk-bounce2"></div>
+                    <div class="sk-child sk-bounce3"></div>
+                </div>
                <textarea class="form-control" rows="17" id="introduction_str" th:text="${introduction}"></textarea>
               </div>
         </div>

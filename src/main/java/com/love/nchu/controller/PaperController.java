@@ -30,6 +30,7 @@ public class PaperController {
     //删除论文控制器
     @Value("${spring.paper.path}")
     String paper_path;
+
     boolean paperSet = false;
     @GetMapping("/paper/admin")
     public ModelAndView admin(Model model){
@@ -40,6 +41,7 @@ public class PaperController {
         }
         model.addAttribute("paperSet",paperSet);
         paperSet = false;
+        model.addAttribute("role","admin");
         model.addAttribute("hasPaper",hasPaper);
         model.addAttribute("list",list);
         return new ModelAndView("userPapers","model",model);
@@ -57,7 +59,7 @@ public class PaperController {
     public ModelAndView deletePaper(@RequestBody deletePaperVo deletePaperVo){
 
        for(String s : deletePaperVo.getListPaperPath()){
-           File file = new File(paper_path.substring(0,9)+s);
+           File file = new File(paper_path.substring(0,13)+s);
            if(file.exists()){
                file.delete();
            }

@@ -101,6 +101,11 @@ public class RegistryController {
         RegistryTool.Save_Image(file, userInfo, img_path, img_vm_path);
         RegistryTool.saveUserInfo(userInfoServer, userServer, userInfo);
 
+        //修改role
+        User user = userServer.findUserByUsername(userInfo.getUsername());
+        user.setRole(userInfo.getIdentity());
+        userServer.save(user);
+
         if (!userInfo.getUsername().equals("admin"))
             reviewTableServer.save(new ReviewTable(userInfo.getUsername(), new Date(), "未处理", "未处理", "warning"));
         return "success";

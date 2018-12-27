@@ -8,6 +8,12 @@
     <script th:inline="javascript">
 
 
+    $(document).ready(function(){
+
+          $("#sk-three-bounce").hide();
+
+      });
+
         $(".btn-pass").click(function(){
             var list = [[${model.list}]];
             fa(list,"pass");

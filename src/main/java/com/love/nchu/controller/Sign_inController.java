@@ -167,10 +167,11 @@ public class Sign_inController {
     @GetMapping("/sign_in/show/week/{date}")
     public ModelAndView weekShow(Model model,@PathVariable  String date) throws Exception{
 
+        System.out.println("aaa");
         Sign_in_Status sign_in_status ;
         List<String> list = MyDate.getWeekDays(date,"yyyy-MM-dd",true);
         List<weekShow> list2 = new ArrayList<>();
-        List<String> user = userServer.getAllOrdinaryUsernmae();
+        List<String> user = userServer.getAllPostGraduateUsername();
         for(int i=0;i<user.size();i++){
             weekShow w = new weekShow(user.get(i),0,0,0,0,0,0,0);
             if(FestivalTool.isFestival(list.get(0),festivalServer)){
@@ -261,6 +262,7 @@ public class Sign_inController {
             }
             list2.add(w);
             }
+
         model.addAttribute("date",date);
         model.addAttribute("datelist",list);
         model.addAttribute("list",list2);

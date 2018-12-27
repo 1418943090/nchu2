@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+      <table class="table table-bordered table-hover table-striped" >
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" id="pro_mainCheckbox"></th>
+                        <th>编号</th>
+                        <th>项目名</th>
+                        <th>负责人</th>
+                        <th>经费</th>
+                        <th>项目文档</th>
+                        <th>立项日期</th>
+                        <th>项目类别</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                   <div th:if="${hasProjects} eq false">
+                      <tr>
+                       <td colspan="8">
+                         <h1 class="text-center" style="color: #d2322d">你还没有添加任何项目哦,立即添加一个吧</h1>
+                       </td>
+                      </tr>
+                    </div>
+                      <tr th:each="project : ${model.list}">
+                          <td><input type="checkbox" class="pro"  th:attr="id=${project.id}"></td>
+                          <td th:text="${project.id}"></td>
+                          <td th:title="${project.name}" th:text="${project.name}"></td>
+                          <td th:text="${project.principal}"></td>
+                          <td th:text="${project.funding}"></td>
+                          <td><a th:href="${project.document}" target="_blank">项目文档</a></td>
+                          <td th:text="${project.date}"></td>
+                          <td th:text="${project.type}"></td>
+                      </tr>
+                 </tbody>
+</html>

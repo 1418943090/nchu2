@@ -49,7 +49,7 @@ public class PersonCenterController {
         User user = (User)request.getSession().getAttribute("user");
 
         nowuser = user.getUsername();
-        if(user.getUsername().equals("admin")){
+        if(user.getRole().equals("admin")){
             return new ModelAndView("redirect:/paper/admin");
         }
         List<Paper> list = paperServer.findPaperByUsername(user.getUsername());
@@ -57,6 +57,8 @@ public class PersonCenterController {
         if(list.size()==0) {
             hasPaper = false;
         }
+        model.addAttribute("role",user.getRole());
+        System.out.println(user.getRole());
         model.addAttribute("hasPaper",hasPaper);
         model.addAttribute("list",list);
         return new ModelAndView("userPapers","model",model);

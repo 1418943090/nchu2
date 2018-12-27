@@ -40,7 +40,7 @@ public class UserServerImpl implements UserServer {
     }
 
     @Override
-    public List<String> getAllOrdinaryUsernmae() {
-        return userRepository.getAllOrdinaryUsernmae();
+    public List<String> getAllPostGraduateUsername() {
+        return userRepository.getAllPostGraduateUsernmae();
     }
 }

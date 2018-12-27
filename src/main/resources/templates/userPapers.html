@@ -31,7 +31,7 @@
 </head>
  <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">新增论文</h1>
+        <h1 class="page-header">论文中心</h1>
     </div>
 </div>
 <body class="gray-bg">
@@ -46,7 +46,8 @@
                 <button class="btn btn-danger btn-del" type="button" onclick="deletePaper();">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;删除
                 </button>
-                 <button class="btn btn-success btn-paper-set" type="button" onclick="paperSet();">
+
+                 <button th:if="${role} eq 'admin'" class="btn btn-success btn-paper-set" type="button" onclick="paperSet();">
                     <span class="" aria-hidden="true"></span>&nbsp;置顶Paper
                  </button>
             </p>

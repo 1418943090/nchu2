@@ -9,9 +9,12 @@
      <link href="/css/ani.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+       <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+      <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/css/bootstrap-select.min.css">
 
@@ -81,15 +84,17 @@
                <li>
                   <a  th:href="@{/products}"  th:method="POST" th:type="post"><h5 class="title"><strong>Products</strong></h5></a>
               </li>
-              <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h5 class="title"><strong>Projects<b class="caret"></b></strong></h5></a>
-                    <ul class="dropdown-menu">
-                       <li><a th:href="@{projects/all}">所有项目</a></li>
-                       <li><a th:href="@{projects/research_project}">科研项目</a></li>
-                       <li><a th:href="@{projects/three_small}">三小项目</a></li>
-                       <li><a th:href="@{projects/others}">横向项目</a></li>
-                    </ul>
-              </li>
+             <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <h5 class="title"><strong>Projects<b class="caret"></b></strong></h5>
+               </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/projects/all">所有项目</a></li>
+                    <li><a href="/projects/researchProject">科研项目</a></li>
+                    <li><a href="/projects/threesmallProject">三小项目</a></li>
+                    <li><a href="/projects/hengProject">横向项目</a></li>
+                </ul>
+             </li>
               <li>
                   <a  th:href="@{/news}"  th:method="POST" th:type="post"><h5 class="title"><strong>News</strong></h5></a>
               </li>
@@ -114,20 +119,9 @@
                      <li>
                         <a href="#" class="list-item text-center" url="userPapers"><i class="fa fa-files-o fa-fw"></i>论文中心</a>
                      </li>
-                      <li >
-                          <a href="#" class=" text-center " ><i class="fa fa-sitemap fa-fw"></i>项目管理<span class="fa arrow"></span></a>
-                           <ul class="nav nav-second-level">
-                             <li>
-                                 <a href="#"  class="list-item text-center" >科研项目</a>
-                             </li>
-                          <!--   <li>
-                                 <a href="#" class="list-item text-center"  >三小项目</a>
-                             </li>-->
-                             <li>
-                                <a  href="#" class="list-item text-center" >横向项目</a>
-                            </li>
-                         </ul>
-                      </li>
+                     <li>
+                        <a href="#" class="list-item text-center" url="projectsCenter"><i class="fa fa-dashboard fa-fw"></i>项目中心</a>
+                     </li>
                       <li>
                          <a href="#" class="list-item text-center" url="sign_in/"><i class="fa fa-table fa-fw"></i>签到系统</a>
                        </li>
