@@ -100,7 +100,7 @@
                       <td th:title="${paper.title}" th:text="${paper.title}"></td>
                       <td th:if="${paper.path ne null}"><a th:href="${paper.path}" target="_blank">查看原文</a></td>
                       <td th:if="${paper.path} eq null">无</td>
-                      <td th:text="${paper.publish_date}"></td>
+                      <td th:text="${paper.getPublishDate()}"></td>
                       <td th:text="${paper.date}"></td>
                   </tr>
              </tbody>

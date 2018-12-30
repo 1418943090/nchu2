@@ -1,5 +1,7 @@
 package com.love.nchu.demain;
+
 import javax.persistence.*;
+
 @Entity
 public class Project {
     @Id
@@ -92,6 +94,9 @@ public class Project {
     }
 
     public String getDate() {
+
+
+
         return date;
     }
 

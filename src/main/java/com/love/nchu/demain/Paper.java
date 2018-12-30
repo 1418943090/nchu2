@@ -2,6 +2,7 @@ package com.love.nchu.demain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -94,6 +95,11 @@ public class Paper implements Serializable {
 
     public Date getPublish_date() {
         return publish_date;
+    }
+
+    public String getPublishDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(publish_date);
     }
 
     public void setPublish_date(Date publish_date) {
