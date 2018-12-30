@@ -51,7 +51,7 @@
                     <h3 class="project-title" style="color: #c7254e" th:text="${project.name}"></h3>
                     <p th:text="${project.description}">
                     </p>
-                    <p><img th:src="${project.pic}" style="border: 0px solid gray; float: left; margin: 16px" width=260px alt="Powder: Platform for Open Wireless Data-driven Experimental Research" href="https://powderwireless.net/" /></p>
+                    <p><img th:if="${project.pic} ne null" th:src="${project.pic}" style="border: 0px solid gray; float: left; margin: 16px" width=260px alt="Powder: Platform for Open Wireless Data-driven Experimental Research" href="https://powderwireless.net/" /></p>
                     <div class="project-description">
                       <p th:text="${project.content}"></p>
                     </div>

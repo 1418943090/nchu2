@@ -38,6 +38,20 @@ public class MyWebConfig implements WebMvcConfigurer {
     String projects_documents_ab_path;
 
 
+
+    @Value("${spring.products.img.vm.path}")
+    String products_img_vm_path;
+
+    @Value("${spring.products.img.ab.path}")
+    String products_img_ab_path;
+
+    @Value("${spring.products.documents.vm.path}")
+    String products_documents_vm_path;
+
+    @Value("${spring.products.documents.ab.path}")
+    String products_documents_ab_path;
+
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(img_vm_path+"**").addResourceLocations(img_ab_path);
@@ -45,5 +59,8 @@ public class MyWebConfig implements WebMvcConfigurer {
         registry.addResourceHandler(news_img_vm_path+"**").addResourceLocations(news_img_ab_path);
         registry.addResourceHandler(projects_img_vm_path+"**").addResourceLocations(projects_img_ab_path);
         registry.addResourceHandler(projects_documents_vm_path+"**").addResourceLocations(projects_documents_ab_path);
+        registry.addResourceHandler(products_img_vm_path+"**").addResourceLocations(products_img_ab_path);
+        registry.addResourceHandler(products_documents_vm_path+"**").addResourceLocations(products_documents_ab_path);
+
     }
 }

@@ -38,9 +38,9 @@
                             message: '你还没有输入项目内容哦'
                         },
                         stringLength: {
-                            min: 50,
+                            min: 5,
                             max: 1500,
-                            message: '项目内容长度范围为50~1500'
+                            message: '项目内容长度范围为5~1500'
                         }
                     }
                 },
@@ -215,41 +215,5 @@ function uploadSubmit_edit(){
             // }
         });
     },500);
-
-}
-
-function add_project_upload_check(){
-    // $("#upForm").data('bootstrapValidator').destroy();
-    // $('#upForm').data('bootstrapValidator', null);
-    var bootstrapValidator = $('#addProjectForm').data('bootstrapValidator');
-    bootstrapValidator.validate();
-    if(bootstrapValidator.isValid()){//如果校验成功后执行的操作
-        uploadSubmit_add();
-    }
-}
-
-function uploadSubmit_add(){
-    $("#close_project_add_modal").click();
-    $("#sk-three-bounce").show();
-    setTimeout(function(){
-        $("#addProjectForm").ajaxSubmit(function(message) {
-
-            $("#rightContainer").html(message);
-            // if(message=='success')
-            //     window.location.href="/registry/step3";
-            // else{
-            //     swal({
-            //         title: "Error!",
-            //         text:message,
-            //         icon: "error",
-            //         button: "确定",
-            //     });
-            // }
-        });
-    },500);
-
-
-
-    return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 
 }

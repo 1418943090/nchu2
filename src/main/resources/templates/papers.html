@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="http://span.ece.utah.edu/css/material.css">
     <link rel="stylesheet" href="http://span.ece.utah.edu/css/main.css">
 </head>
-  <body>
+ <body>
  <header class="site-header">
   <div class="wrapper">
     <a class="" href="">&nbsp;</a> <span>南昌航空大学 • TDY</span>
@@ -21,17 +21,18 @@
             <li ><a href="/index">Home</a></li>
             <li><a href="/people">People</a></li>
             <li><a href="/products">Products</a></li>
-          <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                 <h5 class="title"><strong>Projects<b class="caret"></b></strong></h5>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/projects/all">所有项目</a></li>
-                    <li><a href="/projects/researchProject">科研项目</a></li>
-                    <li><a href="/projects/threesmallProject">三小项目</a></li>
-                    <li><a href="/projects/hengProject">横向项目</a></li>
-                </ul>
-            </li>
+         	<li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     Projects
+                     <b class="caret"></b>
+                 </a>
+                 <ul class="dropdown-menu">
+                     <li><a href="/projects/all">所有项目</a></li>
+                     <li><a href="/projects/researchProject">科研项目</a></li>
+                     <li><a href="/projects/threesmallProject">三小项目</a></li>
+                     <li><a href="/projects/hengProject">横向项目</a></li>
+                 </ul>
+             </li>
             <li><a href="/news">News</a></li>
              <li><a href="/papers">Papers</a></li>
          </ul>
@@ -47,7 +48,7 @@
         <li>
            <p th:text="${paper.title}">
            </p>
-           <a th:href="${paper.path}" target="_blank">查看原文</a>
+           <a th:if="${paper.path} ne null" th:href="${paper.path}" target="_blank">查看原文</a>
          </li>
      </ul>
    </div>

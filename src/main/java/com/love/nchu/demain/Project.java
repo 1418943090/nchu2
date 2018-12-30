@@ -1,11 +1,7 @@
 package com.love.nchu.demain;
-
 import javax.persistence.*;
-
 @Entity
 public class Project {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,7 +12,9 @@ public class Project {
     private String content;
     private String principal;
     private String member;
-    private String date;
+    private String date="";
+    private String dateA="";
+    private String dateB="";
     private Double funding;
     private String pic;
     private String document;
@@ -25,22 +23,18 @@ public class Project {
     private int position2=8;
     private int position3=12;
     private int position4=16;
-
+    private String unit="(元)";
     protected Project(){
-
     }
-
-    public Project(String name, String description, String content, String principal, String member, String date, Double funding,  String type) {
+    public Project(String name, String description, String content, String principal, String member, Double funding,  String type) {
         this.name = name;
         this.description = description;
         this.content = content;
         this.principal = principal;
         this.member = member;
-        this.date = date;
         this.funding = funding;
         this.type = type;
     }
-
     public int getId() {
         return id;
     }
@@ -169,12 +163,38 @@ public class Project {
         this.position4 = position4;
     }
 
+
+    public String getDateA() {
+        return dateA;
+    }
+
+    public void setDateA(String dateA) {
+        this.dateA = dateA;
+    }
+
+    public String getDateB() {
+        return dateB;
+    }
+
+    public void setDateB(String dateB) {
+        this.dateB = dateB;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     public String getLengthName(){
         if(name.length()>50){
             return name.substring(0,50)+"...";
         }
         return name;
     }
+
     @Override
     public String toString() {
         return "Project{" +
@@ -186,6 +206,8 @@ public class Project {
                 ", principal='" + principal + '\'' +
                 ", member='" + member + '\'' +
                 ", date='" + date + '\'' +
+                ", dateA='" + dateA + '\'' +
+                ", dateB='" + dateB + '\'' +
                 ", funding=" + funding +
                 ", pic='" + pic + '\'' +
                 ", document='" + document + '\'' +
@@ -194,6 +216,7 @@ public class Project {
                 ", position2=" + position2 +
                 ", position3=" + position3 +
                 ", position4=" + position4 +
+                ", unit='" + unit + '\'' +
                 '}';
     }
 }

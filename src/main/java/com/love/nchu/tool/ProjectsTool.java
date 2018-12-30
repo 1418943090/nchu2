@@ -1,12 +1,10 @@
 package com.love.nchu.tool;
-
 import com.love.nchu.demain.Project;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-
 @Component
 public class ProjectsTool {
 
@@ -34,14 +32,13 @@ public class ProjectsTool {
         document_vm_path = str;
     }
 
-
-
     public static void deletePic(String path){
         File file = new File(img_path.substring(0,13)+path);
         if(file.exists()){
             file.delete();
         }
     }
+
     public static void deleteDocument(String path){
         File file = new File(document_path.substring(0,13)+path);
         if(file.exists()){
@@ -50,7 +47,6 @@ public class ProjectsTool {
     }
 
     public static void saveDocument(Project project,MultipartFile document){
-
         File f = new File(document_path);
         if(!f.exists()){
             f.mkdirs();
@@ -69,18 +65,14 @@ public class ProjectsTool {
             bos.flush();
             String filename = document_vm_path + filenamestr;
             project.setDocument(filename);
-
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());
-
         }catch(IOException e){
             System.out.println(e.getMessage());
-
         }
     }
 
     public static void  UpdatePic(Project project,MultipartFile pic){
-
         File newfile = new File(img_path);
         if(!newfile.exists()){
             newfile.mkdirs();
@@ -107,8 +99,8 @@ public class ProjectsTool {
             e.printStackTrace();
         }
     }
-    public static void  UpdateDocument(Project project,MultipartFile pic){
 
+    public static void  UpdateDocument(Project project,MultipartFile pic){
         File newfile = new File(document_path);
         if(!newfile.exists()){
             newfile.mkdirs();
@@ -135,11 +127,7 @@ public class ProjectsTool {
         }
     }
 
-
-
     public static void savePic(Project project, MultipartFile pic){
-
-
         File newfile = new File(img_path);
         if(!newfile.exists()){
             newfile.mkdirs();
@@ -163,7 +151,6 @@ public class ProjectsTool {
             project.setPic(filename);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

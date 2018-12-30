@@ -24,12 +24,17 @@ $(function(){
                 },
                 file: {
                     validators: {
-                        notEmpty: {
-                            message: '你还没选择文件哦!'
-                        },
                         regexp: {
                             regexp: /^.*\.pdf$/,
                             message: '论文格式必须是PDF格式的哦'
+                        }
+                    }
+                },
+                publish_date:{
+                    trigger:'click',
+                    validators:{
+                        notEmpty:{
+                            message:'请输入论文发表时间'
                         }
                     }
                 }

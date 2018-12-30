@@ -1,8 +1,5 @@
-
-
-
-function deleteProjects(){
-    var obj = document.getElementsByClassName("pro");
+function deleteProducts(){
+    var obj = document.getElementsByClassName("product_check");
     var check_id = [];
     var k;
     for(k in obj){
@@ -14,7 +11,7 @@ function deleteProjects(){
     if(check_id.length==0)
     {
         swal({
-            title: "你还没有选择要删除的项目哦",
+            title: "你还没有选择要删除的产品哦",
             text: "",
             icon: "warning",
             button: "确定",
@@ -37,21 +34,24 @@ function deleteProjects(){
 }
 function dele(check_id){
     var data = {
-        "listProjectsId": check_id
+        "listProductsId": check_id
+
     };
 
     $("#sk-three-bounce").show();
     $.ajax
     ({
-        url: '/projectCenter/delete',
+        url: '/product/delete',
         contentType: 'application/json;charset=utf-8',
         type: 'post',
         async:true,
         data: JSON.stringify(data),
+        //dataType:"text",
         success: function (data) {
             $("#rightContainer").html(data);
         },
         error : function() {
+            // toastr.warning("一不小心就出错了^_^,请刷新试试嘻嘻,还不行的话,及时联系管理员哦");
             swal({
                 title: "Error!",
                 text: '服务器处理错误',

@@ -133,6 +133,8 @@ public class ProjectsController {
     @PostMapping("/projectCenter/edit")
     public ModelAndView edit(Project project,MultipartFile file_pic,MultipartFile file_document){
         Project project1 = projectServer.findById(project.getId());
+
+
         project.setPic(project1.getPic());
         project.setDocument(project1.getDocument());
         project.setPosition1(project1.getPosition1());
@@ -140,21 +142,31 @@ public class ProjectsController {
         project.setPosition3(project1.getPosition3());
         project.setPosition4(project1.getPosition4());
         project.setUsername(project1.getUsername()) ;
-        if(file_pic!=null){
+        if(file_pic!=null && project.getPic()!=null){
           ProjectsTool.UpdatePic(project,file_pic);
+        }else if(file_pic!=null && project.getPic()==null){
+            ProjectsTool.savePic(project,file_pic);
         }
-        if(file_document!=null){
+
+        if(file_document!=null && project.getDocument()!=null){
            ProjectsTool.UpdateDocument(project,file_document);
+        }else if(file_document!=null && project.getDocument()==null){
+            ProjectsTool.saveDocument(project,file_document);
         }
         projectServer.save(project);
         return new ModelAndView("redirect:/projectCenter/type/"+url);
     }
     @PostMapping("/projectCenter/add")
     public ModelAndView add(Project project, MultipartFile file_pic, MultipartFile file_document, HttpServletRequest request){
+
+
+
         User user =(User) request.getSession().getAttribute("user");
         project.setUsername(user.getUsername());
-        ProjectsTool.savePic(project,file_pic);
-        ProjectsTool.saveDocument(project,file_document);
+        if(file_pic!=null)
+           ProjectsTool.savePic(project,file_pic);
+        if(file_document!=null)
+            ProjectsTool.saveDocument(project,file_document);
         projectServer.save(project);
         return new ModelAndView("redirect:/projectsCenter");
     }

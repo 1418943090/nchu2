@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class PaperController {
@@ -80,7 +78,7 @@ public class PaperController {
        int year = MyDate.getYear();
        System.out.println(year);
        List<Paper> list= new ArrayList<>();
-       HashMap<Integer,List> hashMap = new HashMap<>();
+       HashMap<Integer,List> hashMap = new LinkedHashMap<>();
        while((list = paperServer.findPaperByYear(year)).size()!=0){
            hashMap.put(year,list);
            year--;

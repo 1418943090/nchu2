@@ -7,8 +7,11 @@ import com.love.nchu.service.PaperServer;
 import com.love.nchu.service.UserInfoServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 @RestController
@@ -63,18 +67,31 @@ public class PersonCenterController {
         model.addAttribute("list",list);
         return new ModelAndView("userPapers","model",model);
     }
+
+
+
+
+    @InitBinder
+    public void initBinder(ServletRequestDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
     @PostMapping("/upload/paper")
     public String upload_paper(Paper paper, MultipartFile file){
         paper.setDate(new Date());
         paper.setUsername(nowuser);
-        filenamestr = String.valueOf((int)(Math.random()*100))+file.getOriginalFilename();
-        paper.setPath(paper_vm_path+nowuser+"/"+filenamestr);
-        paper.setName(userInfoServer.getNameByUsername(paper.getUsername()));
-        if( savePaper(file).equals("success")){
-            paperServer.save(paper);
-            return "success";
+        if(file!=null) {
+            filenamestr = String.valueOf((int) (Math.random() * 100)) + file.getOriginalFilename();
+            paper.setPath(paper_vm_path + nowuser + "/" + filenamestr);
+            if( savePaper(file).equals("success")){
+                paperServer.save(paper);
+                return "success";
+            }
+            return "error";
         }
-       return "error";
+        paper.setName(userInfoServer.getNameByUsername(paper.getUsername()));
+        paperServer.save(paper);
+        return "success";
     }
     private String savePaper(MultipartFile file){
         File f = new File(paper_path+nowuser+"/");

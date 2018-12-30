@@ -28,7 +28,7 @@ public interface PaperRepository extends JpaRepository<Paper,Integer> {
     List<Paper> findPaperByTitleLike(String title);
 
 
-    @Query(value = "select * from paper p where year(p.date)=?1 order by p.position ,p.date desc" ,nativeQuery = true)
+    @Query(value = "select * from paper p where year(p.publish_date)=?1 order by p.position ,p.publish_date desc" ,nativeQuery = true)
     List<Paper> findPaperByYear(int year);
 
 

@@ -16,6 +16,7 @@ public class Paper implements Serializable {
     private String path;
     private String username;
     private String name;
+    private Date publish_date;
     private Date  date;
 
     private int position=4;
@@ -24,13 +25,13 @@ public class Paper implements Serializable {
 
     }
 
-    public Paper(String title, String path, String username, String name, Date date) {
+    public Paper(String title, String path, String username, String name, Date publish_date, Date date) {
         this.title = title;
         this.path = path;
         this.username = username;
         this.name = name;
+        this.publish_date = publish_date;
         this.date = date;
-
     }
 
     public int getId() {
@@ -91,12 +92,21 @@ public class Paper implements Serializable {
     }
 
 
+    public Date getPublish_date() {
+        return publish_date;
+    }
+
+    public void setPublish_date(Date publish_date) {
+        this.publish_date = publish_date;
+    }
+
     public String getOptionTitle(){
 
         if(this.title.length()>60)
             return this.title.substring(0,60);
         return this.title;
     }
+
     @Override
     public String toString() {
         return "Paper{" +
@@ -105,6 +115,7 @@ public class Paper implements Serializable {
                 ", path='" + path + '\'' +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
+                ", publish_date=" + publish_date +
                 ", date=" + date +
                 ", position=" + position +
                 '}';
