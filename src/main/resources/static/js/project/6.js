@@ -18,3 +18,23 @@ $("select#date_type").change(function(){
         $("#date2").show();
     }
 });
+
+$("select#edit_date_type").change(function(){
+    //var list = [[${list}]];
+    var type = $('#edit_date_type option:selected').text();
+    if(type=="立项时间")
+    {
+        $("#edit_dateA").prop("value",null);
+        $("#edit_dateB").prop("value",null);
+        document.getElementById("edit_date_error_message").innerText= "";
+        $("#edit_date2").hide();
+        $("#edit_date1").show();
+    }
+    if(type=="起止时间")
+    {
+        $("#edit_date").prop("value",null);
+        document.getElementById("edit_date_error_message").innerText= "";
+        $("#edit_date1").hide();
+        $("#edit_date2").show();
+    }
+});

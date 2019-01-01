@@ -10,5 +10,6 @@ public interface FileServer {
 
     void updateFile(Product product,MultipartFile file,String path,int flag);
     void deleteFile(String path,String filename);
+    void updatePaperFile(String path,String filename,MultipartFile file);
 
 }

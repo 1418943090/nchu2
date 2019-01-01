@@ -19,7 +19,7 @@ import java.util.List;
 public class ProjectsController {
     @Autowired
     ProjectServer projectServer;
-    String url;
+    String url="all";
     User user ;
     Boolean projectSet = false;
     @GetMapping("/projects/{type}")
@@ -133,8 +133,6 @@ public class ProjectsController {
     @PostMapping("/projectCenter/edit")
     public ModelAndView edit(Project project,MultipartFile file_pic,MultipartFile file_document){
         Project project1 = projectServer.findById(project.getId());
-
-
         project.setPic(project1.getPic());
         project.setDocument(project1.getDocument());
         project.setPosition1(project1.getPosition1());
@@ -142,6 +140,7 @@ public class ProjectsController {
         project.setPosition3(project1.getPosition3());
         project.setPosition4(project1.getPosition4());
         project.setUsername(project1.getUsername()) ;
+
         if(file_pic!=null && project.getPic()!=null){
           ProjectsTool.UpdatePic(project,file_pic);
         }else if(file_pic!=null && project.getPic()==null){
@@ -159,10 +158,9 @@ public class ProjectsController {
     @PostMapping("/projectCenter/add")
     public ModelAndView add(Project project, MultipartFile file_pic, MultipartFile file_document, HttpServletRequest request){
 
-
-
         User user =(User) request.getSession().getAttribute("user");
         project.setUsername(user.getUsername());
+
         if(file_pic!=null)
            ProjectsTool.savePic(project,file_pic);
         if(file_document!=null)

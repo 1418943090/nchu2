@@ -8,6 +8,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 @Service
 public class FileServerImpl implements FileServer {
+
+
+
+
+
+
     @Override
     public String saveFile(MultipartFile file, String path,String img_vm_path) {
         File newfile = new File(path);
@@ -16,6 +22,7 @@ public class FileServerImpl implements FileServer {
         }
         String filenamestr = String.valueOf((int)(Math.random()*1000)) + file.getOriginalFilename();
         File bfile = new File(newfile,filenamestr);
+        System.out.println(bfile.getAbsoluteFile());
         if(!bfile.exists()){
             try{
                 bfile.createNewFile();
@@ -38,6 +45,11 @@ public class FileServerImpl implements FileServer {
 
         return  img_vm_path+filenamestr;
     }
+
+
+
+
+
     @Override
     public void updateFile(Product product, MultipartFile file,String path,int flag) {
         File newfile = new File(path);
@@ -76,5 +88,36 @@ public class FileServerImpl implements FileServer {
         if(file.exists()){
             file.delete();
         }
+    }
+
+    @Override
+    public void updatePaperFile(String path,String fileName, MultipartFile file) {
+
+        File newfile = new File(path);
+        if(!newfile.exists()){
+            newfile.mkdirs();
+        }
+        File bfile = new File(path.substring(0,13)+fileName);
+        System.out.println(bfile.getAbsoluteFile());
+        if(!bfile.exists()){
+            try{
+                bfile.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        try {
+            BufferedOutputStream out = new BufferedOutputStream(
+                    new FileOutputStream(bfile));
+            out.write(file.getBytes());
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

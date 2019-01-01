@@ -8,6 +8,15 @@ $(function(){
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
+                updatePublishDate:{
+                    trigger:'click',
+                    validators:{
+                        notEmpty:{
+                            message:'请输入论文发表时间'
+                        }
+                    }
+                },
+
                 updateTitle: {
                     validators: {
                         notEmpty: {
@@ -19,7 +28,15 @@ $(function(){
                             message: '论文标题长度在3~400个字符哦'
                         }
                     }
-                }
+                },
+                updateFile: {
+                    validators: {
+                        regexp: {
+                            regexp: /^.*\.pdf$/,
+                            message: '论文格式必须是PDF格式的哦'
+                        }
+                    }
+                },
             }
         });
     }
@@ -37,11 +54,13 @@ $(function(){
          var k;
          var id;
          var title;
+         var publishDate;
          for(k in obj){
              if(obj[k].checked && obj[k].id!=undefined){
                  num++;
                  id=obj[k].id;
                  title=obj[k].title;
+                 publishDate = obj[k].value;
              }
          }
          if(num==0){
@@ -65,6 +84,7 @@ $(function(){
              document.getElementById("updateTitle").value = title;
              document.getElementById("updateId").value = id;
              document.getElementById("updateUsername").value =  $("#user").attr("username");
+             document.getElementById("updatePublishDate").value = publishDate;
              $('#updateModal').modal('show');
          }
      });

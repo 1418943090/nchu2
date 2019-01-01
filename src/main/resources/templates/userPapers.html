@@ -27,6 +27,14 @@
                 clearBtn: true,//清除按钮
                 format: "yyyy-mm-dd" ,//日期格式
             });
+              $("#updatePublishDate").datepicker({
+                            language: "zh-CN",
+                            autoclose: true,//选中之后自动隐藏日期选择框
+                            clearBtn: true,//清除按钮
+                            format: "yyyy-mm-dd" ,//日期格式
+                        });
+
+
                if([[${paperSet}]]==true){
                    swal({
                           title: "操作成功",
@@ -95,7 +103,7 @@
                   </tr>
                 </div>
                   <tr th:each="paper : ${model.list}">
-                      <td><input type="checkbox" class="cb" th:attr="id=${paper.id},title=${paper.title},value=${paper.path}" ></td>
+                      <td><input type="checkbox" class="cb" th:attr="id=${paper.id},title=${paper.title},value=${paper.getPublishDate()}" ></td>
                       <td id="user" th:attr="username=${paper.username}" th:text="${paper.id}"></td>
                       <td th:title="${paper.title}" th:text="${paper.title}"></td>
                       <td th:if="${paper.path ne null}"><a th:href="${paper.path}" target="_blank">查看原文</a></td>
@@ -179,12 +187,26 @@
                                 <input type="text" class="form-control" id="updateUsername" name="updateUsername">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">发表时间:</label>  <!--placeholder="frank"  -->
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="updatePublishDate" name="updatePublishDate" placeHolder="请选择论文发表时间"/>
+                            </div>
+                        </div>
                         <div class="form-group ">
                             <label for="" class="col-sm-2 control-label">标题:</label>  <!--placeholder="frank"  -->
                             <div class="col-sm-10">
                                 <textarea type="text" class="form-control" rows="10" id="updateTitle" name="updateTitle" placeholder="请输入论文标题"></textarea>
                             </div>
                         </div>
+
+                          <div class="form-group ">
+                                <label for="" class="col-sm-2 control-label">原文:</label>  <!--placeholder="frank"  -->
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control"  id="updateFile" name="updateFile"/>
+                                </div>
+                            </div>
+
                     </form>
                     <iframe src="" frameborder="0" name="frameName" style="display:none;"></iframe>
                 </div>

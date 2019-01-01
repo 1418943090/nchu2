@@ -68,13 +68,7 @@
                         }
                     }
                 },
-                date: {
-                    validators: {
-                        notEmpty: {
-                            message: '你还没有输入项目立项时间哦'
-                        }
-                    }
-                },
+
 
                 funding: {
                     validators: {
@@ -143,25 +137,41 @@ function  checkbox_check(list){
 }
 
 function date_init(list,id){
-
     for(k in list){
         if(list[k].id==id){
-
             $("#edit_id").prop("value",list[k].id);
             $("#edit_name").prop("value",list[k].name);
             $("#edit_description").prop("value",list[k].description);
             $("#edit_content").prop("value",list[k].content);
             $("#edit_principal").prop("value",list[k].principal);
             $("#edit_member").prop("value",list[k].member);
-            $("#edit_date").prop("value",list[k].date);
+
             $("#edit_funding").prop("value",list[k].funding);
-            var no1 = document.getElementById("edit_type");
+           // var no1 = document.getElementById("edit_type");
             if(list[k].type == "科研项目")
                edit_type[0].selected = true;
             if(list[k].type == "三小项目")
                 edit_type[1].selected = true;
             if(list[k].type == "横向项目")
                 edit_type[2].selected = true;
+
+            //var no2 = document.getElementById("edit_select_unit");
+            if(list[k].unit=="(元)")
+                edit_select_unit[0].selected = true;
+            else edit_select_unit[1].selected = true;
+
+
+            if(list[k].date==""){
+
+                edit_date_type[1].selected = true;
+                $("#edit_date1").hide();
+                $("#edit_date2").show();
+                $("#edit_dateA").prop("value",list[k].dateA);
+                $("#edit_dateB").prop("value",list[k].dateB);
+            }
+            else{
+                $("#edit_date").prop("value",list[k].date);
+            }
         }
     }
 }
@@ -195,25 +205,66 @@ function edit_project_upload_check(){
     }
 }
 
+
+    function edit_date_check(){
+        var type = $('#edit_date_type option:selected').text();
+        if(type=="立项时间")
+        {
+            // alert($("#dateA").prop("value"));
+            if($('#edit_date').prop("value")=="")
+            {
+                document.getElementById("edit_date_error_message").innerText= "你还没有输入项目立项日期哦";
+                return false;
+            }
+            return true;
+        }
+        if(type=="起止时间")
+        {
+            if($("#edit_dateA").prop("value")=="")
+            {
+                document.getElementById("edit_date_error_message").innerText= "你还没有输入项目立项日期哦";
+                return false;
+            }
+            else  if($("#edit_dateB").prop("value")=="") {
+                document.getElementById("edit_date_error_message").innerText = "你还没有输入项目结题日期哦";
+                return false;
+            }
+            var start = $("#edit_dateA").prop("value");
+            var end  = $("#edit_dateB").prop("value");
+            var a = new Date(start).getTime();
+            var b = new Date(end).getTime();
+            if(a>=b){
+                document.getElementById("edit_date_error_message").innerText = "起始时间不能大于等于结题时间哦";
+                return false;
+            }
+        }
+        return true;
+    }
+
 function uploadSubmit_edit(){
 
-    $("#close_project_edit_modal").click();
-    $("#sk-three-bounce").show();
-    setTimeout(function(){
-        $("#editProjectForm").ajaxSubmit(function(message) {
+    if(edit_date_check()) {
 
-            $("#rightContainer").html(message);
-            // if(message=='success')
-            //     window.location.href="/registry/step3";
-            // else{
-            //     swal({
-            //         title: "Error!",
-            //         text:message,
-            //         icon: "error",
-            //         button: "确定",
-            //     });
-            // }
-        });
-    },500);
 
+        $("#close_project_edit_modal").click();
+        $("#sk-three-bounce").show();
+        setTimeout(function () {
+            $("#editProjectForm").ajaxSubmit(function (message) {
+
+                $("#rightContainer").empty();
+                $("#rightContainer").html(message);
+                //window.location="/projectCenter/edit";
+                // if(message=='success')
+                //     window.location.href="/registry/step3";
+                // else{
+                //     swal({
+                //         title: "Error!",
+                //         text:message,
+                //         icon: "error",
+                //         button: "确定",
+                //     });
+                // }
+            });
+        }, 500);
+    }
 }
