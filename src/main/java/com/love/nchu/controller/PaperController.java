@@ -112,11 +112,14 @@ public class PaperController {
     @GetMapping("/papers")
     public ModelAndView papers(Model model)throws Exception{
        int year = MyDate.getYear();
+       int k=5;
        System.out.println(year);
        List<Paper> list= new ArrayList<>();
        HashMap<Integer,List> hashMap = new LinkedHashMap<>();
-       while((list = paperServer.findPaperByYear(year)).size()!=0){
-           hashMap.put(year,list);
+       while(k-->0){
+           if((list = paperServer.findPaperByYear(year)).size()!=0 ){
+               hashMap.put(year,list);
+           }
            year--;
        }
        model.addAttribute("hashMap",hashMap);

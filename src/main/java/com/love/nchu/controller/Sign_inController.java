@@ -47,6 +47,10 @@ public class Sign_inController {
     @Value("${spring.net.public.bip}")
     String public_ip3;
 
+    @Value("${spring.net.public.cip}")
+
+    String public_ip4;
+
     String error="";
     Boolean isChange = false;
     public void cound_change(String date){
@@ -324,7 +328,7 @@ public class Sign_inController {
       System.out.println(new Date());
       System.out.println(ip.substring(0,ip.lastIndexOf(".")));
       String userip = ip.substring(0,ip.lastIndexOf("."));
-      if((!userip.equals(public_ip) && !userip.equals(public_ip2)) && !userip.equals(public_ip3)){
+      if((!userip.equals(public_ip) && !userip.equals(public_ip2)) && !userip.equals(public_ip3) && !userip.equals(public_ip4)){
           errorVo.setData("签到失败,不是实验室环境网络");
           return errorVo;
       }
