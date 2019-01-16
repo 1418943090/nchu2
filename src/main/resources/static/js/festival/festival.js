@@ -126,7 +126,7 @@ function dateCheck(note,value,type){
     var now = (new Date()).getTime();
     var date = (new Date(value)).getTime();
     var week = (new Date(value)).getDay();
-    if(week!=0 && week!=6){
+    if(week!=0 && week!=6 && type==2){
         swal({
             title: "Warning!",
             text: value+"并不是周末哦",
@@ -134,8 +134,16 @@ function dateCheck(note,value,type){
             button: "确定",
         });
     }
-   else
-
+   else if((week==0 || week==6 )&& type==1)
+    {
+        swal({
+            title: "Warning!",
+            text: value+"原本就是节假日哦",
+            icon: "warning",
+            button: "确定",
+        });
+    }
+    else
     if(now>date){
         swal({
             title: "Are you sure?",

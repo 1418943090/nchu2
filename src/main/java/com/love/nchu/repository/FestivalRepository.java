@@ -14,4 +14,12 @@ public interface FestivalRepository extends JpaRepository<Festival,Integer> {
 
     @Query("select f from Festival f where f.date=?1")
     Festival getFestivalByDate(String date);
+
+
+    @Query("select f from Festival f where   f.date=?1 and f.type = 1")
+    Festival getFestivalByDateAndType1(String date);
+
+    @Query("select f from Festival f where   f.date=?1 and f.type = 2")
+    Festival getFestivalByDateAndType2(String date);
+
 }

@@ -36,4 +36,14 @@ public class FestivalServerImpl implements FestivalServer {
     public Festival getFestivalById(Integer id) {
         return festivalRepository.getOne(id);
     }
+
+    @Override
+    public Festival getFestivalByDateAndType1(String date) {
+        return festivalRepository.getFestivalByDateAndType1(date);
+    }
+
+    @Override
+    public Festival getFestivalByDateAndType2(String date) {
+        return festivalRepository.getFestivalByDateAndType2(date);
+    }
 }
