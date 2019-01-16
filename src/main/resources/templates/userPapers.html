@@ -19,8 +19,6 @@
             //        maxDate : new Date(),
             //       locale: moment.locale('zh-cn'),
             //   });
-
-
             $("#publish_date").datepicker({
                 language: "zh-CN",
                 autoclose: true,//选中之后自动隐藏日期选择框
@@ -33,8 +31,6 @@
                             clearBtn: true,//清除按钮
                             format: "yyyy-mm-dd" ,//日期格式
                         });
-
-
                if([[${paperSet}]]==true){
                    swal({
                           title: "操作成功",
@@ -97,7 +93,7 @@
                 <tbody>
                 <div th:if="${hasPaper} eq false">
                   <tr>
-                   <td colspan="5">
+                   <td colspan="6">
                      <h1 class="text-center" style="color: #d2322d">你还没有添加任何论文哦,立即添加一篇吧</h1>
                    </td>
                   </tr>
