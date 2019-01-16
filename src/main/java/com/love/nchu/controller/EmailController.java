@@ -1,6 +1,4 @@
 package com.love.nchu.controller;
-
-
 import com.love.nchu.demain.ErrorVo;
 import com.love.nchu.demain.User;
 import com.love.nchu.demain.UserInfo;
@@ -21,43 +19,32 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-
 @RestController
 public class EmailController {
-
     @Autowired
     TitleEditServer titleEditServer;
-
     Date date ;
-
     String code;
     String  useremail;
     @Autowired
     MailServer mailServer;
-
     @Autowired
     UserServer userServer;
-
     @Autowired
     UserInfoServer userInfoServer;
-
     boolean step1 = false;
-
     @GetMapping("/emailValidator/index")
     public ModelAndView index(){
         return new ModelAndView("redirect:/index");
     }
-
     @GetMapping("/emailValidator")
     public ModelAndView emailValidator(Model model){
         step1 = true;
         model.addAttribute("TitleEdit", TitleTool.getTitle(titleEditServer));
       return new ModelAndView("emailValidator","model",model);
     }
-
     @PostMapping("/emailValidator/getVcode")
     public void emailValidator(@RequestBody String email){
-
         date = new Date();
         useremail = email;
         code = EmailTool.getCode();
@@ -74,7 +61,6 @@ public class EmailController {
             errorVo.setData("验证码已过期，请重新获取");//验证码过期
             return errorVo;
         }
-
         User user = (User)request.getSession().getAttribute("user");
         if(!user.getEmail().equals(useremail))
         {
@@ -114,7 +100,6 @@ public class EmailController {
         UserInfo userInfo = userInfoServer.getUserByUsername(user.getUsername());
         userInfo.setEmail(useremail);
         userInfoServer.save(userInfo);
-
         return errorVo;
     }
 

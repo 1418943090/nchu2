@@ -11,12 +11,11 @@ public class FestivalTool {
            // System.out.println(s);
            // System.out.println(MyDate.getWeek(s));
             if(MyDate.getWeek(s)==1 || MyDate.getWeek(s)==7){
-
                 if(festivalServer.getFestivalByDateAndType2(s)!=null)
                     return false;
                 return true;
             }
-          //不是周末 看看是不是法定节假日
+           //不是周末 看看是不是法定节假日
             if(festivalServer.getFestivalByDateAndType1(s)!=null)
                 return true;
              return false;

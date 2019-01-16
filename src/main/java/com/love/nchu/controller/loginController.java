@@ -44,11 +44,11 @@ public class loginController {
           return "账号或密码错误";
   }
    @PostMapping("/login_success")
-    public ModelAndView loginsuccess(HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView loginsuccess(){
         return new ModelAndView("redirect:/index");
     }
     @GetMapping("/login_out")
-    public ModelAndView logout(HttpServletRequest request,HttpServletResponse response) {
+    public ModelAndView logout(HttpServletRequest request) {
         request.getSession().removeAttribute("user");
         Cookie cookie = new Cookie("sessionId",null);
         cookie.setMaxAge(0);
