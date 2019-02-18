@@ -72,7 +72,6 @@ $(function(){
     }
     validator_Init();
 });
-
 function form_check(val,i){
     var bootstrapValidator = $('#RegistryForm').data('bootstrapValidator');
     bootstrapValidator.validate();
@@ -86,9 +85,7 @@ function form_check(val,i){
     }
 }
 var countdown=60;
-
 function getCode(val) {
-
     var email = $("#email").val();
     settime(val,0);
         $.ajax({
@@ -105,7 +102,6 @@ function getCode(val) {
                 swal("错误!", "服务器处理错误", "error");
             }
         });
-
 }
 function settime(val,flag) {
     if (countdown == 0) {
@@ -119,13 +115,11 @@ function settime(val,flag) {
         countdown--;
     }
     if(flag<=0) {
-
         setTimeout(function () {
             settime(val,flag);
         }, 1000);
     }
 }
-
 function form_submit(){
     var data = {
       "username":$("#username").val(),
@@ -162,7 +156,4 @@ function form_submit(){
             });
         }
     });
-
-
-
 }

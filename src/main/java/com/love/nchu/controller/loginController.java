@@ -33,7 +33,6 @@ public class loginController {
           else if(user.isAccountNonLocked()==false){
               return "该账号已被管理员禁用,有疑问请联系管理员";
           } else if (user.getPassword().equals(SHAencrypt.encryptSHA(password))) {
-
                request.getSession().setAttribute("user",user);
                Cookie cookie = new Cookie("sessionId",user.getPassword());
                cookie.setPath("/");

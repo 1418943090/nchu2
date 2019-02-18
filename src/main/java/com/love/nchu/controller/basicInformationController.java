@@ -1,5 +1,4 @@
 package com.love.nchu.controller;
-
 import com.love.nchu.demain.ErrorVo;
 import com.love.nchu.demain.User;
 import com.love.nchu.demain.UserInfo;
@@ -14,32 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
-
 @RestController
 public class basicInformationController {
     @Autowired
     UserInfoServer userInfoServer;
     @Value("${spring.img.vm.path}")
     String img_vm_path;
-
     @Value("${spring.img.ab.path}")
     String img_ab_path;
-
     @Value("${spring.img.path}")
     String img_path;
-
     @RequestMapping("/update/pic")
-    public ModelAndView updatePic(MultipartFile pic, HttpServletRequest request)
-    {
+    public ModelAndView updatePic(MultipartFile pic, HttpServletRequest request) {
         User user =(User) request.getSession().getAttribute("user");
         UserInfo userInfo = userInfoServer.getUserByUsername(user.getUsername());
         RegistryTool.Save_Image(pic,userInfo,img_path,img_vm_path);
         userInfoServer.save(userInfo);
         return new ModelAndView("redirect:/basic_information");
     }
-
     @RequestMapping("/update/basic_information")
     public Object update(@RequestBody  editUserInfo userInfo, Model model){
         ErrorVo error = new ErrorVo("");

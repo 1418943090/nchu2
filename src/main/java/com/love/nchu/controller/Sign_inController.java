@@ -25,46 +25,35 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-
 @RestController
 public class Sign_inController {
     @Autowired
     Sign_in_TimeServer sign_in_timeServer;
     @Autowired
     Sign_in_StatusServer sign_in_statusServer;
-
     @Autowired
     UserServer userServer;
-
     @Autowired
     FestivalServer festivalServer;
-
     @Value("${spring.net.public.ip}")
     String public_ip;
-
     @Value("${spring.net.public.aip}")
     String public_ip2;
     @Value("${spring.net.public.bip}")
     String public_ip3;
-
     @Value("${spring.net.public.cip}")
-
     String public_ip4;
-
     String error="";
     Boolean isChange = false;
     public void cound_change(String date){
-
-            List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(date);
-                for(Sign_in_Status s : list){
-                    s.setCount(s.getCount());
-                    sign_in_statusServer.save(s);
-                }
+    List<Sign_in_Status> list = sign_in_statusServer.getSign_in_StatusByDate(date);
+        for(Sign_in_Status s : list){
+            s.setCount(s.getCount());
+            sign_in_statusServer.save(s);
+        }
     }
-
     @PostMapping("/sign_in/globalmodify")
     public ModelAndView globalmodify(String date,String mon_in,String mon_out,String aft_in,String aft_out,String eve_in,String eve_out,String signinstatus)throws  Exception{
-
         isChange = true;
 //        if(MyDate.getDateTime(date)>=(MyDate.getDateTime(MyDate.getDate()))){
 //            error = "只能修改过去日期签到信息";
@@ -313,9 +302,7 @@ public class Sign_inController {
     //用户点击签到后，判断是否满足签到条件不满足返回原因，满足后将签到时间保存到签到状态表中
     @GetMapping("/sign_in/in/{username}")
     public ErrorVo in(@PathVariable String username, HttpServletRequest request){
-
-      ErrorVo errorVo = new ErrorVo("");
-
+        ErrorVo errorVo = new ErrorVo("");
 //      Festival f = festivalServer.getFestivalByDate(MyDate.getDate());
 //      if(f!=null){
 //          errorVo.setData("今天放假不用签到哦,世界那么大，出去看看吧");
@@ -373,7 +360,6 @@ public class Sign_inController {
     //如果是新的一天则将空的签到信息存到数据中，确保有数据返回给前台
     @GetMapping("/sign_in")
     public ModelAndView Sign_in(HttpServletRequest request, Model model)throws Exception{
-
         User user = (User)request.getSession().getAttribute("user");
         String s = MyDate.getDate("yyyy-MM-dd");
         if(FestivalTool.isFestival(MyDate.getDate("yyyy-MM-dd"),festivalServer)){
