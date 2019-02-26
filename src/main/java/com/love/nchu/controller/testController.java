@@ -109,6 +109,7 @@ public class testController {
     @RequestMapping("/test")
     public void test() throws Exception{
        System.out.println("hello world");
+       System.out.println("hello world");
         Sign_in_Time s = new Sign_in_Time("(6:10~8:55)","(11:00~12:20)","(12:21~14:00)","(17:05~18:20)",
                 "(18:21~20:00)","(20:55~23:00)","5-1","9-30","summer");
 
