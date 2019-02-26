@@ -38,6 +38,7 @@ public class testController {
   @GetMapping("/mail")
   public void mailTest(){
 
+
      // mailServer.sendSimpleMail("1525931170@qq.com","测试","狗子");
       mailServer.sendSimpleMail("1418943090@qq.com","注册请求","你有新的注册请求,赶紧去管理中心看看吧");
 
@@ -107,7 +108,7 @@ public class testController {
 
     @RequestMapping("/test")
     public void test() throws Exception{
-
+       System.out.println("hello world");
         Sign_in_Time s = new Sign_in_Time("(6:10~8:55)","(11:00~12:20)","(12:21~14:00)","(17:05~18:20)",
                 "(18:21~20:00)","(20:55~23:00)","5-1","9-30","summer");
 
