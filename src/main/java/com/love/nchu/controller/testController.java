@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class testController {
@@ -42,6 +43,13 @@ public class testController {
      // mailServer.sendSimpleMail("1525931170@qq.com","测试","狗子");
       mailServer.sendSimpleMail("1418943090@qq.com","注册请求","你有新的注册请求,赶紧去管理中心看看吧");
 
+
+  }
+
+  @RequestMapping("/lot")
+  public ModelAndView lot(){
+
+      return  new ModelAndView("sensorDateIndex");
 
   }
 
@@ -102,10 +110,6 @@ public class testController {
 //      }
 //
 //  }
-
-
-
-
     @RequestMapping("/test")
     public void test() throws Exception{
        System.out.println("hello world");
