@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="utf-8">
+    <title>数据监测中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Carlos Alvarez - Alvarez.is">
+    <!-- Le styles -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href="/assets/css/font-style.css" rel="stylesheet">
+ <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
+<script type="text/javascript">
+$(document).ready(function () {
+
+    $("#btn-blog-next").click(function () {
+      $('#blogCarousel').carousel('next')
+    });
+     $("#btn-blog-prev").click(function () {
+      $('#blogCarousel').carousel('prev')
+    });
+
+     $("#btn-client-next").click(function () {
+      $('#clientCarousel').carousel('next')
+    });
+     $("#btn-client-prev").click(function () {
+      $('#clientCarousel').carousel('prev')
+    });
+
+});
+
+ $(window).load(function(){
+
+    $('.flexslider').flexslider({
+        animation: "slide",
+        slideshow: true,
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+    });
+});
+</script>
+  </head>
+  <body>
+    <div class="container">
+     <div class="row">
+         <div class="col-sm-12 col-lg-12">
+            <div class="half-unit">
+                <dtitle>Local Time</dtitle>
+                <hr>
+                    <div class="clockcenter">
+                        <digiclock>12:45:25</digiclock>
+                    </div>
+            </div>
+         </div>
+     </div>
+
+
+     <div th:each="sensorList : ${model.list}">
+
+      <div class="row">
+
+         <div th:each="sensor: ${sensorList}">
+            <div class="col-sm-3 col-lg-3">
+                <div class="dash-unit">
+                    <dtitle th:text="${sensor.sensorId}"></dtitle>
+                    <hr>
+                    <div class="cont" th:id ="${sensor.sensorId}+'unLine'" style="display:none;">
+                       <img src="/img/unline.png"  width="100" height="100" alt="">
+                       <br><br><br><br><br>
+                        <h1 th:text="${sensor.name}"></h1>
+                    </div>
+
+                    <div th:id ="${sensor.sensorId}+'inLine'" style="display: none;">
+                    <br><br>
+                    <h2 th:id = "${sensor.sensorId}" th:text="${sensor.value}+${sensor.unit}"></h2>
+                     <br><br><br><br><br>
+                     <h1 th:text="${sensor.name}"></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div><!-- /row -->
+
+    </div>
+
+
+	</div> <!-- /container -->
+	<div id="footerwrap">
+      	<footer class="clearfix"></footer>
+      	<div class="container">
+      		<div class="row">
+      			<div class="col-sm-12 col-lg-12">
+      			<p><img src="/assets/img/logo.png" alt=""></p>
+      			<p>南昌航空大学 数据采集中心</p>
+      			</div>
+
+      		</div><!-- /row -->
+      	</div><!-- /container -->
+	</div><!-- /footerwrap -->
+ <script type="text/javascript" src="/assets/js/admin.js"></script>
+ <script type="text/javascript" src="/js/sensorData/getData.js"></script>
+ <script type="text/javascript" src="/js/jquerytimer/jquery.timers-1.2.js"></script>
+
+</body></html>
