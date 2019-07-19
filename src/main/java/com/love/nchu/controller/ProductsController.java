@@ -10,10 +10,7 @@ import com.love.nchu.vo.deleteProductVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -78,7 +75,7 @@ public class ProductsController {
     }
 
     @PostMapping("/product/edit")
-    public ModelAndView edit(Product product,MultipartFile file_pic, MultipartFile file_document){
+    public ModelAndView edit(Product product, MultipartFile file_pic, MultipartFile file_document){
 
         System.out.println(product);
         Product product1 = productServer.findById(product.getId());

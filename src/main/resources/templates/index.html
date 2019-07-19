@@ -51,7 +51,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a th:href="@{/more}"  th:method="POST" th:type="post"><h5 style="color: white" class="title"><strong>了解更多</strong></h5></a>
+            <a href="http://www.nchu.edu.cn/" target="_blank"><h5 style="color: white" class="title"><strong>了解更多</strong></h5></a>
+               <!-- <a th:href="@{/more}"  th:method="POST" th:type="post"><h5 style="color: white" class="title"><strong>了解更多</strong></h5></a>-->
             </li>
             <li class="dropdown" th:unless="#{username}==null">
                 <a id="aa" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"   ><h5><strong><p th:text="${username}" class="username" style="color: white;"></p></strong></h5></a>

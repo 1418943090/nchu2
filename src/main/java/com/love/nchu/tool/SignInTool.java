@@ -51,7 +51,7 @@ public class SignInTool {
             }
         int month = MyDate.getMonth();
         if(month>=5 && month<10){
-            sign_in_time= sign_in_timeServer.getTimeBySeason("summary");
+            sign_in_time= sign_in_timeServer.getTimeBySeason("summer");
 
         }else{
             sign_in_time = sign_in_timeServer.getTimeBySeason("spring");

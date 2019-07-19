@@ -272,6 +272,7 @@ public class Sign_inController {
         }
         if(FestivalTool.isFestival(d,festivalServer)){
             model.addAttribute("sign_in_time",SignInTool.getTime(sign_in_timeServer));
+
             model.addAttribute("date",d);
             model.addAttribute("list",null);
             model.addAttribute("isFestival",true);
@@ -296,7 +297,6 @@ public class Sign_inController {
         model.addAttribute("date",d);
         model.addAttribute("error",error);
         model.addAttribute("isFestival",false);
-
         return new ModelAndView("signinshow","model",model);
     }
     //用户点击签到后，判断是否满足签到条件不满足返回原因，满足后将签到时间保存到签到状态表中

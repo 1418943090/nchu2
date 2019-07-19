@@ -15,9 +15,7 @@ public class MyInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         User user =(User)request.getSession().getAttribute("user");
-
-        if(user==null)
-        {
+        if(user==null) {
             response.sendRedirect("/login");
             return false;
         }
@@ -35,15 +33,14 @@ public class MyInterceptor implements HandlerInterceptor {
                 }
             }
         }
-
        return true;
-
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
     }
+    
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 

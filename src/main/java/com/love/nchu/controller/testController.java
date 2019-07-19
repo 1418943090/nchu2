@@ -6,14 +6,20 @@ import com.love.nchu.service.MailServer;
 import com.love.nchu.service.Sign_in_StatusServer;
 import com.love.nchu.service.Sign_in_TimeServer;
 import com.love.nchu.service.UserInfoServer;
+import com.love.nchu.vo.Account;
+import com.love.nchu.vo.AccountDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/test")
 public class testController {
 
 //    @Value("${spring.img.ab.path}")
@@ -43,6 +49,20 @@ public class testController {
      // mailServer.sendSimpleMail("1525931170@qq.com","测试","狗子");
       mailServer.sendSimpleMail("1418943090@qq.com","注册请求","你有新的注册请求,赶紧去管理中心看看吧");
 
+
+  }
+
+  @RequestMapping("/jsonTest")
+  public ModelAndView jsonTest(){
+      return new ModelAndView("/jsonTest");
+  }
+
+  @RequestMapping("/json")
+  public void json(@RequestBody Account list
+                   ){
+
+
+      System.out.println(list.toString());
 
   }
 

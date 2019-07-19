@@ -53,7 +53,6 @@ function validator_Init2() {
 
 function  product_checkbox_check(list){
 
-
     var obj = document.getElementsByClassName("product_check");
     var num=0;
     var k;
@@ -91,7 +90,6 @@ function product_date_init(list,id){
 
     for(k in list){
         if(list[k].id==id){
-
             $("#edit_id").prop("value",list[k].id);
             $("#edit_name").prop("value",list[k].name);
             $("#edit_description").prop("value",list[k].description);

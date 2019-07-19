@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrapValidate/bootstrapValidator.css" ></script>
+    <script src="/js/bootstrapValidate/bootstrapValidator.js" ></script>
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrapValidate.js"></script>
+    <script type="text/javascript">
+        function test(){
+
+            var json = '[{"accname":"崔春实","id":0,"money":7,"remark":"","thing":"消费-饮食","time":"2019-05-06","type":"支出","username":"","users":null},{"accname":"杭州企鹅科技有限公司","id":0,"money":2,"remark":"","thing":"消费-缴费","time":"2019-05-05","type":"收入","username":"","users":null}]';
+
+             $.ajax({
+                    url:"/test/json",
+                    contentType: 'application/json;charset=utf-8',
+                    type: 'post',
+                    async:true,
+                    data: {"accname":"aa"},    //JSON.stringify(data)
+                    dataType:"json",
+                    success: function(data){
+
+                    },
+
+                });
+        }
+
+    </script>
+<body>
+  <button onclick="test();">测试</button>
+</body>
+</html>

@@ -13,6 +13,26 @@ public class MyConfigAdapter extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(myInterceptor).addPathPatterns("/**")
-                .excludePathPatterns("/productCenter","/product/**","/products/**","/projects/**","/news/**","/test","/ForgetOrChangePassword/**","/updatePassword","/password/**","/registry/**","/papers/**","/people/**","/js/**","/img/**","/image/**","/login","/login_valid","/login_success","log_out","/index","/");
+                .excludePathPatterns("/productCenter",
+                                    "/product/**",
+                                    "/products/**",
+                                    "/projects/**",
+                                    "/news/**",
+                                    "/test/**",
+                                    "/ForgetOrChangePassword/**",
+                                    "/updatePassword",
+                                    "/password/**",
+                                    "/registry/**",
+                                    "/papers/**",
+                                    "/people/**",
+                                    "/js/**",
+                                    "/img/**",
+                                    "/image/**",
+                                    "/login",
+                                    "/login_valid",
+                                    "/login_success",
+                                    "log_out",
+                                    "/index",
+                                    "/");
     }
 }
